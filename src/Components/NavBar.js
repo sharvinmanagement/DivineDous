@@ -1,0 +1,35 @@
+"use client"
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import img from '../../public/Assets/logo.png';
+import { FaAngleDown } from "react-icons/fa";
+import Link from 'next/link';
+
+export default function NavBar() {
+
+  // const [scrollY, setScrollY] = useState(0);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollY(window.scrollY);
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
+
+  return (
+    <d>
+      <nav className={`absolute px-3 lg:px-11 lg:px-20 w-full text-white  bg-blue-900 flex justify-between items-center`} style={{ backgroundColor: `${scrollY > 10 ? '' : 'transparent'}` }}>
+        <Link href='/' ><Image src={img} width={150} height={150} alt='DivinsDuos logo' /></Link>
+        <div className='gap-5 flex items-center'>
+          <button className='px-5 py-2 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold'>Login</button>
+          <h1 className='hidden md:flex gap-1 cursor-pointer items-center'>Help <FaAngleDown /></h1>
+        </div>
+      </nav>
+    </d>
+  )
+}
