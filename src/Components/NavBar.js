@@ -23,7 +23,7 @@ export default function NavBar() {
 
   return (
     <d>
-      <nav className={`absolute px-3 lg:px-11 lg:px-20 w-full text-white  bg-blue-900 flex justify-between items-center`} style={{ backgroundColor: `${scrollY > 10 ? '' : 'transparent'}` }}>
+      <nav className={`absolute px-3 lg:px-11 lg:px-20 w-full text-white  bg-blue-900 flex justify-between items-center`} >
         <Link href='/' ><Image src={img} width={150} height={150} alt='DivinsDuos logo' /></Link>
         <div className='gap-5 flex items-center'>
           <button className='px-5 py-2 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold'>Login</button>
