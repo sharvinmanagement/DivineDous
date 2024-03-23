@@ -7,23 +7,23 @@ import Link from 'next/link';
 
 export default function NavBar() {
 
-  // const [scrollY, setScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScrollY(window.scrollY);
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
 
-  //   window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <d>
-      <nav className={`absolute px-3 lg:px-11 lg:px-20 w-full text-white  bg-blue-900 flex justify-between items-center`} >
+      <nav className={`fixed top-0 px-3 lg:px-11 lg:px-20 w-full text-${scrollY > 10 ? 'black' : 'white'}   flex justify-between items-center bg-${scrollY > 10 ? 'white' : 'transparent'}  transition duration-300 ease-in-out z-100`} >
         <Link href='/' ><Image src={img} width={150} height={150} alt='DivinsDuos logo' /></Link>
         <div className='gap-5 flex items-center'>
           <button className='px-5 py-2 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold'>Login</button>

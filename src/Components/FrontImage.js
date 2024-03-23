@@ -4,7 +4,7 @@ import img from '../../public/Assets/img.jpg'
 
 export default function FrontImage() {
   return (
-    <div>
+    <div className='z-0'>
       <Image src={img} className="w-full h-[600px]" alt="img"></Image>
       <section className='absolute mx-2 md:mx-16  lg:mx-28  top-[10%] md:top-[18%] lg:top-[20%] w-auto  rounded-t-[1rem]  backdrop-blur-md'> 
         <h1 className='text-white text-2xl md:text-3xl lg:text-4xl text-center py-3  md:py-4 lg:py-6 px-4 md:px-7 lg:px-12 '>Imagine your perfect match. Embrace the possibility. Create your love story with us!</h1>
