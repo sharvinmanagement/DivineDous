@@ -23,7 +23,7 @@ export default function NavBar() {
 
   return (
     <d>
-      <nav className={`fixed top-0 px-3 lg:px-11 lg:px-20 w-full text-${scrollY > 10 ? 'black' : 'white'}   flex justify-between items-center bg-${scrollY > 10 ? 'white' : 'transparent'}  transition duration-300 ease-in-out z-100`} >
+      <nav className={`fixed top-0 px-3 lg:px-11 lg:px-20 w-full text-${scrollY > 10 ? 'black' : 'white'}   flex justify-between items-center bg-${scrollY > 10 ? 'white' : 'transparent'}  transition duration-300 ease-in-out z-50 drop-shadow-lg`} >
         <Link href='/' ><Image src={img} width={150} height={150} alt='DivinsDuos logo' /></Link>
         <div className='gap-5 flex items-center'>
           <button className='px-5 py-2 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold'>Login</button>
