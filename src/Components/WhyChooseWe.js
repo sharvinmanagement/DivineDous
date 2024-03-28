@@ -7,7 +7,7 @@ export default function WhyChooseWe() {
       <div className='px-3 lg:px-11 lg:px-24'>
 
         <div className='py-16'>
-          <h1 className=' font-medium text-center text-2xl md:text-4xl mb-4'>Celebrate Love, Choose DivineDous</h1>
+          <h1 className=' font-medium text-center text-2xl md:text-4xl mb-4 text-[#fc4a2d]'>Celebrate Love, Choose DivineDous</h1>
           <p className='text-base text-center md:text-lg text-[#72727d] '>Authentic Profiles | Safety Assured | Unveil Complete Family</p>
         </div>
         <div className='grid  md:grid-cols-3 gap-y-10 md:gap-3 flex-warp'>
@@ -20,7 +20,7 @@ export default function WhyChooseWe() {
                   fill="white"></path>
               </svg>
             </div>
-            <h1 className="text-darken mb-3  text-xl font-medium lg:h-14 lg:px-14">Unlock the Essence of Family Harmony:</h1>
+            <h1 className="text-darken mb-3  text-xl font-medium lg:h-14 lg:px-14 ">Unlock the Essence of Family Harmony:</h1>
             <p className="px-4 text-gray-500">Dive into Comprehensive Family Histories with DivineDous. Step Forward with Assured Confidence.</p>
           </div>
 

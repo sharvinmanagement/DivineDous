@@ -7,70 +7,153 @@ import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 
 export default function FrontImage() {
 
-  const [isGenderOpen, setIsGenderOpen] = useState(false);
-  const [isReligionOpen, setIsReligionOpen] = useState(false);
-  const [isAgeOpen, setIsAgeOpen] = useState(false);
-  const [isMotherTongueOpen, setIsMotherTongueOpen] = useState(false);
+  const [selectOption, setSelectOption] = useState({
+    gender: null,
+    denomination: null,
+    minimumAge: null,
+    maximumAge: null,
+    motherTongue: null
+  })
 
-  const [selectedGender, setSelectedGender] = useState(null);
-  const [selectedReligion, setSelectedReligion] = useState(null);
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [selectedMotherTongue, setSelectedMotherTongue] = useState(null);
+  const [optionOpen, setOptionOpen] = useState({
+    gender: false,
+    denomination: false,
+    minimumAge: false,
+    maximumAge: false,
+    motherTongue: false
+  })
 
   const genderOptions = ['Man', 'Woman'];
-  const religionOptions = ['Hindu', 'Muslim', "Sikh", 'Parsi', 'Jain', 'Christianity', 'Buddhist', 'Other', 'No religion'];
-  const ageOptions = ['18-25', '26-35', '36-45'];
-  const motherTongueOptions = ['English', 'Hindi', 'Spanish', 'Hindi', 'Bengali', 'Telugu', 'Marathi', 'Tamil', 'Urdu', 'Gujarati', 'Kannada', 'Odia', 'Malayalam', 'Punjabi', 'Assamese', 'Kashmiri', 'Sindhi', 'Konkani', 'Nepali',];
+  const denomination = ['Anglicanism', 'Methodist', 'Orthodox', 'African Methodist Episcopal Church', 'Baptist churches', 'Catholic', 'Lutheranism', 'Oriental Orthodox Churches', 'Pentecostalism', 'Protestant', 'Anglican Catholic Church', 'Baptist', 'Non-denominational Christianity', 'Plymouth Brethren', 'Anabaptism', 'Andhra Evangelical Lutheran Church', 'Apostolic', 'Assemblies of God', 'Bible Presbyterian Church', 'China Gospel Fellowship', 'Church of Greece', 'Latter-day Saints', 'Judaism', 'Methodism'];
+  const motherTongue = [
+    'English', 'Hindi','Arabic', 'Malayalam', 'Tamil','Telugu', 'Marathi', 'Punjabi', 'Kannada', 'Odia', 'Gujarati', 'Sindhi','Assamese', 'Kashmiri', 'Konkani', 'Nepali', 'Spanish', 'Bengali', 'Portuguese', 'Russian', 'French', 'German', 'Italian', 'Polish', 'Tagalog', 'Ukrainian','Romanian', 'Dutch', 'Greek', 'Hungarian', 'Swedish', 'Czech','Norwegian', 'Bulgarian', 'Danish', 'Finnish', 'Slovak', 'Serbian','Croatian', 'Lithuanian', 'Latvian',  'Burmese', 'Amharic', 'Chichewa','Akan', 'Kinyarwanda', 'Kongo', 'Lingala', 'Shona', 'Swahili', 'Tswana', 'Yoruba', 'Zulu', 'Uzbek', 'Kirundi', 'Afrikaans', 'Hausa', 'Igbo', 'Kinyarwanda', 'Kirundi', 'Kinyarwanda', 'Kikuyu', 'Kinyarwanda', 'Sesotho', 'Somali', 'Tigrinya', 'Wolof', 'Xhosa', 'Zulu', 'Fijian', 'Hawaiian', 'Maori', 'Samoan', 'Tongan'
+  ];
+  const ages = [];
+  for (let i = 20; i <= 60; i++) {
+    ages.push(i);
+  }
 
   const toggleGenderDropdown = () => {
-    setIsGenderOpen(!isGenderOpen);
-    setIsReligionOpen(false);
-    setIsAgeOpen(false);
-    setIsMotherTongueOpen(false);
+    setOptionOpen(prevState => ({
+      ...prevState,
+      gender: !prevState.gender,
+      denomination: false,
+      minimumAge: false,
+      maximumAge: false,
+      motherTongue: false
+    }));
   };
 
-  const toggleReligionDropdown = () => {
-    setIsReligionOpen(!isReligionOpen);
-    setIsGenderOpen(false);
-    setIsAgeOpen(false);
-    setIsMotherTongueOpen(false);
+  const toggleDomination = () => {
+    setOptionOpen(prevState => ({
+      ...prevState,
+      denomination: !prevState.denomination,
+      gender: false,
+      minimumAge: false,
+      maximumAge: false,
+      motherTongue: false
+    }));
   };
 
-  const toggleAgeDropdown = () => {
-    setIsAgeOpen(!isAgeOpen);
-    setIsGenderOpen(false);
-    setIsReligionOpen(false);
-    setIsMotherTongueOpen(false);
+  const toggleManimumAge = () => {
+    setOptionOpen(prevState => ({
+      ...prevState,
+      minimumAge: !prevState.minimumAge,
+      gender: false,
+      denomination: false,
+      maximumAge: false,
+      motherTongue: false
+    }));
   };
 
-  const toggleMotherTongueDropdown = () => {
-    setIsMotherTongueOpen(!isMotherTongueOpen);
-    setIsGenderOpen(false);
-    setIsReligionOpen(false);
-    setIsAgeOpen(false);
+  const toggleMaximumAge = () => {
+    setOptionOpen(prevState => ({
+      ...prevState,
+      maximumAge: !prevState.maximumAge,
+      gender: false,
+      denomination: false,
+      minimumAge: false,
+      motherTongue: false
+    }));
   };
 
-  const selectGenderOption = (option) => {
-    setSelectedGender(option);
-    setIsGenderOpen(false);
+  const togglemotherTongue = () => {
+    setOptionOpen(prevState => ({
+      ...prevState,
+      motherTongue: !prevState.motherTongue,
+      gender: false,
+      denomination: false,
+      minimumAge: false,
+      maximumAge: false,
+    }));
   };
 
-  const selectReligionOption = (option) => {
-    setSelectedReligion(option);
-    setIsReligionOpen(false);
+  const selectGenderOption = option => {
+    setSelectOption(prevState => ({
+      ...prevState,
+      gender: option
+    }));
+    setOptionOpen(prevState => ({
+      ...prevState,
+      gender: false
+    }));
   };
 
-  const selectAgeOption = (option) => {
-    setSelectedAge(option);
-    setIsAgeOpen(false);
+  const selectDenominationOption = option => {
+    setSelectOption(prevState => ({
+      ...prevState,
+      denomination: option
+    }));
+    setOptionOpen(prevState => ({
+      ...prevState,
+      denomination: false
+    }));
   };
 
-  const selectMotherTongueOption = (option) => {
-    setSelectedMotherTongue(option);
-    setIsMotherTongueOpen(false);
+
+  const selectedMotherTongue = option => {
+    setSelectOption(prevState => ({
+      ...prevState,
+      motherTongue: option
+    }));
+    setOptionOpen(prevState => ({
+      ...prevState,
+      motherTongue: false
+    }));
   };
 
+  const selectedMinmumAge = option => {
+    setSelectOption(prevState => ({
+      ...prevState,
+      minimumAge: option
+    }));
+    setOptionOpen(prevState => ({
+      ...prevState,
+      minimumAge: false
+    }));
+  };
 
+  const selectedMiximumAge = option => {
+    setSelectOption(prevState => ({
+      ...prevState,
+      maximumAge: option
+    }));
+    setOptionOpen(prevState => ({
+      ...prevState,
+      maximumAge: false
+    }));
+  };
+
+  const submit = (event) => {
+    event.preventDefault();
+    setSelectOption({
+      gender: null,
+      religion: null,
+      minimumAge: null,
+      maximumAge: null,
+      motherTongue: null
+    })
+  }
 
   return (
 
@@ -80,14 +163,12 @@ export default function FrontImage() {
         <h1 className='text-white text-2xl md:text-3xl lg:text-4xl text-center py-3  px-1 md:px-4 lg:px-12 [text-shadow:2px_3px_2px_black] z-0'>Imagine your perfect match. Embrace the possibility. Create your love story with us!</h1>
 
 
+        <form className=' rounded-b-lg flex-col md:flex-row  flex flex-wrap gap-2 gap-y-3 py-3 md:py-5 px-3 bg-black/60 z-0'
+          onSubmit={submit}>
+          <div className='flex-1  flex flex-col lg:flex-row gap-2 gap-y-3 '>
 
-
-        <form className=' rounded-b-lg flex-col md:flex-row  flex flex-wrap gap-2 gap-y-3 py-3 md:py-5 px-3 bg-black/60 z-0'>
-          <div className='flex-1 flex flex-col lg:flex-row gap-2 gap-y-3 '>
-            <div className='flex-row gap-2 flex '>
-
-
-              <div className="flex-1   flex">
+            <div className='flex flex-row gap-2  flex-wrap'>
+              <div className="flex-1 flex">
                 <div className="relative">
                   <label htmlFor="gender" className="text-white text-base md:text-lg">
                     I'm looking for
@@ -95,7 +176,7 @@ export default function FrontImage() {
                   <div className="relative">
                     <input
                       type="text"
-                      value={selectedGender || ''}
+                      value={selectOption.gender || ''}
                       placeholder="Select an option"
                       readOnly
                       name="gender"
@@ -103,14 +184,14 @@ export default function FrontImage() {
                       className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      {isGenderOpen ? (
+                      {optionOpen.gender ? (
                         <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       ) : (
                         <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       )}
                     </div>
                   </div>
-                  {isGenderOpen && (
+                  {optionOpen.gender && (
                     <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-0">
                       {genderOptions.map((option, index) => (
                         <div
@@ -129,33 +210,33 @@ export default function FrontImage() {
               <div className="flex-1 flex">
                 <div className="relative">
                   <label htmlFor="religion" className="text-white text-base md:text-lg">
-                    of religion
+                    of Denomination
                   </label>
                   <div className="relative">
                     <input
                       type="text"
-                      value={selectedReligion || ''}
+                      value={selectOption.denomination || ''}
                       placeholder="Select an option"
                       readOnly
-                      name="religion"
-                      onClick={toggleReligionDropdown}
+                      name="denomination"
+                      onClick={toggleDomination}
                       className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      {isReligionOpen ? (
+                      {optionOpen.denomination ? (
                         <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       ) : (
                         <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       )}
                     </div>
                   </div>
-                  {isReligionOpen && (
-                    <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10  h-60 overflow-scroll scrollbar-hide ">
-                      {religionOptions.map((option, index) => (
+                  {optionOpen.denomination && (
+                    <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
+                      {denomination.map((option, index) => (
                         <div
                           key={index}
                           className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                          onClick={() => selectReligionOption(option)}
+                          onClick={() => selectDenominationOption(option)}
                         >
                           {option}
                         </div>
@@ -164,49 +245,85 @@ export default function FrontImage() {
                   )}
                 </div>
               </div>
-
             </div>
 
 
-            <div className='flex-row gap-2 flex'>
-              <div className="flex-1 flex">
+            <div className='flex-row  gap-2 flex'>
+              <div className="flex-1 md:w-60 flex">
                 <div className="relative">
-                  <label htmlFor="age" className="text-white text-base md:text-lg">
+                  <label htmlFor="motherTongue" className="text-white text-base md:text-lg">
                     Age
                   </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={selectedAge || ''}
-                      placeholder="Select an option"
-                      readOnly
-                      name="age"
-                      onClick={toggleAgeDropdown}
-                      className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      {isAgeOpen ? (
-                        <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
-                      ) : (
-                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                  <div className='flex flex-row items-center'>
+                    <div className="relative flex-1">
+                      <input
+                        type="text"
+                        value={selectOption.minimumAge || ''}
+                        placeholder="Select"
+                        readOnly
+                        name="motherTongue"
+                        onClick={toggleManimumAge}
+                        className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
+                      />
+                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        {optionOpen.minimumAge ? (
+                          <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                        ) : (
+                          <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                        )}
+                      </div>
+                      {optionOpen.minimumAge && (
+                        <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
+                          {ages.map((age, index) => (
+                            <div
+                              key={index}
+                              className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                              onClick={() => selectedMinmumAge(age)}
+                            >
+                              {age}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <p className='text-base md:text-lg text-white px-1 md:px-2'>to</p>
+
+                    <div className="relative flex-1">
+                      <input
+                        type="text"
+                        value={selectOption.maximumAge || ''}
+                        placeholder="Select"
+                        readOnly
+                        name="motherTongue"
+                        onClick={toggleMaximumAge}
+                        className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
+                      />
+                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        {optionOpen.maximumAge ? (
+                          <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                        ) : (
+                          <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                        )}
+                      </div>
+                      {optionOpen.maximumAge && (
+                        <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
+                          {ages.map((age, index) => (
+                            <div
+                              key={index}
+                              className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                              onClick={() => selectedMiximumAge(age)}
+                            >
+                              {age}
+                            </div>
+                          ))}
+                        </div>
                       )}
                     </div>
                   </div>
-                  {isAgeOpen && (
-                    <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10">
-                      {ageOptions.map((option, index) => (
-                        <div
-                          key={index}
-                          className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                          onClick={() => selectAgeOption(option)}
-                        >
-                          {option}
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
               </div>
+
+
 
               <div className="flex-1 flex">
                 <div className="relative">
@@ -216,28 +333,28 @@ export default function FrontImage() {
                   <div className="relative">
                     <input
                       type="text"
-                      value={selectedMotherTongue || ''}
+                      value={selectOption.motherTongue || ''}
                       placeholder="Select an option"
                       readOnly
                       name="motherTongue"
-                      onClick={toggleMotherTongueDropdown}
+                      onClick={togglemotherTongue}
                       className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      {isMotherTongueOpen ? (
+                      {optionOpen.motherTongue ? (
                         <FaAngleUp className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       ) : (
                         <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                       )}
                     </div>
                   </div>
-                  {isMotherTongueOpen && (
+                  {optionOpen.motherTongue && (
                     <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
-                      {motherTongueOptions.map((option, index) => (
+                      {motherTongue.map((option, index) => (
                         <div
                           key={index}
                           className="cursor-pointer px-4 py-2 hover:bg-gray-100 "
-                          onClick={() => selectMotherTongueOption(option)}
+                          onClick={() => selectedMotherTongue(option)}
                         >
                           {option}
                         </div>
@@ -246,13 +363,15 @@ export default function FrontImage() {
                   )}
                 </div>
               </div>
-
             </div>
           </div>
+
+
+
           <div class="w-full md:w-fit  md:mt-0 ">
             <div className='flex flex-col  '>
               <label htmlFor="" className='hidden md:flex'>hi</label>
-              <button className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7'>Let's Begin</button>
+              <button className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7' onSubmit={submit}>Let's Begin</button>
             </div>
           </div>
 
