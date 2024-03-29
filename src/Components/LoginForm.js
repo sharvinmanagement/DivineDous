@@ -38,7 +38,7 @@ export default function LoginForm({ toggleLoginForm }) {
                                 <div className='flex flex-row items-center gap-1'>
                                     <input type="checkbox" name="vehicle1" className='text-xs ' /><label className='text-xs text-gray-600'>Remember me</label>
                                 </div>
-                                <Link href="" > <span className='text-xs hover:text-blue-900'>Forgot Password?</span></Link>
+                                <Link href="" > <span className='text-xs font-semibold hover:text-blue-900'>Forgot Password?</span></Link>
                             </div>
                             <div className='flex flex-col gap-y-2 mt-4 '>
                                 <button className='bg-[#FF9A8A]  py-2 rounded-lg w-full'>Login</button>
