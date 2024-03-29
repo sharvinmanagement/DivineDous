@@ -158,7 +158,7 @@ export default function FrontImage() {
   return (
 
     <div >
-      <Image src={img} className="w-full h-[600px] object-cover" alt="img"></Image>
+      <Image src={img} className="w-full h-[600px] object-cover" alt="img"   priority></Image>
       <section className='absolute mx-0 md:mx-12  lg:mx-28  top-[6.5%] md:top-[13%] lg:top-[14%] w-auto  rounded-[1rem]  '>
         <h1 className='text-white text-2xl md:text-3xl lg:text-4xl text-center py-3  px-1 md:px-4 lg:px-12 [text-shadow:2px_3px_2px_black] z-0'>Imagine your perfect match. Embrace the possibility. Create your love story with us!</h1>
 
@@ -192,7 +192,7 @@ export default function FrontImage() {
                     </div>
                   </div>
                   {optionOpen.gender && (
-                    <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-0">
+                    <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10">
                       {genderOptions.map((option, index) => (
                         <div
                           key={index}
@@ -368,7 +368,7 @@ export default function FrontImage() {
 
 
 
-          <div class="w-full md:w-fit  md:mt-0 ">
+          <div className="w-full md:w-fit  md:mt-0 ">
             <div className='flex flex-col  '>
               <label htmlFor="" className='hidden md:flex'>hi</label>
               <button className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7' onSubmit={submit}>Let's Begin</button>
