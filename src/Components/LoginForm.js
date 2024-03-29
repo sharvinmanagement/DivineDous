@@ -52,7 +52,7 @@ export default function LoginForm({ toggleLoginForm }) {
                         </form>
                         <div className='text-sm text-center text-gray-500 flex flex-row justify-center gap-2' > 
                         <span>New to DivineDuos? </span>
-                        <Link href='' ><span className='font-semibold flex items-center '>Sign up Free <FaChevronRight size={12}/></span> </Link> </div>
+                        <Link href='' ><span className='font-semibold flex items-center hover:underline'>Sign up Free <FaChevronRight size={12}/></span> </Link> </div>
                     </div>
                 </div>
             </div>
