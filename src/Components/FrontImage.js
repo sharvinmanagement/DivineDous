@@ -3,7 +3,8 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import img from '../../public/Assets/img.jpg'
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
-
+import Multiselect from 'multiselect-react-dropdown';
+import Link from 'next/link';
 
 export default function FrontImage() {
 
@@ -88,6 +89,7 @@ export default function FrontImage() {
     }));
   };
 
+
   const selectGenderOption = option => {
     setSelectOption(prevState => ({
       ...prevState,
@@ -155,19 +157,21 @@ export default function FrontImage() {
     })
   }
 
+
+
   return (
 
     <div >
       <Image src={img} className="w-full h-[600px] object-cover" alt="img"   priority></Image>
       <section className='absolute mx-0 md:mx-12  lg:mx-28  top-[6.5%] md:top-[13%] lg:top-[14%] w-auto  rounded-[1rem]  '>
-        <h1 className='text-white text-2xl md:text-3xl lg:text-4xl text-center py-3  px-1 md:px-4 lg:px-12 [text-shadow:2px_3px_2px_black] z-0'>Imagine your perfect match. Embrace the possibility. Create your love story with us!</h1>
+        <h1 className='text-white text-2xl md:text-3xl lg:text-6xl text-center py-6  px-1 md:px-4 lg:px-12 [text-shadow:2px_3px_2px_black] z-0'>Find your Christian Life Partner</h1>
 
 
         <form className=' rounded-b-lg flex-col md:flex-row  flex flex-wrap gap-2 gap-y-3 py-3 md:py-5 px-3 bg-black/60 z-0'
           onSubmit={submit}>
-          <div className='flex-1  flex flex-col lg:flex-row gap-2 gap-y-3 '>
+          <div className='flex-1 flex flex-col lg:flex-row gap-2 gap-y-3 '>
 
-            <div className='flex flex-row gap-2  flex-wrap'>
+            <div className='flex-1 flex flex-row gap-2  flex-wrap'>
               <div className="flex-1 flex">
                 <div className="relative">
                   <label htmlFor="gender" className="text-white text-base md:text-lg">
@@ -248,8 +252,8 @@ export default function FrontImage() {
             </div>
 
 
-            <div className='flex-row  gap-2 flex'>
-              <div className="flex-1 md:w-60 flex">
+            <div className='flex-1 flex-row  gap-2 flex'>
+              <div className="flex-1  flex">
                 <div className="relative">
                   <label htmlFor="motherTongue" className="text-white text-base md:text-lg">
                     Age
@@ -332,12 +336,12 @@ export default function FrontImage() {
                   </label>
                   <div className="relative">
                     <input
-                      type="text"
                       value={selectOption.motherTongue || ''}
                       placeholder="Select an option"
                       readOnly
                       name="motherTongue"
                       onClick={togglemotherTongue}
+                      type="text"
                       className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -356,22 +360,23 @@ export default function FrontImage() {
                           className="cursor-pointer px-4 py-2 hover:bg-gray-100 "
                           onClick={() => selectedMotherTongue(option)}
                         >
-                          {option}
+            {option}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
               </div>
+              
             </div>
           </div>
 
 
 
-          <div className="w-full md:w-fit  md:mt-0 ">
+          <div className="w-full  md:w-fit  md:mt-0 ">
             <div className='flex flex-col  '>
               <label htmlFor="" className='hidden md:flex'>hi</label>
-              <button className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7' onSubmit={submit}>Let's Begin</button>
+              <Link href='/registration' className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7 flex justify-center' ><h1> Let's Begin </h1></Link>
             </div>
           </div>
 

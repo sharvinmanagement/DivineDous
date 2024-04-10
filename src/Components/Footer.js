@@ -47,7 +47,7 @@ const Privacy = [
 
 
 const NeedHelp = [
-    { name: 'Member Login', link: '#' },
+    { name: 'Member Login', link: '/login' },
     { name: 'Sign up', link: '#' },
     { name: 'Partner Search', link: '#' },
     { name: 'How to use DivineDous.com', link: '#' },
@@ -58,7 +58,7 @@ const NeedHelp = [
 
   return (
     <>
-      <footer className=' w-[100%] h-[100%] px-2 lg:px-7 xl:px-12 border-slate-900'>
+      <footer className='w-[100%] h-[100%] px-2 lg:px-7 xl:px-12 border-slate-900'>
 
 
         <div className='px-3 md:px-5  lg:px-6 xl:px-[2rem]'>
@@ -76,12 +76,10 @@ const NeedHelp = [
           <div className='px-3 lg:px-6 xl:px-[2.8rem]  md:flex lg:flex flex-warp flex-row justify-between pt-9  lg:pb-6 '>
 
             <div className='w-full md:w-[30%] lg:w-[24%] mb-9 md:mb-0 lg:mb-0'>
-              <Image src={logoImg} alt='DivineDuos' className='w-[38%] w-[50%]' width={100} height={100}/>
-         
-              
+              <Image src={logoImg} alt='DivineDuos' className='w-[38%] w-[50%]' width={150} height={150} style={{width:'8rem' , height:"4rem"}}/>
               <p className='text-[#fff] pr-5 py-5 text-sm font-normal text-black'>30th Floor, Sunshine Tower, Senapati Bapat Marg, Dadar (W), Mumbai, Maharashtra 400013</p>
-              <Image src={googlestore} alt="google store" className='mb-3'  width={110} height={110}/>
-              <Image src={appstore} alt="app store"  width={110} height={110}/>
+              <Image src={googlestore} alt="google store" className='mb-3'  width={110} height={110} style={{width:'7rem' , height:"2.3rem"}}/>
+              <Image src={appstore} alt="app store"  width={110} height={110}  style={{width:'7rem' , height:"2.2rem"}}/>
 
               {/* <Image src="https://upstox.com/app/uploads/2022/08/download-appStore.png" alt="" className='w-[38%]  md:w-[50%]'  width={100} height={100}/> */}
             </div>
@@ -111,7 +109,6 @@ const NeedHelp = [
 
             <div className='mx-0 mb:mx-1 lg:mx-2.5 mb-9 md:mb-0 lg:mb-0'>
               <p className=' pb-2 mb-4 font-semibold text-base text-center border-b-2 px-12'>Privacy</p>
-
               <ul className='text-[#fff]  text-sm font-normal text-black'>
                 {Privacy.map((item, index) => (
                   <li key={index} className='mb-2 '>

@@ -3,7 +3,6 @@ import registrationIMG from '../../public/Assets/process/registration.png'
 import chat from '../../public/Assets/process/couplechatting.webp'
 import select from '../../public/Assets/process/select.png'
 import Image from 'next/image'
-import { IoIosArrowForward } from "react-icons/io";
 
 export default function Process() {
     return (
@@ -35,13 +34,13 @@ export default function Process() {
                             <p className="px-4 text-gray-500">Tailor your partner preferences and let our advanced recommendation engine guide you to compatible profiles</p>
                         </div>
                         <div className='flex justify-center mb-4 md:mb-0'>
-                            <Image src={select} alt="registrationIMG" width={150} height={200} priority={true} />
+                            <Image src={select} alt="registrationIMG" width={150} height={200} style={{width:'auto' , height:"10rem"}}/>
                         </div>
                     </div>
 
                     <div className="rounded-xl bg-white p-3 md:p-6  text-center shadow-md">
                         <div className='flex justify-center mb-3'>
-                            <Image src={chat} alt="registrationIMG" width={200} height={200} priority={true} />
+                            <Image src={chat} alt="registrationIMG" width={200} height={200} priority={true} style={{width:'auto' , height:"10rem"}}/>
                         </div>
                         <div>
                             <h1 className="text-darken mb-3  text-xl font-medium lg:h-14 lg:px-14">Engage in Meaningful Conversations</h1>

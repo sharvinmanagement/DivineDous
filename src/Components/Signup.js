@@ -1,13 +1,12 @@
 "use client"
 import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
-import img from '../../public/Assets/logo.png'
+
 import Image from 'next/image';
 import { FaChevronRight } from "react-icons/fa";
 import Link from 'next/link';
 
-
-export default function LoginForm({ toggleLoginForm}) {
+export default function LoginForm({ toggleLoginForm }) {
 
     return (
         <>
@@ -15,9 +14,6 @@ export default function LoginForm({ toggleLoginForm}) {
                 <div className='w-[90%] md:w-[50%] lg:w-[36%] xl:w-[28%] h-fit  relative  bg-white rounded-lg  mt-10 '>
                     <div onClick={toggleLoginForm} className='absolute top-2 right-2 text-gray-600 cursor-pointer' ><IoMdClose size={20} /></div>
                     <div className='px-5 md:px-9 py-7 z-10'>
-                        <div className='flex justify-center mb-2'>
-                            <Image src={img} width={120} height={100} alt='DivinsDuos logo'  style={{width:'8rem' , height:"4rem"}} />
-                        </div>
                         <h1 className='text-base md:text-lg text-center  text-gray-700'>Welcome back! Please Login</h1>
                         <form className='flex flex-col gap-y-4 my-6'>
                             <div className='flex flex-col gap-y-1'>
@@ -56,7 +52,6 @@ export default function LoginForm({ toggleLoginForm}) {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
