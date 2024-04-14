@@ -1,25 +1,24 @@
 "use client"
 import axios from 'axios';
 import React, { useState } from 'react';
-
-
+import RagistartionFrom from '@/Components/RagistartionFrom';
 
 export default function page() {
 
-  const [ragisterUser, setRagisterUser] = useState({
+  const [registerUser, setRegisterUser] = useState({
     name: "",
     gmail: "",
     password: ""
   })
 
   const inputhandler = (e) => {
-    setRagisterUser((currentData) => {
+    setRegisterUser((currentData) => {
       return { ...currentData, [e.target.name]: e.target.value }
     })
   }
   const onRegister = async (e) => {
     e.preventDefault()
-    setRagisterUser({
+    setRegisterUser({
       name: "",
       gmail: "",
       password: ""
@@ -28,7 +27,7 @@ export default function page() {
 
   return (
     <>
-      <div className=''>
+      {/* <div className=''>
         <div className='flex w-full mt-[4.5rem] justify-center bg-red-500 '>
           <div className='w-full px-5 md:px-20 py-6 my-[3rem] md:w-[55%] bg-white  rounded-lg'>
             <h1 className=' text-3xl font-normal '>Begin your love journey now!</h1>
@@ -40,7 +39,7 @@ export default function page() {
                 <input type="text"
                   id='name'
                   name='name'
-                  value={ragisterUser.name}
+                  value={registerUser.name}
                   onChange={inputhandler}
                   className='border-2 border-gray-300 p-1 rounded-lg' />
               </div>
@@ -49,7 +48,7 @@ export default function page() {
                 <input type="gmail"
                   id='gmail'
                   name='gmail'
-                  value={ragisterUser.gmail}
+                  value={registerUser.gmail}
                   onChange={inputhandler}
                   className='border-2 border-gray-300 p-1 rounded-lg' />
               </div>
@@ -58,7 +57,7 @@ export default function page() {
                 <input type="password"
                   id='password'
                   name='password'
-                  value={ragisterUser.password}
+                  value={registerUser.password}
                   onChange={inputhandler}
                   className='border-2 border-gray-300 p-1 rounded-lg' />
               </div>
@@ -66,7 +65,16 @@ export default function page() {
             </div>
           </div>
         </div>
-      </div>
+        <div>
+
+        <div>
+      <h1>{registerUser.name}</h1>
+      <p>{registerUser.gmail}</p>
+    
+    </div>
+        </div>
+      </div> */}
+      <RagistartionFrom/>
     </>
   )
 }
