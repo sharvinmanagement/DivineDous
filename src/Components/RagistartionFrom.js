@@ -1,6 +1,8 @@
 "use client"
 import axios from 'axios';
 import React, { useState } from 'react';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
+import '../app/globals.css'
 
 export default function RagistartionFrom() {
     const [registerUser, setRegisterUser] = useState({
@@ -14,13 +16,45 @@ export default function RagistartionFrom() {
         MaritalStatus:"",
         Disability:'',
         aboutYourself:'',
+        Qualification:'',
+        Degree:'',
+        FamilyDetails: {
+            FatherStatus: '',
+            MotherStatus: '',
+            NativePlace: '',
+            NoofSiblings: '',
+            FamilyType: '',
+            FamilyTradition: '',
+            AffluenceLevel: ''
+        }
     });
     const [mulyipleUsers, setmulyipleUsers] = useState([]);
 
     const inputHandler = (e) => {
-        setRegisterUser((currentData) => {
-            return { ...currentData, [e.target.name]: e.target.value };
-        })
+
+        const { name, value } = e.target;
+    // For nested fields like dateofBirth, FamilyDetails, etc., use spread operator to maintain previous state
+    if (name.includes('.')) {
+        const [parentField, childField] = name.split('.');
+        setRegisterUser((currentData) => ({
+            ...currentData,
+            [parentField]: {
+                ...currentData[parentField],
+                [childField]: value
+            }
+        }));
+    } else {
+        setRegisterUser((currentData) => ({
+            ...currentData,
+            [name]: value
+        }));
+    }
+
+
+
+        // setRegisterUser((currentData) => {
+        //     return { ...currentData, [e.target.name]: e.target.value };
+        // })
     };
 
     const onRegister = async (e) => {
@@ -38,7 +72,42 @@ export default function RagistartionFrom() {
             },
             MaritalStatus:"",
             Disability:'',
+            Qualification:'',
+            Degree:'',
+            FamilyDetails: {
+                FatherStatus: '',
+                MotherStatus: '',
+                NativePlace: '',
+                NoofSiblings: '',
+                FamilyType: '',
+                FamilyTradition: '',
+                AffluenceLevel: ''
+            }
         });
+    };
+
+    const Qualification = ['Engineering', 'Arts / Design', 'Finance / Commerce', 'Computers / IT', 'Science', 'Medicine', 'Management', 'Law', 'Doctorate', 'Others', 'Non-Graduate']
+    const Degree = {
+        "Engineering": ["B.E / B.Tech", "M.E / M.Tech", "M.S Engineering", "B.Eng. (Hons)", "M.Eng (Hons)", "Engineering Diploma", "AE", "AET"],
+        "Arts / Design": ["B.A", "B.Ed.", "BJMC", "BFA", "B.Arch.", "B.Des", "BMM", "MFA", "M.Ed.", "M.A", "MSW", "MJMC", "M. Arch", "M.Des", "BA (Hons)", "B.Arch (Hons)", "DFA", "D.Ed.", "D. Arch", "AA", "AFA"],
+        "Finance / Commerce": ["B. Com", "CA / CPA", "CFA", "BSc / B.fin", "M.Com", "MSc / M.fin / MS", "B.com (Hons)", "PGD Finance"],
+        "Computers / IT": ["BCA", "B.IT", "BCS", "BA Computer Science", "MCA", "PGDCS", "IT Diploma", "Others"],
+        "Science": ["B.Sc.", "M.Sc.", "B.Sc. (Hons)", "M.Sc. (hons)", "Dip SC", "As", "AAS", "Others"],
+        "Medicine": ["MBBS", "BDS", "BPT", "BAMS", "BHMS", "B.Pharma", "BVSc", "BSC / BScN", "MDS", "M.D", "M.S Medicine", "MPT", "DM", "M. Pharma", "PGD Medicine", "Others"],
+        "Management": ["BBA", "BHM", "BBM", "MBA", "PGDM", "ABA", "Others"],
+        "Law": ["BL / LLB", "ML / LLM", "LLB (Hons)", "ALA"],
+        "Doctorate": ["Ph.D.", "M.Phil."],
+        "Others": ["Bachelor", "Master", "Diploma", "Honors", "Doctorate", "Associate"],
+        "Non-Graduate": ["High School", "Less than high School"]
+    }
+    const FamilyDetails = {
+        "FatherStatus": [ "Employed", "Business", "Retired", "Not Employed", "Passed Away"],
+        "MotherStatus": [ "Homemaker", "Employed", "Business", "Retired", "Passed Away"],
+        "NativePlace": "Specify where you belong to (e.g.: Delhi)",
+        "NoofSiblings": ['1', '2', '3', '4', '5 or Above '],
+        "FamilyType": [ "Joint", "Nuclear"],
+        "FamilyTradition": ["Traditional", "Moderate", "Liberal"],
+        "AffluenceLevel": [ "Affluent", "Upper Middle Class", "Middle Class", "Lower Middle Class"]
     };
 
     return (
@@ -51,8 +120,8 @@ export default function RagistartionFrom() {
                         <div>
 
                       
-                            <div className='flex flex-col mb-9'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>Profile Created by </p>
+                            <div className='flex flex-col mb-9 gap-3'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Profile Created by </p>
                                 <div className='flex gap-3 flex-wrap'>
                                     <div className='border-2 px-1 py-1  rounded-full flex items-center'>
                                         <input type="radio" id="createdFor" name="createdFor" value="MySelf" onChange={inputHandler} checked={registerUser.createdFor === "MySelf"} className={`h-6 w-6`} />
@@ -81,8 +150,8 @@ export default function RagistartionFrom() {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col mb-9'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>Gender</p>
+                            <div className='flex flex-col mb-9 gap-3'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Gender</p>
                                 <div className='flex gap-3 flex-wrap'>
                                     <div className='border-2 px-1 py-1  rounded-full flex items-center'>
                                         <input type="radio" id="gender" name="gender" value="Male" onChange={inputHandler} checked={registerUser.gender === "Male"} className={`h-6 w-6`} />
@@ -95,8 +164,8 @@ export default function RagistartionFrom() {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col mb-9'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-4 text-[#41404d]'>Date of Birth</p>
+                            <div className='flex flex-col mb-9 gap-4'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Date of Birth</p>
                                 <div className='grid grid-cols-3 gap-4 '>
                                     <div class="relative " data-twe-input-wrapper-init>
                                         <input type="number"
@@ -149,8 +218,8 @@ export default function RagistartionFrom() {
                             </div>
 
 
-                            <div className='flex flex-col mb-9'> 
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>Marital Status</p>
+                            <div className='flex flex-col mb-9 gap-3 '> 
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Marital Status</p>
                                 <div className='flex gap-3 flex-wrap'>
                                     <div className='border-2 px-1 py-1  rounded-full flex items-center'>
                                         <input type="radio" id="MaritalStatus" name="MaritalStatus" value="Never Married" onChange={inputHandler} checked={registerUser.MaritalStatus === "Never Married"} className={`h-6 w-6`} />
@@ -167,8 +236,8 @@ export default function RagistartionFrom() {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col mb-9'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>Any Disability</p>
+                            <div className='flex flex-col mb-9 gap-3' >
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Any Disability</p>
                                 <div className='flex gap-3 flex-wrap'>
                                     <div className='border-2 px-1 py-1  rounded-full flex items-center'>
                                         <input type="radio" id="Disability" name="Disability" value="None" onChange={inputHandler} checked={registerUser.Disability === "None"} className={`h-6 w-6`} />
@@ -182,8 +251,8 @@ export default function RagistartionFrom() {
                             </div>
 
 
-                            <div className='flex flex-col mb-9'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>	Health Information</p>
+                            <div className='flex flex-col mb-9 gap-3'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>	Health Information</p>
                                 <div className='flex gap-3 flex-wrap'>
                                     <div className='border-2 px-1 py-1  rounded-full flex items-center'>
                                         <input type="radio" id="HealthInformation" name="HealthInformation" value="No Health Problems" onChange={inputHandler} checked={registerUser.HealthInformation=== "No Health Problems"} className={`h-6 w-6`} />
@@ -223,8 +292,8 @@ export default function RagistartionFrom() {
 
 
 
-                            <div className='flex flex-col mb-8'>
-                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal mb-2 text-[#41404d]'>More about your self, Partner and Family</p>
+                            <div className='flex flex-col mb-8 gap-3'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal text-[#41404d]'>More about your self, Partner and Family</p>
                                 <div className='relative'>
                                     <textarea id="aboutYourself"
                                         name="aboutYourself"
@@ -236,18 +305,178 @@ export default function RagistartionFrom() {
                                         className='w-full peer block w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden'
                                         placeholder="Tell us more about yourself, your partner, and your family...">
                                     </textarea>
-                                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm">
+                                    <div className="absolute bottom-1 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm">
                                         <span id="characterCount">500 characters remaining</span>
                                     </div>
                                 </div>
                             </div>
 
 
+                            <div className='flex flex-col mb-9 gap-3'>
+                                <p htmlFor="createdFor" className='text-[1.37rem] font-normal text-[#41404d]'>Highest Qualification</p>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-3 flex-wrap '>
+                                    <div className='relative'>
+                                    <select name="Qualification" id="Qualification" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+
+                                    <option value='' id='' className='' >select</option>
+                                        {
+                                            Qualification.map((Qualification,index) => {
+                                                return <option value={Qualification} id={index} className='my-3'>{Qualification}</option>
+                                            })
+                                        }
+                                    </select>
+                                        <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                            <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                        </div>
+                                    </div>
+
+                                    {
+                                        registerUser.Qualification && <div className='relative'>
+                                            <select name="Degree" id="Degree" onChange={inputHandler} className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                            <option value='' id=''>select</option>
+                                                {
+                                                    Degree[registerUser.Qualification].map((Degree, index) => {
+                                                        return <option value={Degree} id={index} key={index}>{Degree}</option>
+                                                    })
+                                                }
+                                            </select>
+                                            <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                                <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div className='flex justify-center my-12 text-[1.37rem] font-normal text-[#41404d]'><p>Family Backround</p></div>
+
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+
+
+                                <div className='relative mb-9 gap-3'>
+                                    <select name="FatherStatus" id="FatherStatus" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.FatherStatus.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >Father's Status
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180 ">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+                                <div className='relative  mb-9 gap-3'>
+                                    <select name="MotherStatus" id="MotherStatus" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.MotherStatus.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >Mother's Status
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+                                <div className='relative  mb-9 gap-3'>
+                                    <select name="FamilyType" id="FamilyType" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.FamilyType.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >Family Type
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+                                <div className='relative  mb-9 gap-3'>
+                                    <select name="AffluenceLevel" id="AffluenceLevel" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.FamilyTradition.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >Family Tradition
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+                                <div className='relative  mb-9 gap-3'>
+                                    <select name="AffluenceLevel" id="AffluenceLevel" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.AffluenceLevel.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >Affluence Level
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+
+
+                                <div className='relative  mb-9 gap-3'>
+                                    <select name="NoofSiblings" id="NoofSiblings" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
+                                        <option value='' id='' className='' >select</option>
+                                        {
+                                            FamilyDetails.NoofSiblings.map((item, index) => {
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <label
+                                        htmlFor="dateofBirth_day"
+                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                    >No of Siblings
+                                    </label>
+                                    <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
+                                        <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
 
                             <button className='bg-blue-600 py-2 px-10 text-white rounded-md' onClick={onRegister} >submit</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
 
 
@@ -260,11 +489,17 @@ export default function RagistartionFrom() {
                                 <p>{user.Disability}</p>
                                 <p>{user.HealthInformation}</p>
                                 <p>{user.aboutYourself}</p>
+                                <p>{user.Qualification}</p>
+                                <p>{user.Degree}</p>
+                                <p>{user.FamilyDetails}</p>
+                                <p>{user.aboutYourself}</p>
+                                <p>{user.Qualification}</p>
+                                <p>{user.Degree}</p>
                         </div>
                     ))}
                 </div>
 
-</div>
+
     
    </>
   )
