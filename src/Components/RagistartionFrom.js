@@ -167,10 +167,10 @@ export default function RagistartionFrom() {
                             <div className='flex flex-col mb-9 gap-4'>
                                 <p htmlFor="createdFor" className='text-[1.37rem] font-normal  text-[#41404d]'>Date of Birth</p>
                                 <div className='grid grid-cols-3 gap-4 '>
-                                    <div class="relative " data-twe-input-wrapper-init>
+                                    <div classname="relative " data-twe-input-wrapper-init>
                                         <input type="number"
                                             name="dateofBirth_day"
-                                            class="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
+                                            classname="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
                                             id="exampleFormControlInput1"
                                             placeholder="DD" 
                                             maxLength={2} 
@@ -178,15 +178,15 @@ export default function RagistartionFrom() {
                                             onChange={inputHandler}/>
                                             <label
                                            htmlFor="dateofBirth_day"
-                                            class="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
+                                            classname="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
                                         >Day
                                         </label>
                                     </div>
 
-                                    <div class="relative " data-twe-input-wrapper-init>
+                                    <div classname="relative " data-twe-input-wrapper-init>
                                         <input type="number"
                                             name="dateofBirth_month"
-                                            class="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
+                                            classname="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
                                             id="exampleFormControlInput1"
                                             placeholder="MM" 
                                             maxLength={2} 
@@ -194,20 +194,20 @@ export default function RagistartionFrom() {
                                             onChange={inputHandler}/>
                                             <label
                                             htmlFor="dateofBirth_month"
-                                            class="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
+                                            classname="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
                                         >Month
                                         </label>
                                     </div>
 
-                                    <div class="relative" data-twe-input-wrapper-init>
+                                    <div classname="relative" data-twe-input-wrapper-init>
                                         <input type="number"
                                         name="dateofBirth_year"
-                                            class="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
+                                            classname="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden"
                                             id="exampleFormControlInput1"
                                             placeholder="YYYY" maxLength={4}  value={registerUser.dateofBirth.year} onChange={inputHandler}/>
                                             <label
                                             htmlFor="dateofBirth_year"
-                                            class="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
+                                            classname="pointer-events-none absolute left-3 top-0 text-sm mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[0.8rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400"
                                         >Year
                                         </label>
                                     </div>
@@ -364,7 +364,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >Father's Status
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180 ">
@@ -383,7 +383,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >Mother's Status
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
@@ -402,7 +402,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >Family Type
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
@@ -421,7 +421,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >Family Tradition
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
@@ -440,7 +440,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >Affluence Level
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
@@ -460,7 +460,7 @@ export default function RagistartionFrom() {
                                     </select>
                                     <label
                                         htmlFor="dateofBirth_day"
-                                        class="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
+                                        classname="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem]"
                                     >No of Siblings
                                     </label>
                                     <div className="absolute inset-y-0 right-2 flex items-center px-2 pointer-events-none peer-focus:rotate-180">
@@ -482,7 +482,7 @@ export default function RagistartionFrom() {
 
                 <div className='  grid  md:grid-cols-3 gap-y-10  flex-warp my-[4.5rem] mx-[3rem] gap-5' >
                     {mulyipleUsers.map((user, index) => (
-                        <div key={index} class="p-6 border-black border-2 bg-white shadow-md bg-clip-border rounded-xl  ">  
+                        <div key={index} classname="p-6 border-black border-2 bg-white shadow-md bg-clip-border rounded-xl  ">  
                                 <p>{user.createdFor}</p>
                                 <p>{user.gender}</p>
                                 <p>{user.MaritalStatus}</p>
