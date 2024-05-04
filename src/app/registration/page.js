@@ -15,8 +15,7 @@ export default function page() {
         Religion: '', motherTongue: '', EthnicOrigin: '', Religion: '', denominations: '',
         NativeCity: '', LivingCountry: '', LivingState: '', LivingCity: '', ResidencyStatus: '',
         Qualification: '', Degree: '', WorkingSector: '', WorkingAsRole: '', WorkingWith: '',
-        Salary: '', GamilAddress:'', passward:"",
-        ReEnterpassward:"",number:"",
+        Salary: '', GamilAddress:'',    passward:"",    ReEnterpassward:"",    number:"",
 
         lookingforMaxAge: '', lookingforMinAge: '', lookingforMaxHeight: '', lookingforMinHeight: '', lookingforMaritalStatus: '', lookingforEthnicOrigin: '', lookingforReligion: '', lookingforDenomination: '', lookingforAnnualIncome: "",
         lookingforProfileCreatedby: "", lookingforDiet: "", lookingforCountryLiving: '', lookingforStateLiving: '', lookingforCity: '', lookingforQualification: "", lookingforDegree: "", lookingforWorkingSector: '', lookingforWorkingAsRole: ''
@@ -42,7 +41,7 @@ export default function page() {
             Religion: '', motherTongue: '', EthnicOrigin: '', Religion: '', denominations: '',
             NativeCity: '', LivingCountry: '', LivingState: '', LivingCity: '', ResidencyStatus: '',
             Qualification: '', Degree: '', WorkingSector: '', WorkingAsRole: '', WorkingWith: '',
-            Salary: '',
+            Salary: '', GamilAddress:'', passward:"",    ReEnterpassward:"",  number:"",
 
             lookingforMaxAge: '', lookingforMinAge: '', lookingforMaxHeight: '', lookingforMinHeight: '', lookingforMaritalStatus: '', lookingforEthnicOrigin: '', lookingforReligion: '', lookingforDenomination: '', lookingforAnnualIncome: "",
             lookingforProfileCreatedby: "", lookingforDiet: "", lookingforCountryLiving: '', lookingforStateLiving: '', lookingforCity: '', lookingforQualification: "", lookingforDegree: "", lookingforWorkingSector: '', lookingforWorkingAsRole: ''
