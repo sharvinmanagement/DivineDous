@@ -1,143 +1,138 @@
 "use client"
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
+
 import '../app/globals.css'
 
 export default function RagistartionFrom() {
-    const [registerUser, setRegisterUser] = useState({
-        createdFor: "",
-        gender: "",
-        dateofBirth: {
-            day: "",
-            month: "",
-            year: ""
-        },
-        MaritalStatus: "",
-        Disability: '',
-        HealthInformation: '',
-        Diet:'',
-        aboutYourself: '',
-        FatherStatus: '',
-        MotherStatus: '',
-        NativePlace: '',
-        NoofSiblings: '',
-        FamilyType: '',
-        FamilyTradition: '',
-        AffluenceLevel: '',
-        Qualification: '',
-        Degree: '',
-        WorkingSector: "",
-        WorkingAsRole: "",
-        WorkingWith : ''
-    });
-    const [mulyipleUsers, setmulyipleUsers] = useState([]);
+    // const [registerUser, setRegisterUser] = useState({
+    //     createdFor: "",
+    //     gender: "",
+    //     dateofBirth: {
+    //         day: "",
+    //         month: "",
+    //         year: ""
+    //     },
+    //     MaritalStatus: "",
+    //     Disability: '',
+    //     HealthInformation: '',
+    //     Diet: '',
+    //     aboutYourself: '',
+    //     FatherStatus: '',
+    //     MotherStatus: '',
+    //     NativePlace: '',
+    //     NoofSiblings: '',
+    //     FamilyType: '',
+    //     FamilyTradition: '',
+    //     AffluenceLevel: '',
+    //     Qualification: '',
+    //     Degree: '',
+    //     WorkingSector: "",
+    //     WorkingAsRole: "",
+    //     WorkingWith: ''
+    // });
+    // const [mulyipleUsers, setmulyipleUsers] = useState([]);
 
 
-    
-  
+    // const inputHandler = (e) => {
+    //     setRegisterUser((currentData) => {
+    //         return { ...currentData, [e.target.name]: e.target.value };
+    //     })
+    // };
 
-    const inputHandler = (e) => {
-        setRegisterUser((currentData) => {
-            return { ...currentData, [e.target.name]: e.target.value };
-        })
-    };
+    // const onRegister = async (e) => {
+    //     e.preventDefault();
+    //     // Add the current user to the array of registered users
+    //     setmulyipleUsers(prevUsers => [...prevUsers, registerUser]);
+    //     // Reset the state to clear the form fields
 
-    const onRegister = async (e) => {
-        e.preventDefault();
-        // Add the current user to the array of registered users
-        setmulyipleUsers(prevUsers => [...prevUsers, registerUser]);
-        // Reset the state to clear the form fields
-       
-        setRegisterUser({
-            createdFor: "",
-            gender: "",
-            dateofBirth: {
-                day: "",
-                month: "",
-                year: ""
-            },
-            MaritalStatus: "",
-            Disability: '',
-            HealthInformation: '',
-            Diet:'',
-            aboutYourself: '',
-            FatherStatus: '',
-            MotherStatus: '',
-            NativePlace: '',
-            NoofSiblings: '',
-            FamilyType: '',
-            FamilyTradition: '',
-            AffluenceLevel: '',
-            Qualification: '',
-            Degree: '',
-            WorkingSector: "",
-            WorkingAsRole: " ",
-            WorkingWith:' '
-        });
-    };
+    //     setRegisterUser({
+    //         createdFor: "",
+    //         gender: "",
+    //         dateofBirth: {
+    //             day: "",
+    //             month: "",
+    //             year: ""
+    //         },
+    //         MaritalStatus: "",
+    //         Disability: '',
+    //         HealthInformation: '',
+    //         Diet: '',
+    //         aboutYourself: '',
+    //         FatherStatus: '',
+    //         MotherStatus: '',
+    //         NativePlace: '',
+    //         NoofSiblings: '',
+    //         FamilyType: '',
+    //         FamilyTradition: '',
+    //         AffluenceLevel: '',
+    //         Qualification: '',
+    //         Degree: '',
+    //         WorkingSector: "",
+    //         WorkingAsRole: " ",
+    //         WorkingWith: ' '
+    //     });
+    // };
 
-    const Qualification = ['Engineering', 'Arts / Design', 'Finance / Commerce', 'Computers / IT', 'Science', 'Medicine', 'Management', 'Law', 'Doctorate', 'Others', 'Non-Graduate']
-    const Degree = {
-        "Engineering": ["B.E / B.Tech", "M.E / M.Tech", "M.S Engineering", "B.Eng. (Hons)", "M.Eng (Hons)", "Engineering Diploma", "AE", "AET"],
-        "Arts / Design": ["B.A", "B.Ed.", "BJMC", "BFA", "B.Arch.", "B.Des", "BMM", "MFA", "M.Ed.", "M.A", "MSW", "MJMC", "M. Arch", "M.Des", "BA (Hons)", "B.Arch (Hons)", "DFA", "D.Ed.", "D. Arch", "AA", "AFA"],
-        "Finance / Commerce": ["B. Com", "CA / CPA", "CFA", "BSc / B.fin", "M.Com", "MSc / M.fin / MS", "B.com (Hons)", "PGD Finance"],
-        "Computers / IT": ["BCA", "B.IT", "BCS", "BA Computer Science", "MCA", "PGDCS", "IT Diploma", "Others"],
-        "Science": ["B.Sc.", "M.Sc.", "B.Sc. (Hons)", "M.Sc. (hons)", "Dip SC", "As", "AAS", "Others"],
-        "Medicine": ["MBBS", "BDS", "BPT", "BAMS", "BHMS", "B.Pharma", "BVSc", "BSC / BScN", "MDS", "M.D", "M.S Medicine", "MPT", "DM", "M. Pharma", "PGD Medicine", "Others"],
-        "Management": ["BBA", "BHM", "BBM", "MBA", "PGDM", "ABA", "Others"],
-        "Law": ["BL / LLB", "ML / LLM", "LLB (Hons)", "ALA"],
-        "Doctorate": ["Ph.D.", "M.Phil."],
-        "Others": ["Bachelor", "Master", "Diploma", "Honors", "Doctorate", "Associate"],
-        "Non-Graduate": ["High School", "Less than high School"]
-    }
-    const Diet = ["Veg", "Non-Veg", "Occasionally Non-Veg", "Eggetarian", "Jain", "Vegan"];
-     
-    const FatherStatus = ["Employed", "Business", "Retired", "Not Employed", "Passed Away"]
-    const MotherStatus = ["Homemaker", "Employed", "Business", "Retired", "Passed Away"]
-    const NativePlace = ["Specify where you belong to (e.g.: Delhi)"]
-    const NoofSiblings = ['1', '2', '3', '4', '5 or Above ']
-    const FamilyType = ["Joint", "Nuclear"]
-    const FamilyTradition = ["Traditional", "Moderate", "Liberal"]
-    const AffluenceLevel = ["Affluent", "Upper Middle Class", "Middle Class", "Lower Middle Class"]
+    // const Qualification = ['Engineering', 'Arts / Design', 'Finance / Commerce', 'Computers / IT', 'Science', 'Medicine', 'Management', 'Law', 'Doctorate', 'Others', 'Non-Graduate']
+    // const Degree = {
+    //     "Engineering": ["B.E / B.Tech", "M.E / M.Tech", "M.S Engineering", "B.Eng. (Hons)", "M.Eng (Hons)", "Engineering Diploma", "AE", "AET"],
+    //     "Arts / Design": ["B.A", "B.Ed.", "BJMC", "BFA", "B.Arch.", "B.Des", "BMM", "MFA", "M.Ed.", "M.A", "MSW", "MJMC", "M. Arch", "M.Des", "BA (Hons)", "B.Arch (Hons)", "DFA", "D.Ed.", "D. Arch", "AA", "AFA"],
+    //     "Finance / Commerce": ["B. Com", "CA / CPA", "CFA", "BSc / B.fin", "M.Com", "MSc / M.fin / MS", "B.com (Hons)", "PGD Finance"],
+    //     "Computers / IT": ["BCA", "B.IT", "BCS", "BA Computer Science", "MCA", "PGDCS", "IT Diploma", "Others"],
+    //     "Science": ["B.Sc.", "M.Sc.", "B.Sc. (Hons)", "M.Sc. (hons)", "Dip SC", "As", "AAS", "Others"],
+    //     "Medicine": ["MBBS", "BDS", "BPT", "BAMS", "BHMS", "B.Pharma", "BVSc", "BSC / BScN", "MDS", "M.D", "M.S Medicine", "MPT", "DM", "M. Pharma", "PGD Medicine", "Others"],
+    //     "Management": ["BBA", "BHM", "BBM", "MBA", "PGDM", "ABA", "Others"],
+    //     "Law": ["BL / LLB", "ML / LLM", "LLB (Hons)", "ALA"],
+    //     "Doctorate": ["Ph.D.", "M.Phil."],
+    //     "Others": ["Bachelor", "Master", "Diploma", "Honors", "Doctorate", "Associate"],
+    //     "Non-Graduate": ["High School", "Less than high School"]
+    // }
+    // const Diet = ["Veg", "Non-Veg", "Occasionally Non-Veg", "Eggetarian", "Jain", "Vegan"];
+
+    // const FatherStatus = ["Employed", "Business", "Retired", "Not Employed", "Passed Away"]
+    // const MotherStatus = ["Homemaker", "Employed", "Business", "Retired", "Passed Away"]
+    // const NativePlace = ["Specify where you belong to (e.g.: Delhi)"]
+    // const NoofSiblings = ['1', '2', '3', '4', '5 or Above ']
+    // const FamilyType = ["Joint", "Nuclear"]
+    // const FamilyTradition = ["Traditional", "Moderate", "Liberal"]
+    // const AffluenceLevel = ["Affluent", "Upper Middle Class", "Middle Class", "Lower Middle Class"]
 
 
-    const ResidencyStatus = ['Citizen', 'Permanent Resident', 'Student Visa', 'Temporary Visa', 'Work Permit'];
+    // const ResidencyStatus = ['Citizen', 'Permanent Resident', 'Student Visa', 'Temporary Visa', 'Work Permit'];
 
-    const WorkingSector = [ "Accounting, Banking & Finance",  "Administration & HR",  "Advertising, Media & Entertainment",  "Agriculture",  "Airline & Aviation", "Architecture & Design", "Artists, Animators & Web Designers", "Beauty, Fashion & Jewelry Designers", "BPO, KPO, & Customer Support", "Civil Services / Law Enforcements", "Defense", "Education & Training", "Engineering", "Hotel & Hospitality", "IT & Software Engineering", "Legal",  "Medical & Healthcare", "Merchant Navy", "Sales & Marketing", "Science", "Corporate Professionals", "Others", "Non Working"];
+    // const WorkingSector = ["Accounting, Banking & Finance", "Administration & HR", "Advertising, Media & Entertainment", "Agriculture", "Airline & Aviation", "Architecture & Design", "Artists, Animators & Web Designers", "Beauty, Fashion & Jewelry Designers", "BPO, KPO, & Customer Support", "Civil Services / Law Enforcements", "Defense", "Education & Training", "Engineering", "Hotel & Hospitality", "IT & Software Engineering", "Legal", "Medical & Healthcare", "Merchant Navy", "Sales & Marketing", "Science", "Corporate Professionals", "Others", "Non Working"];
 
-    const WorkingAsRole = {
-        "Accounting, Banking & Finance": ["Banking Professional", "Chartered Accountant", "Company Secretary", "Finance Professional", "Investment Professional", "Accounting Professional (Other)"],
-        "Administration & HR": ["Admin Professional", "Human Resources Professional"],
-        "Advertising, Media & Entertainment": ["Actor", "Advertising Professional", "Entertainment Professional", "Event Manager", "Journalist", "Media Professional", "Public Relations Professional"],
-        "Agriculture": ["Farming", "Horticulturist", "Agricultural Professional (Others)"],
-        "Airline & Aviation": ["Air Hostess / Flight Attendant", "Pilot / Co-Pilot", "Other Airline Professional"],
-        "Architecture & Design": ["Architect", "Interior Designer", "Landscape Architect"],
-        "Artists, Animators & Web Designers": ["Animator", "Commercial Artist", "Web / UX Designers", "Artists (Others)"],
-        "Beauty, Fashion & Jewelry Designers": ["Beautician", "Fashion Designer", "Hair Stylist", "Jewelry Designer", "Designer (Others)"],
-        "BPO, KPO, & Customer Support": ["Customer Support / BPO / KPO Professional"],
-        "Civil Services / Law Enforcements": ["IAS / IRS / IES / IFS", "Indian Police Services (IPS)", "Law Enforcement Employee (Others)"],
-        "Defense": ["Airforce", "Army", "Navy", "Defense Services (Others)"],
-        "Education & Training": ["Lecturer", "Professor", "Research Assistant", "Research Scholar", "Teacher", "Training Professional (Others)"],
-        "Engineering": ["Civil Engineer", "Electronics / Telecom Engineer", "Mechanical / Production Engineer", "Non-IT Engineer (Others)"],
-        "Hotel & Hospitality": ["Chef / Sommelier / Food Critic", "Catering Professional", "Hotel & Hospitality Professional (Others)"],
-        "IT & Software Engineering": ["Software Developer / Programmer", "Software Consultant", "Hardware & Networking Professional", "Software Professional (Others)"],
-        "Legal": ["Lawyer", "Legal Assistant", "Legal Professional (Others)"],
-        "Medical & Healthcare": ["Dentist", "Doctor", "Medical Transcriptionist", "Nurse", "Pharmacist", "Physician Assistant", "Physiotherapist / Occupational Therapist", "Psychologist", "Surgeon", "Veterinary Doctor", "Therapist (Others)", "Medical / Healthcare Professional (Others)"],
-        "Merchant Navy": ["Merchant Navy Officer", "Mariner"],
-        "Sales & Marketing": ["Marketing Professional", "Sales Professional"],
-        "Science": ["Biologist / Botanist", "Physicist", "Science Professional (Others)"],
-        "Corporate Professionals": ["CxO / Chairman / Director / President", "VP / AVP / GM / DGM", "Sr. Manager / Manager", "Consultant / Supervisor / Team Leads", "Team Member / Staff"],
-        "Others": ["Agent / Broker / Trader / Contractor", "Business Owner / Entrepreneur", "Politician", "Social Worker / Volunteer / NGO", "Sportsman", "Travel & Transport Professional", "Writer"],
-        "Non Working": ["Student", "Retired", "Not Working", "Select"]
-    };
+    // const WorkingAsRole = {
+    //     "Accounting, Banking & Finance": ["Banking Professional", "Chartered Accountant", "Company Secretary", "Finance Professional", "Investment Professional", "Accounting Professional (Other)"],
+    //     "Administration & HR": ["Admin Professional", "Human Resources Professional"],
+    //     "Advertising, Media & Entertainment": ["Actor", "Advertising Professional", "Entertainment Professional", "Event Manager", "Journalist", "Media Professional", "Public Relations Professional"],
+    //     "Agriculture": ["Farming", "Horticulturist", "Agricultural Professional (Others)"],
+    //     "Airline & Aviation": ["Air Hostess / Flight Attendant", "Pilot / Co-Pilot", "Other Airline Professional"],
+    //     "Architecture & Design": ["Architect", "Interior Designer", "Landscape Architect"],
+    //     "Artists, Animators & Web Designers": ["Animator", "Commercial Artist", "Web / UX Designers", "Artists (Others)"],
+    //     "Beauty, Fashion & Jewelry Designers": ["Beautician", "Fashion Designer", "Hair Stylist", "Jewelry Designer", "Designer (Others)"],
+    //     "BPO, KPO, & Customer Support": ["Customer Support / BPO / KPO Professional"],
+    //     "Civil Services / Law Enforcements": ["IAS / IRS / IES / IFS", "Indian Police Services (IPS)", "Law Enforcement Employee (Others)"],
+    //     "Defense": ["Airforce", "Army", "Navy", "Defense Services (Others)"],
+    //     "Education & Training": ["Lecturer", "Professor", "Research Assistant", "Research Scholar", "Teacher", "Training Professional (Others)"],
+    //     "Engineering": ["Civil Engineer", "Electronics / Telecom Engineer", "Mechanical / Production Engineer", "Non-IT Engineer (Others)"],
+    //     "Hotel & Hospitality": ["Chef / Sommelier / Food Critic", "Catering Professional", "Hotel & Hospitality Professional (Others)"],
+    //     "IT & Software Engineering": ["Software Developer / Programmer", "Software Consultant", "Hardware & Networking Professional", "Software Professional (Others)"],
+    //     "Legal": ["Lawyer", "Legal Assistant", "Legal Professional (Others)"],
+    //     "Medical & Healthcare": ["Dentist", "Doctor", "Medical Transcriptionist", "Nurse", "Pharmacist", "Physician Assistant", "Physiotherapist / Occupational Therapist", "Psychologist", "Surgeon", "Veterinary Doctor", "Therapist (Others)", "Medical / Healthcare Professional (Others)"],
+    //     "Merchant Navy": ["Merchant Navy Officer", "Mariner"],
+    //     "Sales & Marketing": ["Marketing Professional", "Sales Professional"],
+    //     "Science": ["Biologist / Botanist", "Physicist", "Science Professional (Others)"],
+    //     "Corporate Professionals": ["CxO / Chairman / Director / President", "VP / AVP / GM / DGM", "Sr. Manager / Manager", "Consultant / Supervisor / Team Leads", "Team Member / Staff"],
+    //     "Others": ["Agent / Broker / Trader / Contractor", "Business Owner / Entrepreneur", "Politician", "Social Worker / Volunteer / NGO", "Sportsman", "Travel & Transport Professional", "Writer"],
+    //     "Non Working": ["Student", "Retired", "Not Working", "Select"]
+    // };
 
 
-    const WorkingWith = ["Private Company", "Government / Public Sector", "Defense / Civil Services", "Business / Self Employed", "Not Working"];
+    // const WorkingWith = ["Private Company", "Government / Public Sector", "Defense / Civil Services", "Business / Self Employed", "Not Working"];
 
     return (
         <>
-            <div className=''>
+      {/*      <div className=''>
                 <div className='flex w-full mt-[4.5rem] justify-center bg-red-500 '>
                     <div className='w-full px-5  md:px-10 lg:px-20 py-6 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
                         <h1 className=' text-3xl font-normal '>Begin your love journey now!</h1>
@@ -173,6 +168,10 @@ export default function RagistartionFrom() {
                                         <label htmlFor="createdForSon" className='mx-2 text-sm font-medium text-gray-700'>Other</label>
                                     </div>
                                 </div>
+
+
+
+
                             </div>
 
                             <div className='flex flex-col mb-9 gap-3'>
@@ -318,21 +317,20 @@ export default function RagistartionFrom() {
                             <div className='flex flex-col mb-9 gap-3'>
                                 <p className='text-[1.37rem] font-normal  text-[#41404d]'>Diet</p>
                                 <div className='flex gap-3 flex-wrap'>
-    {Diet.map(option => (
-        <div key={option} className='border-2 px-1 py-1 rounded-full flex items-center'>
-            <input 
-                type="radio" 
-                id={option} 
-                name="HealthInformation" 
-                value={option} 
-                onChange={inputHandler} 
-                checked={registerUser.HealthInformation === option} 
-                className={`h-6 w-6`} 
-            />
-            <label htmlFor={option} className='mx-2 text-sm font-medium text-gray-600'>{option}</label>
-        </div>
-    ))}
-</div>
+                                    {Diet.map((item, index) => (
+                                        <div key={index} className='border-2 px-1 py-1 rounded-full flex items-center'>
+                                            <input
+                                                type="radio"
+                                                name="Diet"
+                                                value={item}
+                                                onChange={inputHandler}
+                                                checked={registerUser.Diet === item}
+                                                className={`h-6 w-6`}
+                                            />
+                                            <label htmlFor={item} className='mx-2 text-sm font-medium text-gray-600'>{item}</label>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
 
 
@@ -364,7 +362,7 @@ export default function RagistartionFrom() {
                                         <option value='' id='' className='' >select</option>
                                         {
                                             FatherStatus.map((item, index) => {
-                                                return <option value={ item } key={index} className='my-3'>{ item }</option>
+                                                return <option value={item} key={index} className='my-3'>{item}</option>
                                             })
                                         }
                                     </select>
@@ -459,7 +457,7 @@ export default function RagistartionFrom() {
                                     <select name="NoofSiblings" id="NoofSiblings" onChange={inputHandler} placeholder='select' className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'>
                                         <option value='' id='' className='' >select</option>
                                         {
-                                           NoofSiblings.map((item, index) => {
+                                            NoofSiblings.map((item, index) => {
                                                 return <option value={item} key={index} className='my-3'>{item}</option>
                                             })
                                         }
@@ -515,10 +513,10 @@ export default function RagistartionFrom() {
                                             <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <label
-                                    htmlFor="Qualification"
-                                    className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
-                                >Field
-                                </label>
+                                            htmlFor="Qualification"
+                                            className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
+                                        >Field
+                                        </label>
                                     </div>
 
                                     {
@@ -535,10 +533,10 @@ export default function RagistartionFrom() {
                                                 <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                                             </div>
                                             <label
-                                    htmlFor="Degree"
-                                    className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
-                                >Degree
-                                </label>
+                                                htmlFor="Degree"
+                                                className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
+                                            >Degree
+                                            </label>
                                         </div>
                                     }
                                 </div>
@@ -560,8 +558,8 @@ export default function RagistartionFrom() {
                                             <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                                         </div>
                                         <label
-                                    htmlFor="WorkingSector"
-                                    className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] " >Working Sector</label>
+                                            htmlFor="WorkingSector"
+                                            className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] " >Working Sector</label>
                                     </div>
 
                                     {
@@ -578,10 +576,10 @@ export default function RagistartionFrom() {
                                                 <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                                             </div>
                                             <label
-                                    htmlFor="WorkingAsRole"
-                                    className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
-                                >Working Role
-                                </label>
+                                                htmlFor="WorkingAsRole"
+                                                className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
+                                            >Working Role
+                                            </label>
                                         </div>
                                     }
                                 </div>
@@ -605,44 +603,45 @@ export default function RagistartionFrom() {
                                     <FaAngleDown className="w-5 h-5 text-gray-400" aria-hidden="true" />
                                 </div>
                             </div>
-                            
+
 
                             <button className='bg-blue-600 mt-10 py-2 px-10 text-white rounded-md' onClick={onRegister} >submit</button>
                         </div>
                     </div>
                 </div>
-            </div>
+             </div>
 
 
 
-                <div className='  grid  md:grid-cols-3 gap-y-10  flex-warp my-[4.5rem] mx-[3rem] gap-5' >
-                    {mulyipleUsers.map((user, index) => (
-                        <div key={index} className="p-6 border-black border-2 bg-white shadow-md bg-clip-border rounded-xl  ">  
-                                <p>{user.createdFor}</p>
-                                <p>{user.gender}</p>
-                                <p>{user.MaritalStatus}</p>
-                                <p>{user.Disability}</p>
-                                <p>{user.HealthInformation}</p>
-                                <p>{user.Diet}</p>
-                                <p>{user.aboutYourself}</p>
-                                <p>{user.FatherStatus}</p>
-                                <p>{user.MotherStatus}</p>
-                                <p>{user.NativePlace}</p>
-                                <p>{user.NoofSiblings}</p>
-                                <p>{user.FamilyType}</p>
-                                <p>{user.FamilyTradition}</p>
-                                <p>{user.AffluenceLevel}</p>
-                                <p>{user.Qualification}</p>
-                                <p>{user.Degree}</p>
-                                <p>{user.WorkingAsRole}</p>
-                                <p>{user.WorkingSector}</p>
-                                <p>{user.WorkingWith}</p>
-                        </div>
-                    ))}
-                </div>
+            <div className='  grid  md:grid-cols-3 gap-y-10  flex-warp my-[4.5rem] mx-[3rem] gap-5' >
+                {mulyipleUsers.map((user, index) => (
+                    <div key={index} className="p-6 border-black border-2 bg-white shadow-md bg-clip-border rounded-xl  ">
+                        <p>{user.createdFor}</p>
+                        <p>{user.gender}</p>
+                        <p>{user.MaritalStatus}</p>
+                        <p>{user.Disability}</p>
+                        <p>{user.HealthInformation}</p>
+                        <p>{user.Diet}</p>
+                        <p>{user.aboutYourself}</p>
+                        <p>{user.FatherStatus}</p>
+                        <p>{user.MotherStatus}</p>
+                        <p>{user.NativePlace}</p>
+                        <p>{user.NoofSiblings}</p>
+                        <p>{user.FamilyType}</p>
+                        <p>{user.FamilyTradition}</p>
+                        <p>{user.AffluenceLevel}</p>
+                        <p>{user.Qualification}</p>
+                        <p>{user.Degree}</p>
+                        <p>{user.WorkingAsRole}</p>
+                        <p>{user.WorkingSector}</p>
+                        <p>{user.WorkingWith}</p>
+                    </div>
+                ))}
+            </div> */}
 
 
-    
-   </>
-  )
+<RagistartionFrom/>
+
+        </>
+    )
 }
