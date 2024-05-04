@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { FaAngleDown } from 'react-icons/fa';
+import { FaArrowLeftLong } from "react-icons/fa6";
 import formdata from '../../formdata'
 import OptionsInput from '@/fromInputType/OptionsInput';
 import Radioinput from '@/fromInputType/Radioinput';
@@ -15,7 +15,8 @@ export default function page() {
         Religion: '', motherTongue: '', EthnicOrigin: '', Religion: '', denominations: '',
         NativeCity: '', LivingCountry: '', LivingState: '', LivingCity: '', ResidencyStatus: '',
         Qualification: '', Degree: '', WorkingSector: '', WorkingAsRole: '', WorkingWith: '',
-        Salary: '',
+        Salary: '', GamilAddress:'', passward:"",
+        ReEnterpassward:"",number:"",
 
         lookingforMaxAge: '', lookingforMinAge: '', lookingforMaxHeight: '', lookingforMinHeight: '', lookingforMaritalStatus: '', lookingforEthnicOrigin: '', lookingforReligion: '', lookingforDenomination: '', lookingforAnnualIncome: "",
         lookingforProfileCreatedby: "", lookingforDiet: "", lookingforCountryLiving: '', lookingforStateLiving: '', lookingforCity: '', lookingforQualification: "", lookingforDegree: "", lookingforWorkingSector: '', lookingforWorkingAsRole: ''
@@ -33,7 +34,6 @@ export default function page() {
         // Add the current user to the array of registered users
         setmulyipleUsers(prevUsers => [...prevUsers, registerUser]);
         // Reset the state to clear the form fields
-
         setRegisterUser({
             CreatedFor: '', Gender: '', FirstName: '', LastName: '', MaritalStatus: '', DateOfBirth: '',
             Height: '', Disability: '', HealthInformation: '', Diet: '', aboutYourself: '',
@@ -74,11 +74,15 @@ export default function page() {
     const [currentSlide, setCurrentSlide] = useState(1);
     const nextSlide = () => {
         setCurrentSlide(currentSlide + 1);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1);
     };
-  
+
 
     return (
         <>
@@ -142,8 +146,8 @@ export default function page() {
                                 />
                             </div>
                         </div>
-                         {/* Marital Status */}
-                         <div className='flex flex-col  gap-3 mb-8'>
+                        {/* Marital Status */}
+                        <div className='flex flex-col  gap-3 mb-8'>
                             <p className='text-[1.37rem] font-normal  text-[#41404d]'>Marital Status</p>
                             <div className='flex gap-3 flex-wrap'>
                                 {
@@ -265,296 +269,22 @@ export default function page() {
                                 </div>
                             </div>
                         </div>
+
                         <div className='flex justify-end'>
-                        <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
-                        </div>
+                                <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
+                            </div>
+                        
                        
                     </div>
 
-                    <div className="flex flex-col justify-center" style={{ display: currentSlide === 2 ? 'flex' : 'none', gridGap: '1rem' }}>
-
-                        
-                    </div>
-                    <div className="flex flex-col justify-center" style={{ display: currentSlide === 3 ? 'flex' : 'none', gridGap: '1rem' }}>
-                        {/* Profile Created by */}
-                        hi uyhil hp8yimgotuiyvrthedr cjv rydcv hiybgukdtr jcubyhuhyjtrs ex tcrtvgfcds zfxh try
-                        <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
-                    </div>
-                </div>
-            </div>
+                    <div className="flex relative flex-col justify-center" style={{ display: currentSlide === 2 ? 'flex' : 'none', gridGap: '2rem' }}>
 
 
+                    <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong  className="text-base  md:text-2xl"/></button>
 
+                        <div className='flex justify-center  text-[1.37rem] font-normal text-[#41404d]'><p>Family Backround</p></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div className='flex w-full mt-[4.5rem] justify-center bg-red-500 '>
-                    <div className='w-full relative px-5  md:px-10 lg:px-20 py-28 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
-
-                        {/* Profile Created by */}
-                        <div className='flex flex-col mb-12 gap-3'>
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>Profile Created by </p>
-                            <div className='flex gap-3 flex-wrap'>
-                                {formdata.CreatedFor.map((option, index) => (
-                                    <Radioinput
-                                        key={index}
-                                        id={`CreatedFor-${option}`}
-                                        name="CreatedFor"
-                                        value={option}
-                                        onChange={inputHandler}
-                                        checked={registerUser.CreatedFor === option}
-                                        label={option}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Gender */}
-                        <div className='flex flex-col gap-3  mb-12 '>
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>Gender</p>
-                            <div className='flex gap-3 flex-wrap'>
-                                {formdata.Gender.map((option, index) => (
-                                    <Radioinput
-                                        key={index}
-                                        id={`Gender-${option}`}
-                                        name="Gender"
-                                        value={option}
-                                        onChange={inputHandler}
-                                        checked={registerUser.Gender === option}
-                                        label={option}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Your Name  */}
-                        <div className='flex flex-col gap-7 mb-12'>
-                            <p className='text-[1.37rem] font-normal text-[#41404d]'>Your Name</p>
-                            <div className='flex flex-col md:flex-row gap-5'>
-                                <Textinput
-                                    id="FirstName"
-                                    name="FirstName"
-                                    value={registerUser.FirstName}
-                                    onChange={inputHandler}
-                                    placeholder="Type here First Name"
-                                    label="FirstName"
-                                />
-                                <Textinput
-                                    id="LastName"
-                                    name="LastName"
-                                    value={registerUser.LastName}
-                                    onChange={inputHandler}
-                                    placeholder="Type here Last Name"
-                                    label="LastName"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Marital Status */}
-                        <div className='flex flex-col mb-12 gap-3 '>
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>Marital Status</p>
-                            <div className='flex gap-3 flex-wrap'>
-                                {
-                                    formdata.Status.map((option, index) => (
-                                        <Radioinput
-                                            key={index}
-                                            id={`MaritalStatus-${option}`}
-                                            name="MaritalStatus"
-                                            value={option}
-                                            onChange={inputHandler}
-                                            checked={registerUser.MaritalStatus === option}
-                                            label={option}
-                                        />
-                                    ))
-                                }
-                            </div>
-                        </div>
-
-                        {/* DateOfBirth, AND Height */}
-                        <div className='flex flex-col md:flex-row mb-12 gap-6'>
-                            <div className='relative w-full'>
-                                <input
-                                    type="date"
-                                    id="DateOfBirth"
-                                    name="DateOfBirth"
-                                    value={registerUser.DateOfBirth}
-                                    onChange={inputHandler}
-                                    className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'
-                                />
-
-                                <label
-                                    htmlFor="Date of Brith"
-                                    className="pointer-events-none absolute left-3 top-0 text-xl mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out -translate-y-[1.1rem] scale-[0.8]    motion-reduce:transition-none bg-white px-2 peer-focus:text-cyan-400 peer-focus:text-lg peer-focus:-translate-y-[0.9rem] "
-                                >Date of Brith
-                                </label>
-                            </div>
-
-
-                            <div className='relative w-full gap-3'>
-                                <OptionsInput
-                                    name="Height"
-                                    options={heightOptions}
-                                    inputHandler={inputHandler}
-                                    label="Your-Height"
-                                    className='w-full'
-                                />
-                            </div>
-
-                        </div>
-
-
-                        {/* Any Disability */}
-                        <div className='flex flex-col mb-12 gap-3' >
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>Any Disability</p>
-                            <div className='flex gap-3 flex-wrap'>
-                                <div className='border-2 px-1 py-1  rounded-full flex items-center'>
-                                    <input type="radio" id="Disability" name="Disability" value="None" onChange={inputHandler} checked={registerUser.Disability === "None"} className={`h-6 w-6`} />
-                                    <label htmlFor="Disability" className='mx-2 text-sm font-medium text-gray-600'>None</label>
-                                </div>
-                                <div className='border-2  px-1 py-1 rounded-full flex items-center'>
-                                    <input type="radio" id="Disability" name="Disability" value="Physical Disability" onChange={inputHandler} checked={registerUser.Disability === "Physical Disability"} className='h-6 w-6 ' />
-                                    <label htmlFor="Disability" className='mx-2 text-sm font-medium text-gray-600'>Physical Disability</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Health Information */}
-                        <div className='flex flex-col mb-12 gap-3'>
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>	Health Information</p>
-                            <div className='flex gap-3 flex-wrap'>
-                                {formdata.healthOptions.map((option, index) => (
-                                    <Radioinput
-                                        key={index}
-                                        id={`HealthInformation-${option.value}`}
-                                        name="HealthInformation"
-                                        value={option.value}
-                                        onChange={inputHandler}
-                                        checked={registerUser.HealthInformation === option.value}
-                                        label={option.label}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Diet */}
-                        <div className='flex flex-col mb-12 gap-3'>
-                            <p className='text-[1.37rem] font-normal  text-[#41404d]'>Diet</p>
-                            <div className='flex gap-3 flex-wrap'>
-                                {formdata.Diet.map((option, index) => (
-                                    <Radioinput
-                                        key={index}
-                                        id={`Diet-${index}`} // You may want to make the ID unique per option
-                                        name="Diet"
-                                        value={option}
-                                        onChange={inputHandler}
-                                        checked={registerUser.Diet === option}
-                                        label={option}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* More about your self, Partner and Family */}
-                        <div className='flex flex-col mb-8 gap-3'>
-                            <p className='text-[1.37rem] font-normal text-[#41404d]'>More about your self, Partner and Family</p>
-                            <div className='relative'>
-                                <textarea id="aboutYourself"
-                                    name="aboutYourself"
-                                    onChange={inputHandler}
-                                    value={registerUser.aboutYourself}
-                                    cols="30"
-                                    rows="6"
-                                    maxLength={500}
-                                    className='w-full peer block w-full rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 overflow-hidden'
-                                    placeholder="Tell us more about yourself, your partner, and your family...">
-                                </textarea>
-                                <div className="absolute bottom-1 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm">
-                                    <span id="characterCount">500 characters remaining</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        {/* Church Name */}
-                        <div className='flex flex-col md:flex-row mb-12 gap-6'>
-                            <div className='flex flex-col gap-3 w-full' >
-                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Church Name</p>
-                                <Textinput
-                                    type="text"
-                                    id="ChurchName"
-                                    name="ChurchName"
-                                    onChange={inputHandler}
-                                    value={registerUser.ChurchName}
-                                    placeholder='Church Name'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-3  w-full'>
-                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Church Address</p>
-                                <Textinput
-                                    type="text"
-                                    id="ChurchAddress"
-                                    name="ChurchAddress"
-                                    onChange={inputHandler}
-                                    value={registerUser.ChurchAddress}
-                                    placeholder='Church Address'
-                                />
-                            </div>
-                        </div>
-
-                        {/* Is baptized ? */}
-                        <div className='flex flex-col md:flex-row mb-12 gap-5'>
-                            <div className='flex flex-col gap-3 w-full' >
-                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Is baptized ?</p>
-                                <div className='flex gap-3 flex-wrap'>
-                                    <div className='border-2 px-1 py-1  rounded-full flex items-center'>
-                                        <input type="radio" id="IsBaptized " name="IsBaptized" value="Yes" onChange={inputHandler} checked={registerUser.IsBaptized === "Yes"} className={`h-6 w-6`} />
-                                        <label htmlFor="IsBaptized" className='mx-2 text-sm font-medium text-gray-600'>Yes</label>
-                                    </div>
-                                    <div className='border-2  px-1 py-1 rounded-full flex items-center'>
-                                        <input type="radio" id="IsBaptized" name="IsBaptized" value="NO" onChange={inputHandler} checked={registerUser.IsBaptized === "NO"} className='h-6 w-6 ' />
-                                        <label htmlFor="IsBaptized" className='mx-2 text-sm font-medium text-gray-600'>No</label>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Baptism Date */}
-                            <div className='relative w-full flex-col gap-3'>
-                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Baptism Date</p>
-                                <input
-                                    type="date"
-                                    id="BaptismDate"
-                                    name="BaptismDate"
-                                    value={registerUser.BaptismDate}
-                                    onChange={inputHandler}
-                                    className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'
-                                />
-                            </div>
-                        </div>
-
-
-
-                        {/* Family Backround */}
-                        <div className='flex justify-center my-12 text-[1.37rem] font-normal text-[#41404d]'><p>Family Backround</p></div>
-
-                        <div className='grid grid-cols-1 md:grid-cols-2 mb-12  gap-12'>
+                        <div className='grid grid-cols-1 md:grid-cols-2  gap-12'>
                             <OptionsInput
                                 name="FatherStatus"
                                 options={formdata.FatherStatus}
@@ -627,9 +357,69 @@ export default function page() {
                             />
                         </div>
 
-                        <div className='flex justify-center my-12 text-[1.37rem] font-normal text-[#41404d]'><p>	Location, Education & Career Backround</p></div>
+                        <div className='flex flex-col md:flex-row  gap-6'>
+                            <div className='flex flex-col gap-3 w-full' >
+                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Church Name</p>
+                                <Textinput
+                                    type="text"
+                                    id="ChurchName"
+                                    name="ChurchName"
+                                    onChange={inputHandler}
+                                    value={registerUser.ChurchName}
+                                    placeholder='Church Name'
+                                />
+                            </div>
+                            <div className='flex flex-col gap-3  w-full'>
+                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Church Address</p>
+                                <Textinput
+                                    type="text"
+                                    id="ChurchAddress"
+                                    name="ChurchAddress"
+                                    onChange={inputHandler}
+                                    value={registerUser.ChurchAddress}
+                                    placeholder='Church Address'
+                                />
+                            </div>
+                        </div>
 
-                        <div className='flex flex-col gap-5 mb-12'>
+                        {/* Is baptized ? */}
+                        <div className='flex flex-col md:flex-row  gap-5'>
+                            <div className='flex flex-col gap-3 w-full' >
+                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Is baptized ?</p>
+                                <div className='flex gap-3 flex-wrap'>
+                                    <div className='border-2 px-1 py-1  rounded-full flex items-center'>
+                                        <input type="radio" id="IsBaptized " name="IsBaptized" value="Yes" onChange={inputHandler} checked={registerUser.IsBaptized === "Yes"} className={`h-6 w-6`} />
+                                        <label htmlFor="IsBaptized" className='mx-2 text-sm font-medium text-gray-600'>Yes</label>
+                                    </div>
+                                    <div className='border-2  px-1 py-1 rounded-full flex items-center'>
+                                        <input type="radio" id="IsBaptized" name="IsBaptized" value="NO" onChange={inputHandler} checked={registerUser.IsBaptized === "NO"} className='h-6 w-6 ' />
+                                        <label htmlFor="IsBaptized" className='mx-2 text-sm font-medium text-gray-600'>No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Baptism Date */}
+                            <div className='relative w-full flex-col gap-3'>
+                                <p className='text-[1.37rem] font-normal  text-[#41404d]'>Baptism Date</p>
+                                <input
+                                    type="date"
+                                    id="BaptismDate"
+                                    name="BaptismDate"
+                                    value={registerUser.BaptismDate}
+                                    onChange={inputHandler}
+                                    className='w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none'
+                                />
+                            </div>
+                        </div>
+                        <div className='flex justify-end'>
+                            <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
+                        </div>
+                    </div>
+
+                    <div className="flex relative flex-col justify-center" style={{ display: currentSlide === 3 ? 'flex' : 'none', gridGap: '2rem' }}>
+                    <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong  className="text-base  md:text-2xl"/></button>
+                        <div className='flex justify-center  text-center text-[1.37rem] font-normal text-[#41404d]'><p>	Location, Education & Career Backround</p></div>
+                        {/* Living Location */}
+                        <div className='flex flex-col gap-5 '>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Living Location</p>
                             <div className='flex flex-row gap-3'>
                                 {formdata.LivingLoactionFields.map((field, index) => (
@@ -647,7 +437,7 @@ export default function page() {
                         </div>
 
                         {/* ResidencyStatus */}
-                        <div className='relative mb-9 gap-3'>
+                        <div className='relative  gap-3'>
                             <OptionsInput
                                 name="ResidencyStatus"
                                 options={formdata.ResidencyStatus}
@@ -657,7 +447,7 @@ export default function page() {
                         </div>
 
                         {/* Highest Qualification */}
-                        <div className='flex flex-col mb-9 gap-6'>
+                        <div className='flex flex-col  gap-6'>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Highest Qualification</p>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 flex-wrap '>
                                 <div className='relative'>
@@ -681,7 +471,7 @@ export default function page() {
                             </div>
                         </div>
                         {/* Working As */}
-                        <div className='flex flex-col mb-9 gap-6'>
+                        <div className='flex flex-col  gap-6'>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Working As</p>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 flex-wrap '>
                                 <OptionsInput
@@ -703,7 +493,7 @@ export default function page() {
                             </div>
                         </div>
 
-                        <div className='flex flex-col md:flex-row mb-9 gap-3'>
+                        <div className='flex flex-col md:flex-row  gap-3'>
                             <OptionsInput
                                 name="WorkingWith"
                                 options={formdata.WorkingWith}
@@ -717,12 +507,17 @@ export default function page() {
                                 label="Annual Income"
                             />
                         </div>
+                        <div className='flex justify-end'>
+                            <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
+                        </div>
+                    </div>
 
-
-                        <p className='flex justify-center my-12 text-[1.37rem] font-normal text-[#41404d]'>Partner Looking for (basic info)</p>
+                    <div className="flex relative flex-col justify-center" style={{ display: currentSlide === 4 ? 'flex' : 'none', gridGap: '1.5rem' }}>
+                        <p className='flex justify-center text-[1.37rem] font-normal text-[#41404d]'>Partner Looking for (basic info)</p>
+                        <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong  className="text-base  md:text-2xl"/></button>
 
                         {/* looking for Marital Status */}
-                        <div className='flex flex-col mb-12 gap-3 '>
+                        <div className='flex flex-col mb-9  gap-3 '>
                             <p className='text-[1.37rem] font-normal  text-[#41404d]'>Marital Status</p>
                             <div className='flex gap-3 flex-wrap'>
                                 {
@@ -740,7 +535,7 @@ export default function page() {
                                 }
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 md:grid-cols-2 mb-12  gap-12'>
+                        <div className='grid grid-cols-1 md:grid-cols-2   gap-12'>
 
                             {/* looking for Min Age */}
                             <div className='flex flex-row gap-3 w-full items-center '>
@@ -861,7 +656,7 @@ export default function page() {
                         </div>
 
                         {/* looking for Qualification */}
-                        <div className='flex flex-col mb-9 gap-6'>
+                        <div className='flex flex-col  gap-6'>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Highest Qualification</p>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 flex-wrap '>
                                 <div className='relative'>
@@ -886,7 +681,7 @@ export default function page() {
                         </div>
 
                         {/* looking for Working Sector */}
-                        <div className='flex flex-col mb-9 gap-6'>
+                        <div className='flex flex-col  gap-6'>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Working As</p>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 flex-wrap '>
                                 <OptionsInput
@@ -908,16 +703,65 @@ export default function page() {
                             </div>
                         </div>
 
-                        <button className='bg-blue-600 mt-10 py-2 px-10 text-white rounded-md' onClick={onRegister} >submit</button>
+                        <div className='flex justify-end'>
+                            <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
+                        </div>
+                    </div>
+
+                    <div className="flex relative flex-col justify-center items-center " style={{ display: currentSlide === 5 ? 'flex' : 'none', gridGap: '2rem' }}>
+                    <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
+                            <p className='text-[1.37rem] font-normal text-[#41404d]'>Gmail Address </p>
+                                <Textinput
+                                    type='gamil'
+                                    id="GamilAddress"
+                                    name="GamilAddress"
+                                    onChange={inputHandler}
+                                    placeholder="Type here"
+                                    label="gmail"
+                                />
+                        </div>
+                        <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
+                            <p className='text-[1.37rem] font-normal text-[#41404d]'>Create passward</p>
+                                <Textinput
+                                type='password'
+                                    id="passward"
+                                    name="passward"
+                                    onChange={inputHandler}
+                                    placeholder="Type here"
+                                    label="password"
+                                />
+                        </div>
+                        <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
+                            <p className='text-[1.37rem] font-normal text-[#41404d]'>Re-Enter passward</p>
+                                <Textinput
+                                type='passward'
+                                    id="ReEnterpassward"
+                                    name="ReEnterpassward"
+                                    onChange={inputHandler}
+                                    placeholder="Type here"
+                                />
+                        </div>
+                        <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
+                            <p className='text-[1.37rem] font-normal text-[#41404d]'>Number</p>
+                                <Textinput
+                                    type='number'
+                                    id="number"
+                                    name="number"
+                                    onChange={inputHandler}
+                                    placeholder="Type here"
+                                />
+                        </div>
+                        <div className='flex justify-center'>
+                            <button onClick={onRegister} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Submit</button>
+                        </div>
+
                     </div>
                 </div>
-
-          
-
+            </div>
             {/* 688 */}
 
 
-            <div className='  grid  gap-y-10 grid-rows-4 grid-flow-col  flex-warp my-[4.5rem] mx-[3rem] gap-5'>
+            {/* <div className='  grid  gap-y-10 grid-rows-4 grid-flow-col  flex-warp my-[4.5rem] mx-[3rem] gap-5'>
                 {mulyipleUsers.map((user, index) => (
                     <div key={index} className="p-6 border-black flex flex-row  border-2 bg-white shadow-md bg-clip-border rounded-xl  ">
                         <div className='flex flex-row' >
@@ -960,7 +804,7 @@ export default function page() {
                         
                     </div>
                 ))}
-            </div>             
+            </div>              */}
                     {/* <RagistartionFrom/> */}
                     </>
                 )
