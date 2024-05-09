@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import img from '../../public/Assets/img.jpg'
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 import Multiselect from 'multiselect-react-dropdown';
+import OptionsInput from '@/fromInputType/OptionsInput';
 import Link from 'next/link';
+import formdata from '@/formdata';
 
 export default function FrontImage() {
 
@@ -146,31 +148,42 @@ export default function FrontImage() {
     }));
   };
 
-  const submit = (event) => {
-    event.preventDefault();
-    setSelectOption({
-      gender: null,
-      religion: null,
-      minimumAge: null,
-      maximumAge: null,
-      motherTongue: null
-    })
-  }
+ 
+  const [selectOptions, setselectOption] = useState({
+    denominations: '', MaxAge: '', MinAge: '', gender:''
+});
 
+const ageOptions = [];
+    
+    for (let age = 18; age <= 55; age++) {
+        ageOptions.push(age);
+    }
+    
+ const inputHandler=()=>{
+
+ }
+ const submit = (event) => {
+  event.preventDefault();
+  setselectOption({
+    gender: null,
+    religion: null,
+    minimumAge: null,
+    maximumAge: null,
+    motherTongue: null
+  })
+}
 
 
   return (
 
     <div >
-      <Image src={img} className="w-full h-[600px] object-cover" alt="img"   priority></Image>
-      <section className='absolute mx-0 md:mx-12  lg:mx-28  top-[6.5%] md:top-[13%] lg:top-[14%] w-auto  rounded-[1rem]  '>
+      <Image src={img} className="w-full h-[600px] object-cover" alt="img"  priority></Image>
+      <section className='absolute mx-0 md:mx-12  lg:mx-28  top-[6.5%] md:top-[13%] lg:top-[14%]  rounded-[1rem]  '>
         <h1 className='text-white text-2xl md:text-3xl lg:text-6xl text-center py-6  px-1 md:px-4 lg:px-12 [text-shadow:2px_3px_2px_black] z-0'>Find your Christian Life Partner</h1>
-
-
+       
         <form className=' rounded-b-lg flex-col md:flex-row  flex flex-wrap gap-2 gap-y-3 py-3 md:py-5 px-3 bg-black/60 z-0'
           onSubmit={submit}>
           <div className='flex-1 flex flex-col lg:flex-row gap-2 gap-y-3 '>
-
             <div className='flex-1 flex flex-row gap-2  flex-wrap'>
               <div className="flex-1 flex">
                 <div className="relative">
@@ -250,7 +263,6 @@ export default function FrontImage() {
                 </div>
               </div>
             </div>
-
 
             <div className='flex-1 flex-row  gap-2 flex'>
               <div className="flex-1  flex">
@@ -370,13 +382,68 @@ export default function FrontImage() {
               
             </div>
           </div>
+          {/* <div className='flex-1 flex flex-col lg:flex-row gap-2 gap-y-3 '>
+            <div className=' flex-col '>
+              <p className="text-white text-base md:text-lg">
+                I'm looking for
+              </p>
+              <OptionsInput
+                name="denominations"
+                options={formdata.denominations}
+                inputHandler={inputHandler}
+                className='w-full'
+              />
+            </div>
+            <div className='grow flex flex-col'>
+              <p className="text-white text-base md:text-lg">
+                of Denomination
+              </p>
+              <OptionsInput
+                name="denominations"
+                options={formdata.denominations}
+                inputHandler={inputHandler}
+              />
+            </div>
 
-
-
+            <div className='grow flex flex-col'>
+            <p className="text-white text-base md:text-lg">
+                Age
+              </p>
+              <div className='flex-1 flex-row  gap-2 flex'>
+                <div className="relative grow">
+                  <OptionsInput
+                    name="forMinAge"
+                    options={ageOptions}
+                    inputHandler={inputHandler}
+                    className='w-full'
+                  />
+                </div>
+                To
+                <div className="relative grow">
+                  <OptionsInput
+                    name="forMaxAge"
+                    options={ageOptions}
+                    inputHandler={inputHandler}
+                    className='w-full'
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='grow flex flex-col'>
+              <p className="text-white text-base md:text-lg">
+                of Denomination
+              </p>
+              <OptionsInput
+                name="motherTongue"
+                options={formdata.motherTongue}
+                inputHandler={inputHandler}
+              />
+            </div>
+          </div> */}
           <div className="w-full  md:w-fit  md:mt-0 ">
             <div className='flex flex-col  '>
               <label htmlFor="" className='hidden md:flex'>hi</label>
-              <Link href='/registration' className='py-1 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7 flex justify-center' ><h1> Let's Begin </h1></Link>
+              <Link href='/registration' className='py-2 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7 flex justify-center' ><h1> Let's Begin </h1></Link>
             </div>
           </div>
 

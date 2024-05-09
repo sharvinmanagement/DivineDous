@@ -5,6 +5,8 @@ import formdata from '../../formdata'
 import OptionsInput from '@/fromInputType/OptionsInput';
 import Radioinput from '@/fromInputType/Radioinput';
 import Textinput from '@/fromInputType/Textinput';
+import { page1Fields, page2Fields, page3Fields, page4Fields, page5Fields } from '../../validationMassage'
+
 export default function page() {
 
     const [registerUser, setRegisterUser] = useState({
@@ -12,7 +14,7 @@ export default function page() {
         Height: '', Disability: '', HealthInformation: '', Diet: '', aboutYourself: '',
         ChurchName: '', ChurchAddress: '', IsBaptized: '', BaptismDate: '', FatherStatus: '',
         MotherStatus: '', FamilyType: '', FamilyTradition: '', AffluenceLevel: '', NoofSiblings: '',
-        Religion: '', motherTongue: '', EthnicOrigin: '', Religion: '', denominations: '',
+        Religion: '', motherTongue: '', EthnicOrigin: '',  denominations: '',
         NativeCity: '', LivingCountry: '', LivingState: '', LivingCity: '', ResidencyStatus: '',
         Qualification: '', Degree: '', WorkingSector: '', WorkingAsRole: '', WorkingWith: '',
         Salary: '', GamilAddress:'',    passward:"",    ReEnterpassward:"",    number:"",
@@ -38,13 +40,12 @@ export default function page() {
             Height: '', Disability: '', HealthInformation: '', Diet: '', aboutYourself: '',
             ChurchName: '', ChurchAddress: '', IsBaptized: '', BaptismDate: '', FatherStatus: '',
             MotherStatus: '', FamilyType: '', FamilyTradition: '', AffluenceLevel: '', NoofSiblings: '',
-            Religion: '', motherTongue: '', EthnicOrigin: '', Religion: '', denominations: '',
+            Religion: '', motherTongue: '', EthnicOrigin: '', denominations: '',
             NativeCity: '', LivingCountry: '', LivingState: '', LivingCity: '', ResidencyStatus: '',
             Qualification: '', Degree: '', WorkingSector: '', WorkingAsRole: '', WorkingWith: '',
             Salary: '', GamilAddress:'', passward:"",    ReEnterpassward:"",  number:"",
 
-            lookingforMaxAge: '', lookingforMinAge: '', lookingforMaxHeight: '', lookingforMinHeight: '', lookingforMaritalStatus: '', lookingforEthnicOrigin: '', lookingforReligion: '', lookingforDenomination: '', lookingforAnnualIncome: "",
-            lookingforProfileCreatedby: "", lookingforDiet: "", lookingforCountryLiving: '', lookingforStateLiving: '', lookingforCity: '', lookingforQualification: "", lookingforDegree: "", lookingforWorkingSector: '', lookingforWorkingAsRole: ''
+            lookingforMaxAge: '', lookingforMinAge: '', lookingforMaxHeight: '', lookingforMinHeight: '', lookingforMaritalStatus: '', lookingforEthnicOrigin: '', lookingforReligion: '', lookingforDenomination: '', lookingforAnnualIncome: "",  lookingforProfileCreatedby: "", lookingforDiet: "", lookingforCountryLiving: '', lookingforStateLiving: '', lookingforCity: '', lookingforQualification: "", lookingforDegree: "", lookingforWorkingSector: '', lookingforWorkingAsRole: ''
         });
     };
 
@@ -70,14 +71,68 @@ export default function page() {
     }
     Salary.push(`Above ${maxSalary} LPA`);
 
-    const [currentSlide, setCurrentSlide] = useState(1);
-    const nextSlide = () => {
-        setCurrentSlide(currentSlide + 1);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    const validateFields = () => {
+        let isValid = true;
+        let missingFields = [];
+        switch (currentSlide) {
+            case 1:
+                Object.keys(page1Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                        missingFields.push(page1Fields[field]);
+                    }
+                });
+                break;
+            case 2:
+                Object.keys(page2Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 3:
+                Object.keys(page3Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 4:
+                Object.keys(page4Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 5:
+                Object.keys(page5Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+      
+        return isValid;
     };
+
+    const [currentSlide, setCurrentSlide] = useState(1);
+    const nextSlide = ()=>{
+        if (validateFields()) {
+            setCurrentSlide(currentSlide + 1);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } 
+        else {
+            alert(`Please fill in all required fields`);
+           // alert("Please fill in all required fields.");
+        }
+    };
+
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1);
     };
@@ -85,9 +140,10 @@ export default function page() {
 
     return (
         <>
+
+        
             <div className='flex w-full mt-[4.5rem] justify-center bg-red-500 '>
                 <div className='w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
-
                     <div className="flex flex-col " style={{ display: currentSlide === 1 ? 'flex' : 'none', gridGap: '2rem' }}>
                         {/* Profile Created by */}
                         <div className='flex flex-col  gap-3'>
@@ -105,6 +161,7 @@ export default function page() {
                                     />
                                 ))}
                             </div>
+                           
                         </div>
                         {/* Gender */}
                         <div className='flex flex-col gap-3  '>
@@ -197,7 +254,6 @@ export default function page() {
 
                         </div>
 
-
                         {/* Any Disability */}
                         <div className='flex flex-col  gap-3' >
                             <p className='text-[1.37rem] font-normal  text-[#41404d]'>Any Disability</p>
@@ -270,14 +326,11 @@ export default function page() {
                         </div>
 
                         <div className='flex justify-end'>
-                                <button onClick={nextSlide} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
+                                <button onClick={() => nextSlide(page1Fields)} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Continue</button>
                             </div>
-                        
-                       
                     </div>
 
                     <div className="flex relative flex-col justify-center" style={{ display: currentSlide === 2 ? 'flex' : 'none', gridGap: '2rem' }}>
-
 
                     <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong  className="text-base  md:text-2xl"/></button>
 
@@ -355,9 +408,8 @@ export default function page() {
                                 label="NativeCity"
                             />
                         </div>
-
-                        <div className='flex flex-col md:flex-row  gap-6'>
-                            <div className='flex flex-col gap-3 w-full' >
+                        <div className='grid grid-cols-1 md:grid-cols-2  gap-12'>
+                        <div className='flex flex-col gap-3 w-full' >
                                 <p className='text-[1.37rem] font-normal  text-[#41404d]'>Church Name</p>
                                 <Textinput
                                     type="text"
@@ -379,10 +431,7 @@ export default function page() {
                                     placeholder='Church Address'
                                 />
                             </div>
-                        </div>
-
-                        {/* Is baptized ? */}
-                        <div className='flex flex-col md:flex-row  gap-5'>
+                             {/* Is baptized ? */}
                             <div className='flex flex-col gap-3 w-full' >
                                 <p className='text-[1.37rem] font-normal  text-[#41404d]'>Is baptized ?</p>
                                 <div className='flex gap-3 flex-wrap'>
@@ -512,7 +561,7 @@ export default function page() {
                     </div>
 
                     <div className="flex relative flex-col justify-center" style={{ display: currentSlide === 4 ? 'flex' : 'none', gridGap: '1.5rem' }}>
-                        <p className='flex justify-center text-[1.37rem] font-normal text-[#41404d]'>Partner Looking for (basic info)</p>
+                        <p className='flex justify-center text-[1.37rem] text-center font-normal text-[#41404d]'>Partner Looking for (basic info)</p>
                         <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong  className="text-base  md:text-2xl"/></button>
 
                         {/* looking for Marital Status */}
@@ -555,7 +604,7 @@ export default function page() {
                                 />
                             </div>
 
-                            {/* looking for MinAge */}
+                            {/* looking for height */}
                             <div className='flex flex-row gap-3 w-full items-center'>
                                 <OptionsInput
                                     name="lookingforMinHeight"
@@ -708,47 +757,48 @@ export default function page() {
                     </div>
 
                     <div className="flex relative flex-col justify-center items-center " style={{ display: currentSlide === 5 ? 'flex' : 'none', gridGap: '2rem' }}>
-                    <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
+                        <button onClick={prevSlide} className="absolute -top-3 left-1 md:-left-3 text-[#41404d] ">< FaArrowLeftLong className="text-base  md:text-2xl" /></button>
+                        <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Gmail Address </p>
-                                <Textinput
-                                    type='gamil'
-                                    id="GamilAddress"
-                                    name="GamilAddress"
-                                    onChange={inputHandler}
-                                    placeholder="Type here"
-                                    label="gmail"
-                                />
+                            <Textinput
+                                type='gamil'
+                                id="GamilAddress"
+                                name="GamilAddress"
+                                onChange={inputHandler}
+                                placeholder="Type here"
+                                label="gmail"
+                            />
                         </div>
                         <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Create passward</p>
-                                <Textinput
+                            <Textinput
                                 type='password'
-                                    id="passward"
-                                    name="passward"
-                                    onChange={inputHandler}
-                                    placeholder="Type here"
-                                    label="password"
-                                />
+                                id="passward"
+                                name="passward"
+                                onChange={inputHandler}
+                                placeholder="Type here"
+                                label="password"
+                            />
                         </div>
                         <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Re-Enter passward</p>
-                                <Textinput
+                            <Textinput
                                 type='passward'
-                                    id="ReEnterpassward"
-                                    name="ReEnterpassward"
-                                    onChange={inputHandler}
-                                    placeholder="Type here"
-                                />
+                                id="ReEnterpassward"
+                                name="ReEnterpassward"
+                                onChange={inputHandler}
+                                placeholder="Type here"
+                            />
                         </div>
                         <div className='flex flex-col justify-center w-full md:w-[60%] gap-5 '>
                             <p className='text-[1.37rem] font-normal text-[#41404d]'>Number</p>
-                                <Textinput
-                                    type='number'
-                                    id="number"
-                                    name="number"
-                                    onChange={inputHandler}
-                                    placeholder="Type here"
-                                />
+                            <Textinput
+                                type='number'
+                                id="number"
+                                name="number"
+                                onChange={inputHandler}
+                                placeholder="Type here"
+                            />
                         </div>
                         <div className='flex justify-center'>
                             <button onClick={onRegister} className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500">Submit</button>

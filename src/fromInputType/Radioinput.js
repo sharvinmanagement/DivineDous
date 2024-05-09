@@ -14,6 +14,7 @@ export default function Radioinput({ id, name, value, checked, onChange, label }
                     className='h-6 w-6'
                 />
                 <label htmlFor={id} className='mx-2 text-sm font-medium text-gray-600'>{label}</label>
+            
             </div>
         </>
     )
