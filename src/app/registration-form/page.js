@@ -142,7 +142,7 @@ export default function page() {
         <>
 
         
-            <div className='flex w-full mt-[4.5rem] justify-center bg-red-500 '>
+            <div className='flex w-full mp-[4.5rem] justify-center bg-red-500 '>
                 <div className='w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
                     <div className="flex flex-col " style={{ display: currentSlide === 1 ? 'flex' : 'none', gridGap: '2rem' }}>
                         {/* Profile Created by */}
@@ -380,7 +380,7 @@ export default function page() {
                                 label="Your Mother Tongue"
                             />
                             <OptionsInput
-                                name="denominations"
+                                name="Religion"
                                 options={formdata.Religion}
                                 inputHandler={inputHandler}
                                 label="Religion"
@@ -688,15 +688,15 @@ export default function page() {
                             <div className='flex flex-col gap-5 '>
                                 <p className='text-[1.37rem] font-normal text-[#41404d]'>Living Location</p>
                                 <div className='flex flex-row gap-3'>
-                                    {formdata.lookingforLivingLoactionFields.map((field, index) => (
+                                    {formdata.lookingforLivingLoactionFields.map((fields, index) => (
                                         <Textinput
                                             key={index}
                                             id="NativeCity"
-                                            name={field.name}
-                                            value={registerUser[field.name]}
+                                            name={fields.name}
+                                            value={registerUser[fields.name]}
                                             onChange={inputHandler}
                                             placeholder='Type Here..'
-                                            label={field.label}
+                                            label={fields.label}
                                         />
                                     ))}
                                 </div>
@@ -845,8 +845,6 @@ export default function page() {
                             {user.lookingforMaxAge} {user.lookingforMinAge} {user.lookingforMaxHeight}  {user.lookingforMinHeight}
                             {user.lookingforMaritalStatus} {user.lookingforEthnicOrigin} {user.lookingforReligion} {user.lookingforDenomination}
                             {user.lookingforCountryLiving} {user.lookingforStateLiving} {user.lookingforCity}
-
-
                             {user.lookingforAnnualIncome}
                             {user.lookingforProfileCreatedby}   {user.lookingforDiet}    {user.lookingforQualification}  {user.lookingforDegree}  {user.lookingforWorkingSector}    {user.lookingforWorkingAsRole}
                         </div>

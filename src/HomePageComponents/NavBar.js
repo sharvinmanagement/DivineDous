@@ -7,8 +7,6 @@ import Link from 'next/link';
 import LoginForm from './LoginForm';
 import { useRouter } from "next/router";
 
-
-
 export default function NavBar() {
 
   
@@ -37,7 +35,8 @@ export default function NavBar() {
         <div className='gap-5 flex items-center'>
           <button className='px-5 py-2 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold' onClick={toggleLoginForm}>Login</button>
          <h1 className='hidden md:flex gap-1 cursor-pointer items-center '>Help <FaAngleDown /></h1>
-        </div>
+         <Link href='/divine-dous' className='hidden md:flex gap-1 cursor-pointer items-center '>divine-dous</Link>
+                 </div>
       </nav>
     {
       loginShow && <LoginForm  toggleLoginForm={toggleLoginForm} loginShow={loginShow}/>

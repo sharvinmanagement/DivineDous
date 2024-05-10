@@ -1,13 +1,17 @@
-import AboutData from '@/Components/AboutData';
-import FrontImage from '@/Components/FrontImage';
-import Process from '@/Components/Process';
-import WhyChooseWe from '@/Components/WhyChooseWe';
+import AboutData from '@/HomePageComponents/AboutData';
+import FrontImage from '@/HomePageComponents/FrontImage';
+import NavBar from '@/HomePageComponents/NavBar';
+import Process from '@/HomePageComponents/Process';
+import WhyChooseWe from '@/HomePageComponents/WhyChooseWe';
 
 export default function Home() {
 
   return (
     <>
       <div className="">
+        <section>
+          <NavBar />
+        </section>
         <section className=''>
           <FrontImage />
         </section>
