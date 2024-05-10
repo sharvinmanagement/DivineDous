@@ -20,9 +20,9 @@ export default function Navbar() {
         switch (item) {
             case 'Matches':
                 setSecondNavbarItems([
-                    { link: '/new-matches', value: 'New Matches' },
-                    { link: '/my-matches', value: 'My Matches' },
-                    { link: '/near-me', value: 'Near Me' }
+                    { link: '/divinedous', value: 'New Matches' },
+                    { link: '/divine-dous/mymatches/pages', value: 'My Matches' },
+                    { link: '/divinedous', value: 'Near Me' }
                 ]);
                 break;
             case 'Search':
@@ -45,7 +45,7 @@ export default function Navbar() {
     return (
         <div>
             {/* First Navbar */}
-            <nav className={` px-3 lg:px-11 lg:px-20 w-full text-black flex justify-between items-center  transition duration-300 ease-in-out z-30 drop-shadow-lg `} >
+            <nav className={` px-3 py-2 lg:px-11 lg:px-20 w-full text-black flex justify-between items-center  transition duration-300 ease-in-out z-30 drop-shadow-lg `} >
                 <Link href='/' ><Image src={img} width={150} height={150} alt='DivinsDuos logo' style={{ width: '8rem', height: "4rem" }} /></Link>
                 <ul className='flex justify-between gap-16 text-lg font-medium'>
                     <li onClick={() => { handleFirstNavbarItemClick('My Shaadi'); setActiveFirstNavItem('My Shaadi'); }} className='px-5'>My Shaadi</li>
