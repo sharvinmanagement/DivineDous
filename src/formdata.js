@@ -57,6 +57,10 @@ const formdata = {
     CreatedFor: ["MySelf", "Parent Guardian", "Sibling", "Friend", "Other"],
     Gender: ['Male', 'Female'],
     Status: ['Never Married', 'Divorced', 'Awaiting Divorce'],
+    
+//  Status : [{ value: 'Never Married', label: 'Never Married' },
+//  { value: 'Divorced', label: 'Divorced' },
+//  { value: 'Awaiting Divorce', label: 'Awaiting Divorce' }],
     healthOptions: [
         { value: "No Health Problems", label: "No Health Problems" },
         { value: "HIV Positive", label: "HIV Positive" },

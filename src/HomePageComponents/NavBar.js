@@ -35,7 +35,7 @@ export default function NavBar() {
         <div className='gap-5 flex items-center'>
           <button className='px-5 py-3 bg-[#FF9A8A] rounded-lg text-xs md:text-sm lg:text-sm text-black font-semibold' onClick={toggleLoginForm}>Login</button>
          <h1 className='hidden md:flex gap-1 cursor-pointer items-center '>Help <FaAngleDown /></h1>
-         <Link href='/divine-dous' className='hidden md:flex gap-1 cursor-pointer items-center '>divine-dous</Link>
+         
                  </div>
       </nav>
     {

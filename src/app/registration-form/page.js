@@ -2,10 +2,8 @@
 import React, { useState } from 'react';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import formdata from '../../formdata'
-import OptionsInput from '@/fromInputType/OptionsInput';
-import Radioinput from '@/fromInputType/Radioinput';
-import Textinput from '@/fromInputType/Textinput';
 import { page1Fields, page2Fields, page3Fields, page4Fields, page5Fields } from '../../validationMassage'
+import {OptionsInput,Radioinput,Textinput} from '@/InputComponents/RegistrationInput'
 
 export default function page() {
 
@@ -114,7 +112,6 @@ export default function page() {
             default:
                 break;
         }
-      
         return isValid;
     };
 
@@ -129,9 +126,12 @@ export default function page() {
         } 
         else {
             alert(`Please fill in all required fields`);
-           // alert("Please fill in all required fields.");
         }
     };
+
+    const Status =  [{ value: 'Never Married', label: 'Never Married' },
+ { value: 'Divorced', label: 'Divorced' },
+ { value: 'Awaiting Divorce', label: 'Awaiting Divorce' }]
 
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1);
@@ -219,6 +219,7 @@ export default function page() {
                                         />
                                     ))
                                 }
+                                
                             </div>
                         </div>
 
