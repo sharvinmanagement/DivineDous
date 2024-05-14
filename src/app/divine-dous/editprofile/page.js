@@ -1,4 +1,5 @@
 "use client"
+import Footer from '@/HomePageComponents/Footer';
 import { EditOptionsInput } from '@/InputComponents/EditeInput';
 import formdata from '@/formdata';
 import React, { useState } from 'react';
@@ -40,7 +41,7 @@ export default function page() {
 
     return (
       <>
-            <div className='flex justify-center'>
+            <div className='flex justify-center px-0 lg:px-11 lg:px-36'>
                 <div className='w-[98%]  md:w-[80%] lg:w-[65%] p-2 lg:p-4  mb-16 mt-3  flex flex-col gap-y-2 md:gap-y-5'>
                     <h1 className='text-gray-500 text-base md:text-xl '>Edit Personal Profile</h1>
                     <div className='bg-white px-3 py-1'>
@@ -136,9 +137,8 @@ export default function page() {
                     </div>
 
                         </div>
-                  
-            
 </div>
+<Footer/>
             </>
             )
 }

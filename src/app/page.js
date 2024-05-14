@@ -1,4 +1,5 @@
 import AboutData from '@/HomePageComponents/AboutData';
+import Footer from '@/HomePageComponents/Footer';
 import FrontImage from '@/HomePageComponents/FrontImage';
 import NavBar from '@/HomePageComponents/NavBar';
 import Process from '@/HomePageComponents/Process';
@@ -24,6 +25,7 @@ export default function Home() {
         <section className='mt-10'>
           <AboutData />
         </section>
+        <Footer/>
       </div>
     </>
   );

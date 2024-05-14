@@ -9,3 +9,13 @@
 .option {
  background-color: rgb(12, 54, 54);
 }
+
+.Card-Scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.Card-Scroll{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

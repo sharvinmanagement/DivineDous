@@ -4,6 +4,7 @@ import Select from 'react-select';
 import {SelectInput, Radioinput} from '@/InputComponents/SearchInput'
 import formdata from '@/formdata'
 import { RiUserSearchFill } from "react-icons/ri";
+import Footer from '@/HomePageComponents/Footer';
 
 
 export default function page() {
@@ -73,7 +74,7 @@ const onSearch = async (e) => {
 
   return (
     <>
-      <div className='flex justify-center py-12'>
+      <div className='px-0 lg:px-11 lg:px-36 flex justify-center py-12'>
         <div className='w-[90%]  md:w-[70%] lg:w-[60%] md:py-10 py-6  pr-2 md:pr-12 lg:pr-20 pl-3 md:pl-6 lg:pl-10 bg-white flex flex-col gap-y-6 lg:gap-y-7  text-slate-600  text-sm md:text-base  '>
           <div className='grid grid-cols-4   items-center '>
             <label className=' text-sm md:text-base peer-focus:text-black'>Age</label>
@@ -197,9 +198,6 @@ const onSearch = async (e) => {
 />
   </div>
 </div>
-
-
-
           <div className='flex flex-col  gap-2 md:grid grid-cols-4 justify-center md:items-center'>
             <label className='peer-focus:text-black'>Profession Area</label>
             <div className='col-span-3 flex gap-1 md:gap-3 items-center'>
@@ -221,6 +219,7 @@ const onSearch = async (e) => {
                             
         </div>
       </div>
+      <Footer/>
     </>
   )
 }

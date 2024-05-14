@@ -58,7 +58,7 @@ const NeedHelp = [
 
   return (
     <>
-      <footer className='w-[100%] h-[100%] px-2 lg:px-7 xl:px-12 border-slate-900'>
+      <footer className='w-[100%] h-[100%] px-2 lg:px-7 xl:px-12 border-slate-900 bg-white'>
 
 
         <div className='px-3 md:px-5  lg:px-6 xl:px-[2rem]'>

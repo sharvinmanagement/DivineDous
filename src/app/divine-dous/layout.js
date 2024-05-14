@@ -11,11 +11,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    
     return (
 
         <div className="relative">
             <NavBar />
-            <div className="px-0 lg:px-11 lg:px-36 bg-gray-200">
+            <div className="bg-gray-200">
             {children}
             </div>
        

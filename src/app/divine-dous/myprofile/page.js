@@ -4,12 +4,13 @@ import manimg from '../../../../public/manfakeprofile.jpeg'
 import Image from 'next/image'
 import { FaEdit } from "react-icons/fa";
 import Link from 'next/link';
+import Footer from '@/HomePageComponents/Footer';
 
 
 export default function page() {
     return (
         <>
-            <div className='flex justify-center'>
+            <div className='flex justify-center px-0 lg:px-11 lg:px-36'>
                 <div className='w-[90%]  md:w-[70%] lg:w-[60%] p-2 lg:p-4  mb-16 mt-3 bg-white flex flex-col gap-y-2 md:gap-y-3 '>
                     <div className='text-xl md:text-2xl lg:text-4xl p-2 md:p-3 text-gray-700 bg-violet-50 font-semibold text-center '>
                         {profileData.FirstName}  {profileData.LastName}
@@ -164,6 +165,7 @@ export default function page() {
                     
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }
