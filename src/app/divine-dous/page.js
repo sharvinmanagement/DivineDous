@@ -10,23 +10,17 @@
 //   )
 // }
 
-
-'use client'
-import Navbar from '@/DivineComponents/Navbar'
-import ProfileCard from '@/DivineComponents/ProfileCard'
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+"use client";
+import Navbar from "@/DivineComponents/Navbar";
+import ProfileCard from "@/DivineComponents/ProfileCard";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function page() {
-  
-  // const router = useRouter()
-  //    useEffect(() => {
-  //   router.push('/divine-dous/myprofile');
-  // }, []);
+    const router = useRouter();
+    useEffect(() => {
+        router.push("/divine-dous/myprofile");
+    }, []);
 
-  return (
-    <>
-  
-    </>
-  )
+    return <></>;
 }
