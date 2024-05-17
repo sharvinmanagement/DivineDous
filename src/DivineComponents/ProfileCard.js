@@ -113,7 +113,6 @@ export default function ProfileCard() {
             </li>
           </ul>
 
-
           <div id="default-tab-content" className='text-black'>
             <div className={`p-4 lg:p-6 gap-y-4 flex flex-col mb-60 ${activeTab !== 'About' ? 'hidden' : ''}`} id="About" role="tabpanel" aria-labelledby="About">
               <h1 className='text-xl font-semibold text-gray-600'>About Her</h1>

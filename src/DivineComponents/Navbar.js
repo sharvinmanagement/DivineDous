@@ -62,15 +62,13 @@ export default function Navbar() {
                 <ul className='flex justify-center gap-2 md:gap-5 lg:gap-10 text-sm  lg:text-base font-medium'>
                     {secondNavbarItems.map((item, index) => (
                         <li key={index} className='shadow-md px-3 md:px-6 rounded-lg lg:px-10 py-2 bg-red-400 border-black text-center'>
-                            <Link href={item.link} className='  '>
+                            <Link href={item.link} className={item.isActive ? 'active' : ''}>
                                 {item.value}
                             </Link>
                         </li>
                     ))}
                 </ul>
             </nav>
-
-          
         </div>
     )
 }
