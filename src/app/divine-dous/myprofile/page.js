@@ -1,6 +1,6 @@
 import React from 'react'
 import profileData from '@/fakeProfiledata'
-import manimg from '../../../../public/manfakeprofile.jpeg'
+import img from '../../../../public/NutralProfileImg.webp'
 import Image from 'next/image'
 import { FaEdit } from "react-icons/fa";
 import Link from 'next/link';
@@ -17,9 +17,9 @@ export default function page() {
                     </div>
                     <div className='flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border-b-2 border-violet-200 pb-2'>
                         
-                        <Image src={manimg} alt="myprofile" className='w-40 lg:w-48'/>
+                        <Image src={img} alt="myprofile" className='w-40 lg:w-48'/>
 
-<div className='flex flex-col w-full gap-5'>
+                    <div className='flex flex-col w-full gap-5'>
                         <div className='flex flex-col md:grid grid-cols-2 w-full text-sm md:text-base py-2 gap-2 md:gap-3  ' >
                             <div className='flex flex-col gap-y-2 border-r-0 md:border-r-2 border-gray-300'>
                                 <div className='grid grid-cols-2 '>
@@ -48,13 +48,11 @@ export default function page() {
                         <div className='flex justify-center md:justify-start'>
                         <Link href='/divine-dous/editprofile' className='px-10 py-2 rounded-lg bg-blue-600 text-sm md:text-base font-semibold text-white flex gap-5 flex items-center'>Edit <FaEdit size={20}/></Link>
                         </div>
-                        
-
                         </div>
                     </div>
                     
-                       <h1 className='bg-violet-400 text-sm md:text-base  text-white w-fit px-6 py-1'>About MySelf</h1> 
-          
+                    <h1 className='bg-violet-400 text-sm md:text-base  text-white w-fit px-6 py-1'>About MySelf</h1> 
+
                     <div >
                         <h1 className='text-red-600 text-base font-bold md:text-xl py-1 border-b-2 '>Personality, Family Details, Career, Partner Expectations etc.</h1>
                         <p className='text-sm text-gray-600 px-2 py-2'>
@@ -62,7 +60,6 @@ export default function page() {
                         </p>
                     </div>
 
-                    
                     <div >
                         <h1 className='text-red-600 text-base font-bold md:text-xl py-1 border-b-2 '>Basics & Lifestyle</h1>
                         <div className='flex flex-col md:grid grid-cols-2 w-full text-sm md:text-sm py-2 gap-3  gap-y-2 px-2' >

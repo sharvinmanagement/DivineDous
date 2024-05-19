@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useEffect} from 'react';
-import img from '../../public/fakeimg.avif'
 import Image from 'next/image'
 import FakeMatcheData from '@/FakeMatcheData';
 
@@ -26,6 +25,7 @@ import { MdTripOrigin } from "react-icons/md";
 import { BiHandicap } from "react-icons/bi";
 import { MdOutlineFoodBank } from "react-icons/md";
 import { BiFoodMenu } from "react-icons/bi";
+import img from '../../public/NutralProfileImg.webp'
 
 
 export default function ProfileCard() {
