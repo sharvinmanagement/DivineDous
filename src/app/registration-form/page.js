@@ -30,9 +30,7 @@ export default function page() {
 
     const onRegister = async (e) => {
         e.preventDefault();
-        // Add the current user to the array of registered users
         setmulyipleUsers(prevUsers => [...prevUsers, registerUser]);
-        // Reset the state to clear the form fields
         setRegisterUser({
             CreatedFor: '', Gender: '', FirstName: '', LastName: '', MaritalStatus: '', DateOfBirth: '',
             Height: '', Disability: '', HealthInformation: '', Diet: '', aboutYourself: '',
@@ -129,19 +127,13 @@ export default function page() {
         }
     };
 
-    const Status =  [{ value: 'Never Married', label: 'Never Married' },
- { value: 'Divorced', label: 'Divorced' },
- { value: 'Awaiting Divorce', label: 'Awaiting Divorce' }]
-
     const prevSlide = () => {
         setCurrentSlide(currentSlide - 1);
     };
 
 
     return (
-        <>
-
-        
+        <>        
             <div className='flex w-full mp-[4.5rem] justify-center bg-red-500 '>
                 <div className='w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
                     <div className="flex flex-col " style={{ display: currentSlide === 1 ? 'flex' : 'none', gridGap: '2rem' }}>

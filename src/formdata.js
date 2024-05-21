@@ -11,7 +11,7 @@ const formdata = {
     FamilyTradition: ["Traditional", "Moderate", "Liberal"],
     AffluenceLevel: ["Affluent", "Upper Middle Class", "Middle Class", "Lower Middle Class"],
     ResidencyStatus: ['Citizen', 'Permanent Resident', 'Student Visa', 'Temporary Visa', 'Work Permit'],
-    WorkingSector: ["Accounting, Banking & Finance", "Administration & HR", "Advertising, Media & Entertainment", "Agriculture", "Airline & Aviation", "Architecture & Design", "Artists, Animators & Web Designers", "Beauty, Fashion & Jewelry Designers", "BPO, KPO, & Customer Support", "Civil Services / Law Enforcements", "Defense", "Education & Training", "Engineering", "Hotel & Hospitality", "IT & Software Engineering", "Legal", "Medical & Healthcare", "Merchant Navy", "Sales & Marketing", "Science", "Corporate Professionals", "Others", "Non Working"],
+   
 
     Qualification: ['Engineering', 'Arts / Design', 'Finance / Commerce', 'Computers / IT', 'Science', 'Medicine', 'Management', 'Law', 'Doctorate', 'Others', 'Non-Graduate'],
     Degree: {
@@ -28,6 +28,7 @@ const formdata = {
         "Non-Graduate": ["High School", "Less than high School"]
     },
 
+    WorkingSector: ["Accounting, Banking & Finance", "Administration & HR", "Advertising, Media & Entertainment", "Agriculture", "Airline & Aviation", "Architecture & Design", "Artists, Animators & Web Designers", "Beauty, Fashion & Jewelry Designers", "BPO, KPO, & Customer Support", "Civil Services / Law Enforcements", "Defense", "Education & Training", "Engineering", "Hotel & Hospitality", "IT & Software Engineering", "Legal", "Medical & Healthcare", "Merchant Navy", "Sales & Marketing", "Science", "Corporate Professionals", "Others", "Non Working"],
     WorkingAsRole: {
         "Accounting, Banking & Finance": ["Banking Professional", "Chartered Accountant", "Company Secretary", "Finance Professional", "Investment Professional", "Accounting Professional (Other)"],
         "Administration & HR": ["Admin Professional", "Human Resources Professional"],
@@ -83,6 +84,8 @@ const formdata = {
         { name: 'lookingforLivingCity', label: 'City' }
       ],
 
+      healthInformation: [ "No Health Problems", "HIV Positive",  "Diabetes",  "Low BP", "High BP",  "Heart Ailments","Other"
+    ],
 
 };
 
