@@ -153,7 +153,6 @@ export default function page() {
                                     />
                                 ))}
                             </div>
-                           
                         </div>
                         {/* Gender */}
                         <div className='flex flex-col gap-3  '>

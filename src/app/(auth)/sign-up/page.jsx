@@ -3,6 +3,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import formOptions from '@/formdata'
+import { page1Fields, page2Fields, page3Fields, page4Fields, page5Fields } from '@/validationMassage'
+import {OptionsInput,Radioinput,Textinput} from '@/InputComponents/RegistrationInput'
 
 // TODO: fix the styling
 export default function page() {
@@ -31,8 +35,100 @@ export default function page() {
         console.log(response);
     };
 
+
+    // changes start from here
+
+    const ageOptions = [];
+    const heightOptions = [];
+    for (let age = 18; age <= 55; age++) {
+        ageOptions.push(age);
+    }
+    for (let feet = 4; feet <= 9; feet++) {
+        for (let inches = 0; inches <= 12; inches++) {
+            heightOptions.push(`${feet} ft ${inches} in`);
+        }
+    }
+
+    const Salary = [];
+    const rangeStep = 3;
+    const maxSalary = 50; // Maximum salary in LPA
+    for (let i = rangeStep; i <= maxSalary; i += rangeStep) {
+        const lowerRange = i - rangeStep;
+        const upperRange = i;
+        const category = `${lowerRange} LPA to ${upperRange} LPA`;
+        Salary.push(category);
+    }
+    Salary.push(`Above ${maxSalary} LPA`);
+
+    const validateFields = () => {
+        let isValid = true;
+        let missingFields = [];
+        switch (currentSlide) {
+            case 1:
+                Object.keys(page1Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                        missingFields.push(page1Fields[field]);
+                    }
+                });
+                break;
+            case 2:
+                Object.keys(page2Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 3:
+                Object.keys(page3Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 4:
+                Object.keys(page4Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            case 5:
+                Object.keys(page5Fields).forEach(field => {
+                    if (!registerUser[field]) {
+                        isValid = false;
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+        return isValid;
+    };
+
+    const [currentSlide, setCurrentSlide] = useState(1);
+    const nextSlide = ()=>{
+        if (validateFields()) {
+            setCurrentSlide(currentSlide + 1);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } 
+        else {
+            alert(`Please fill in all required fields`);
+        }
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide(currentSlide - 1);
+    };
+
+
+
     return (
-        <div className="h-screen w-full bg-red-400 flex items-center justify-center">
+        <>
+        <div className="bg-red-400 flex itms-center">
             <div className="bg-white p-5 rounded shadow-2xl">
                 <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <h1 className="text-xl text-center font-bold">Sign Up</h1>
@@ -73,5 +169,12 @@ export default function page() {
                 </form>
             </div>
         </div>
+
+            <div className='flex w-full mp-[4.5rem] justify-center bg-red-400 '>
+                <div className='w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
+
+                </div>
+            </div>
+        </>
     );
 }

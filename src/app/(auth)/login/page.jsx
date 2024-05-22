@@ -7,7 +7,8 @@ import Link from "next/link";
 import { IoMdClose } from "react-icons/io";
 import img from '../../../../public/Assets/logo.png'
 import Image from 'next/image';
-import { FaChevronRight } from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 
 // TODO: fix the styling
@@ -75,14 +76,14 @@ export default function page() {
                 </form>
             </div>
         </div> */}
-            <div className='fixed  bg-red-400 h-full w-full flex justify-center  z-50'>
+            <div className='fixed  bg-red-400 h-full w-full flex justify-center items-center z-50'>
                 <div className='w-[90%] md:w-[50%] lg:w-[36%] xl:w-[28%] h-fit  relative  bg-white rounded-lg  mt-10 '>
-                    <div className='absolute top-2 right-2 text-gray-600 cursor-pointer' ><IoMdClose size={20} /></div>
+                    <div className='absolute top-2 left-2 text-gray-600 cursor-pointer' ><IoMdArrowBack size={20} /></div>
                     <div className='px-5 md:px-9 py-7 z-10'>
                         <div className='flex justify-center mb-2'>
                             <Image src={img} width={120} height={100} alt='DivinsDuos logo' style={{ width: '8rem', height: "4rem" }} />
                         </div>
-                        <h1 className='text-base md:text-lg text-center  text-gray-700'>Welcome back! Please Login</h1>
+                        <h1 className='text-base md:text-lg text-center py-3 text-gray-700'>Welcome back! Please Login</h1>
                         <form className='flex flex-col gap-y-4 my-6' onSubmit={handleSubmit}>
                             <div className='flex flex-col gap-y-1'>
                                 <label htmlFor="" className='text-sm text-gray-600'>Mobile No. / Email ID</label>
@@ -113,7 +114,7 @@ export default function page() {
                         </form>
                         <div className='text-sm text-center text-gray-500 flex flex-row justify-center gap-2' >
                             <span>New to DivineDuos? </span>
-                            <Link href='/registration' onClick={toggleLoginForm}><span className='font-semibold flex items-center hover:underline'>Sign up Free <FaChevronRight size={12} /></span> </Link> </div>
+                            <Link href='/sign-up' ><span className='font-semibold flex items-center hover:underline gap-2'>Sign up Free <FaArrowRightLong size={12} /></span> </Link> </div>
                     </div>
                 </div>
             </div>
