@@ -19,8 +19,10 @@ import { useRouter } from "next/navigation";
 export default function page() {
     const router = useRouter();
     useEffect(() => {
-        router.push("/divine-dous/myprofile");
+        router.push("/divine-dous/matches");
     }, []);
 
-    return <></>;
+    return <>
+    
+    </>;
 }

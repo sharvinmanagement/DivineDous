@@ -2,8 +2,7 @@
 import MatchesCard from '@/DivineComponents/MatchesCard'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-
-export default function pages() {
+export default function page() {
 
   const [matches, setMatches] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
