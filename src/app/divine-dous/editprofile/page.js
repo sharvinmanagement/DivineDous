@@ -3,9 +3,10 @@ import Footer from '@/HomePageComponents/Footer';
 import { EditOptionsInput, EditTextinput } from '@/InputComponents/EditeInput';
 import formdata from '@/formdata';
 import Image from 'next/image';
-import NutralProfileImg from '../../../../public/NutralProfileImg.webp'
 import React, { useState } from 'react';
 import { CiSaveUp2 } from "react-icons/ci";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import img from '../../../../public/NutralProfileImg.webp'
 
 
 export default function page() {
@@ -72,23 +73,33 @@ export default function page() {
         <>
             <div className='flex justify-center flex-col px-2 md:px-16 lg:px-36 mb-12'>
 
-                <h1 className='text-red-400 text-center text-lg md:text-xl lg:text-3xl font-bold  py-6'>Edit Personal Profile</h1>
-                <div className=' grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                    <div className='flex flex-col gap-5'>
+                <h1 className='text-red-400 text-center text-lg md:text-xl lg:text-3xl font-bold py-5 md:py-6 m'>Edit Personal Profile</h1>
+                <div className=' grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5'>
+                    <div className='flex flex-col gap-3 md:gap-5'>
 
-                        <div className='grid bg-white px-3 py-1'>
+                        <div className='grid bg-white px-3 py-1 gap-2'>
                             <h1 className='py-2 border-b-2 border-gray-300 text-gray-500 text-base md:text-lg lg:text-xl '>Profile Image</h1>
-                           
-                            <input type="file" accept="image/*" onChange={handleImageChange} />
-                           
-                    <div>
-                    {/* {edit.profileImages && ( */}
-                    <div>
-                        <img src={NutralProfileImg } alt="Profile" style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
-                    </div>
-                {/* )} */}
-                    </div>
-                
+                                <div className='w-full bg-black flex justify-center '>
+                                    {
+                                        edit.profileImages ? 
+                                        <Image src={edit.profileImages} alt="Profile" width={600} height={200}  className='h-96 w-72'/>
+                                    : <Image src={img} alt="Profile" width={600} height={700}  className='h-96'/>
+                                    }
+                                </div>
+                            <div class="flex items-center justify-center w-full">
+                                <label htmlFor="profileImages" class="flex flex-col items-center justify-center w-full py-3 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+                                    <div class="flex flex-col items-center justify-center">
+                                    <FaCloudUploadAlt color='black' size={30}/>
+                                    <input type="file" accept="image/*" id='profileImages' name='profileImages' onChange={handleImageChange} className='hidden'/>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                    </div>
+                                </label>
+                            </div>
+
+
+
+
                         </div>
 
                         {/* Basic Info */}
@@ -175,7 +186,7 @@ export default function page() {
 
 
 
-                    <div className='flex flex-col gap-5'>
+                    <div className='flex flex-col  gap-3 md:gap-5'>
                         {/* Family Backround */}
                         <div className='grid bg-white px-3 py-1'>
                             <h1 className='py-2 border-b-2 border-gray-300 text-gray-500 text-base md:text-lg lg:text-xl  '>About Yourself</h1>
@@ -341,7 +352,7 @@ export default function page() {
 
                     </div>
 
-                    <div className='flex flex-col gap-5'>
+                    <div className='flex flex-col  gap-3 md:gap-5'>
 
                         {/* Family Backround */}
                         <div className='grid bg-white px-3 py-1'>

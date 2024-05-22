@@ -1,8 +1,8 @@
 const formdata = {
     Diet: ["Veg", "Non-Veg", "Occasionally Non-Veg", "Eggetarian", "Jain", "Vegan"],
-    denominations : ["Anglo Indian", "Basel Mission", "Born Again", "Brethren", "Cannonite", "Catholic", "Chaldean Syrian", "Catholic Knanaya", "Catholic Malankara", "Cheramar", "Christian Nadar", "Church of North India (CNI)", "Church of South India (CSI)", "CMS", "Convert", "Evangelical", "Indian Orthodox", "Intercaste", "IPC", "Jacobite", "Jacobite Knanaya", "Knanaya", "Knanaya Catholic", "Knanaya Jacobite", "Knanaya Pentecostal", "Knanaya", "Latin Catholic", "Malankara", "Malankara Catholic", "Mangalorean", "Marathoma", "Methodist", "Mormon", "Nadar", "Orthodox", "Pentecost", "Presbyterian", "Protestant", "RCSC", "Roman Catholic", "Salvation Army", "Scheduled Caste (SC)", "Scheduled Tribe (ST)", "Seventh day Adventist", "Syrian", "Syrian Catholic", "Syrian Orthodox", "Syro Malabar"],
-    motherTongue : ['Hindi', 'English', 'Bengali', 'Gujarati', 'Kashmiri', 'Malayalam', 'Marathi', 'Oriya', 'Punjabi',  'Urdu',  'Sanskrit' ,'Arabic', , 'Tamil','Telugu', 'Kannada', 'Odia', 'Gujarati', 'Sindhi','Assamese', 'Kashmiri', 'Konkani', 'Nepali', 'Spanish', 'Bengali', 'Portuguese', 'Russian', 'French', 'German', 'Italian', 'Polish', 'Tagalog', 'Ukrainian','Romanian', 'Dutch', 'Greek', 'Hungarian', 'Swedish', 'Czech','Norwegian', 'Bulgarian', 'Danish', 'Finnish', 'Slovak', 'Serbian','Croatian', 'Lithuanian', 'Latvian',  'Burmese', 'Amharic', 'Chichewa','Akan', 'Kinyarwanda', 'Kongo', 'Lingala', 'Shona', 'Swahili', 'Tswana', 'Yoruba', 'Zulu', 'Uzbek', 'Kirundi', 'Afrikaans', 'Hausa', 'Igbo', 'Kinyarwanda', 'Kirundi', 'Kinyarwanda', 'Kikuyu', 'Kinyarwanda', 'Sesotho', 'Somali', 'Tigrinya', 'Wolof', 'Xhosa', 'Zulu', 'Fijian', 'Hawaiian', 'Maori', 'Samoan', 'Tongan'],
-    Religion:['Christian'],
+    denominations: ["Anglo Indian", "Basel Mission", "Born Again", "Brethren", "Cannonite", "Catholic", "Chaldean Syrian", "Catholic Knanaya", "Catholic Malankara", "Cheramar", "Christian Nadar", "Church of North India (CNI)", "Church of South India (CSI)", "CMS", "Convert", "Evangelical", "Indian Orthodox", "Intercaste", "IPC", "Jacobite", "Jacobite Knanaya", "Knanaya", "Knanaya Catholic", "Knanaya Jacobite", "Knanaya Pentecostal", "Knanaya", "Latin Catholic", "Malankara", "Malankara Catholic", "Mangalorean", "Marathoma", "Methodist", "Mormon", "Nadar", "Orthodox", "Pentecost", "Presbyterian", "Protestant", "RCSC", "Roman Catholic", "Salvation Army", "Scheduled Caste (SC)", "Scheduled Tribe (ST)", "Seventh day Adventist", "Syrian", "Syrian Catholic", "Syrian Orthodox", "Syro Malabar"],
+    motherTongue: ['Hindi', 'English', 'Bengali', 'Gujarati', 'Kashmiri', 'Malayalam', 'Marathi', 'Oriya', 'Punjabi', 'Urdu', 'Sanskrit', 'Arabic', , 'Tamil', 'Telugu', 'Kannada', 'Odia', 'Gujarati', 'Sindhi', 'Assamese', 'Kashmiri', 'Konkani', 'Nepali', 'Spanish', 'Bengali', 'Portuguese', 'Russian', 'French', 'German', 'Italian', 'Polish', 'Tagalog', 'Ukrainian', 'Romanian', 'Dutch', 'Greek', 'Hungarian', 'Swedish', 'Czech', 'Norwegian', 'Bulgarian', 'Danish', 'Finnish', 'Slovak', 'Serbian', 'Croatian', 'Lithuanian', 'Latvian', 'Burmese', 'Amharic', 'Chichewa', 'Akan', 'Kinyarwanda', 'Kongo', 'Lingala', 'Shona', 'Swahili', 'Tswana', 'Yoruba', 'Zulu', 'Uzbek', 'Kirundi', 'Afrikaans', 'Hausa', 'Igbo', 'Kinyarwanda', 'Kirundi', 'Kinyarwanda', 'Kikuyu', 'Kinyarwanda', 'Sesotho', 'Somali', 'Tigrinya', 'Wolof', 'Xhosa', 'Zulu', 'Fijian', 'Hawaiian', 'Maori', 'Samoan', 'Tongan'],
+    Religion: ['Christian'],
     FatherStatus: ["Employed", "Business", "Retired", "Not Employed", "Passed Away"],
     MotherStatus: ["Homemaker", "Employed", "Business", "Retired", "Passed Away"],
     NativePlace: ["Specify where you belong to (e.g.: Delhi)"],
@@ -11,7 +11,7 @@ const formdata = {
     FamilyTradition: ["Traditional", "Moderate", "Liberal"],
     AffluenceLevel: ["Affluent", "Upper Middle Class", "Middle Class", "Lower Middle Class"],
     ResidencyStatus: ['Citizen', 'Permanent Resident', 'Student Visa', 'Temporary Visa', 'Work Permit'],
-   
+
 
     Qualification: ['Engineering', 'Arts / Design', 'Finance / Commerce', 'Computers / IT', 'Science', 'Medicine', 'Management', 'Law', 'Doctorate', 'Others', 'Non-Graduate'],
     Degree: {
@@ -58,10 +58,7 @@ const formdata = {
     CreatedFor: ["MySelf", "Parent Guardian", "Sibling", "Friend", "Other"],
     Gender: ['Male', 'Female'],
     Status: ['Never Married', 'Divorced', 'Awaiting Divorce'],
-    
-//  Status : [{ value: 'Never Married', label: 'Never Married' },
-//  { value: 'Divorced', label: 'Divorced' },
-//  { value: 'Awaiting Divorce', label: 'Awaiting Divorce' }],
+
     healthOptions: [
         { value: "No Health Problems", label: "No Health Problems" },
         { value: "HIV Positive", label: "HIV Positive" },
@@ -71,22 +68,21 @@ const formdata = {
         { value: "Heart Ailments", label: "Heart Ailments" },
         { value: "Other", label: "Other" }
     ],
-    EthnicOrigin : ["African","Caribbean","Indian","Melanesian","Australasian/Aboriginal","Chinese","Guamanian","Japanese","Korean","Polynesian","European/Anglo Saxon","Other Pacific Islander","Latin American","Arabic","Vietnamese","Micronesian","Declined to Respond","Other Hispanic","US or Canadian Indian","Other Asian","Puerto Rican","Filipino","Mexican","Alaskan Native","Cuban"],
-    LivingLoactionFields : [
+    EthnicOrigin: ["African", "Caribbean", "Indian", "Melanesian", "Australasian/Aboriginal", "Chinese", "Guamanian", "Japanese", "Korean", "Polynesian", "European/Anglo Saxon", "Other Pacific Islander", "Latin American", "Arabic", "Vietnamese", "Micronesian", "Declined to Respond", "Other Hispanic", "US or Canadian Indian", "Other Asian", "Puerto Rican", "Filipino", "Mexican", "Alaskan Native", "Cuban"],
+    LivingLoactionFields: [
         { name: 'LivingCountry', label: 'Country' },
         { name: 'LivingState', label: 'State' },
         { name: 'LivingCity', label: 'City' }
-      ],
+    ],
 
-      lookingforLivingLoactionFields : [
+    lookingforLivingLoactionFields: [
         { name: 'lookingforLivingCountry', label: 'Country' },
         { name: 'lookingforLivingState', label: 'State' },
         { name: 'lookingforLivingCity', label: 'City' }
-      ],
-
-      healthInformation: [ "No Health Problems", "HIV Positive",  "Diabetes",  "Low BP", "High BP",  "Heart Ailments","Other"
     ],
 
+    healthInformation: ["No Health Problems", "HIV Positive", "Diabetes", "Low BP", "High BP", "Heart Ailments", "Other"
+    ],
 };
 
 module.exports = formdata;
