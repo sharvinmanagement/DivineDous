@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
     page1Fields,
@@ -79,7 +79,7 @@ const defaultForm = {
     lookingforWorkingAsRole: "",
 };
 
-export default function page() {
+function CompleteProfilePage() {
     const [registerUser, setRegisterUser] = useState(defaultForm);
     // const [mulyipleUsers, setmulyipleUsers] = useState([]);
     const searchParams = useSearchParams();
@@ -1092,5 +1092,13 @@ export default function page() {
                 </div>
             </div>
         </>
+    );
+}
+
+export default function Page() {
+    return (
+        <Suspense>
+            <CompleteProfilePage />
+        </Suspense>
     );
 }
