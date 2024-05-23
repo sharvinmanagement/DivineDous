@@ -35,6 +35,7 @@ export async function POST(request) {
         const savedUser = await newUser.save();
         console.log("savedUser",savedUser);
 
+        
         await sendEmail2({ email, emailType: "VERIFY", userId: savedUser._id });
 
         return NextResponse.json({
