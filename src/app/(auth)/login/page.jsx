@@ -9,6 +9,7 @@ import img from "../../../../public/Assets/logo.png";
 import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
 import { FaArrowRightLong } from "react-icons/fa6";
+import notify from "@/helpers/notify";
 
 // TODO: fix the styling
 export default function page() {
@@ -31,12 +32,14 @@ export default function page() {
         try {
             const response = await axios.post("/api/users/login/", formData);
             if (response.status === 200) {
+                notify("Login successful!", "success");
                 router.push("/divine-dous/myprofile");
             } else {
                 console.log("Something went wrong!");
             }
         } catch (error) {
             console.log(error);
+            notify(error, "error");
         }
     };
 
