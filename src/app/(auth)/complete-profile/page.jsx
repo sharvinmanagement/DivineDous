@@ -1,21 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import formdata from "../../formdata";
 import {
     page1Fields,
     page2Fields,
     page3Fields,
     page4Fields,
     page5Fields,
-} from "../../validationMassage";
+} from "@/validationMassage";
 import {
     OptionsInput,
     Radioinput,
     Textinput,
 } from "@/InputComponents/RegistrationInput";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import formdata from "@/formdata";
 
 const defaultForm = {
     CreatedFor: "",
@@ -81,7 +81,9 @@ const defaultForm = {
 
 export default function page() {
     const [registerUser, setRegisterUser] = useState(defaultForm);
-    const [mulyipleUsers, setmulyipleUsers] = useState([]);
+    // const [mulyipleUsers, setmulyipleUsers] = useState([]);
+    const searchParams = useSearchParams();
+    const email = searchParams.get("email");
 
     const inputHandler = (e) => {
         setRegisterUser((currentData) => {
@@ -91,12 +93,17 @@ export default function page() {
 
     const onRegister = async (e) => {
         e.preventDefault();
-        setmulyipleUsers((prevUsers) => [...prevUsers, registerUser]);
-        setRegisterUser(defaultForm);
-        const response = await axios.post('')
+        let data = registerUser;
+        data["email"] = decodeURIComponent(email);
+        // setmulyipleUsers((prevUsers) => [...prevUsers, registerUser]);
+        const response = await axios.patch(
+            "/api/users/complete-profile/",
+            data
+        );
         if (response.status === 200) {
-            
+            console.log(response.data);
         }
+        setRegisterUser(defaultForm);
     };
 
     const ageOptions = [];
@@ -186,7 +193,7 @@ export default function page() {
 
     return (
         <>
-            <div className="flex w-full mp-[4.5rem] justify-center bg-red-500 ">
+            <div className="flex w-full mp-[4.5rem] justify-center bg-red-400">
                 <div className="w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] md:w-[75%] lg:w-[55%] bg-white  rounded-lg">
                     <div
                         className="flex flex-col "

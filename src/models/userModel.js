@@ -64,7 +64,7 @@ const UserSchema = new mongoose.Schema({
         WorkingSector: String,
         WorkingAsRole: String,
         WorkingWith: String,
-        Salary: Number,
+        Salary: String,
         MobileNumber: String,
         lookingforMaxAge: Number,
         lookingforMinAge: Number,
