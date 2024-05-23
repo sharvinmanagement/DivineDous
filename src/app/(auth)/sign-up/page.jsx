@@ -3,8 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaArrowLeftLong } from "react-icons/fa6";
-import formOptions from "@/formdata";
+
 import {
     page1Fields,
     page2Fields,
@@ -44,9 +43,10 @@ export default function page() {
         console.log(formData);
         const response = await axios.post("/api/users/register/", formData);
         if (response.status === 200) {
-            router.push("/login");
+            router.push(
+                `/complete-profile/?email=${encodeURIComponent(formData.email)}`
+            );
         }
-        console.log(response);
     };
 
     // changes start from here
