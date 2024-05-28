@@ -96,6 +96,7 @@ export default function page() {
                                 height={100}
                                 alt="DivinsDuos logo"
                                 style={{ width: "8rem", height: "4rem" }}
+                                priority
                             />
                         </div>
                         <h1 className="text-base md:text-lg text-center py-3 text-gray-700">

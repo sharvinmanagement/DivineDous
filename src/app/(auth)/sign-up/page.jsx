@@ -20,6 +20,7 @@ import {
 import img from "../../../../public/Assets/logo.png";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
+import notify from "@/helpers/notify";
 
 // TODO: fix the styling
 export default function page() {
@@ -41,11 +42,19 @@ export default function page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        const response = await axios.post("/api/users/register/", formData);
-        if (response.status === 200) {
-            router.push(
-                `/complete-profile/?email=${encodeURIComponent(formData.email)}`
-            );
+        try {
+            const response = await axios.post("/api/users/register/", formData);
+            if (response.status === 200) {
+                router.push(
+                    `/complete-profile/?email=${encodeURIComponent(
+                        formData.email
+                    )}`
+                );
+            } else {
+                notify("User already exists!", "error");
+            }
+        } catch (error) {
+            console.log("signup error", error);
         }
     };
 

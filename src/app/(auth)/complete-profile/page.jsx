@@ -6,7 +6,6 @@ import {
     page2Fields,
     page3Fields,
     page4Fields,
-    page5Fields,
 } from "@/validationMassage";
 import {
     OptionsInput,
@@ -16,6 +15,8 @@ import {
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import formdata from "@/formdata";
+import { useRouter } from "next/navigation";
+import notify from "@/helpers/notify";
 
 const defaultForm = {
     CreatedFor: "",
@@ -84,6 +85,7 @@ function CompleteProfilePage() {
     // const [mulyipleUsers, setmulyipleUsers] = useState([]);
     const searchParams = useSearchParams();
     const email = searchParams.get("email");
+    const router = useRouter();
 
     const inputHandler = (e) => {
         setRegisterUser((currentData) => {
@@ -96,14 +98,20 @@ function CompleteProfilePage() {
         let data = registerUser;
         data["email"] = decodeURIComponent(email);
         // setmulyipleUsers((prevUsers) => [...prevUsers, registerUser]);
-        const response = await axios.patch(
-            "/api/users/complete-profile/",
-            data
-        );
-        if (response.status === 200) {
-            console.log(response.data);
+        try {
+            const response = await axios.patch(
+                "/api/users/complete-profile/",
+                data
+            );
+            if (response.status === 200) {
+                console.log(response.data);
+                router.push(`/login`);
+                notify("Done!", "success");
+            }
+            setRegisterUser(defaultForm);
+        } catch (error) {
+            console.log(error);
         }
-        setRegisterUser(defaultForm);
     };
 
     const ageOptions = [];
@@ -113,7 +121,7 @@ function CompleteProfilePage() {
     }
     for (let feet = 4; feet <= 9; feet++) {
         for (let inches = 0; inches <= 12; inches++) {
-            heightOptions.push(`${feet} ft ${inches} in`);
+            heightOptions.push(`${feet}ft ${inches}in`);
         }
     }
 
@@ -156,13 +164,6 @@ function CompleteProfilePage() {
                 break;
             case 4:
                 Object.keys(page4Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                    }
-                });
-                break;
-            case 5:
-                Object.keys(page5Fields).forEach((field) => {
                     if (!registerUser[field]) {
                         isValid = false;
                     }
@@ -253,16 +254,16 @@ function CompleteProfilePage() {
                                     name="FirstName"
                                     value={registerUser.FirstName}
                                     onChange={inputHandler}
-                                    placeholder="Type here First Name"
-                                    label="FirstName"
+                                    placeholder="John"
+                                    label="First Name"
                                 />
                                 <Textinput
                                     id="LastName"
                                     name="LastName"
                                     value={registerUser.LastName}
                                     onChange={inputHandler}
-                                    placeholder="Type here Last Name"
-                                    label="LastName"
+                                    placeholder="Snow"
+                                    label="Last Name"
                                 />
                             </div>
                         </div>
@@ -314,7 +315,7 @@ function CompleteProfilePage() {
                                     name="Height"
                                     options={heightOptions}
                                     inputHandler={inputHandler}
-                                    label="Your-Height"
+                                    label="Your Height"
                                     className="w-full"
                                 />
                             </div>
@@ -431,7 +432,7 @@ function CompleteProfilePage() {
                                 ></textarea>
                                 <div className="absolute bottom-1 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm">
                                     <span id="characterCount">
-                                        500 characters remaining
+                                        500 characters max
                                     </span>
                                 </div>
                             </div>
@@ -666,7 +667,7 @@ function CompleteProfilePage() {
                                             name={field.name}
                                             value={registerUser[field.name]}
                                             onChange={inputHandler}
-                                            placeholder="Type Here.."
+                                            placeholder={field.label}
                                             label={field.label}
                                         />
                                     )
@@ -1008,79 +1009,6 @@ function CompleteProfilePage() {
                         </div>
 
                         <div className="flex justify-end">
-                            <button
-                                onClick={nextSlide}
-                                className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500"
-                            >
-                                Continue
-                            </button>
-                        </div>
-                    </div>
-
-                    <div
-                        className="flex relative flex-col justify-center items-center "
-                        style={{
-                            display: currentSlide === 5 ? "flex" : "none",
-                            gridGap: "2rem",
-                        }}
-                    >
-                        <button
-                            onClick={prevSlide}
-                            className="absolute -top-3 left-1 md:-left-3 text-[#41404d] "
-                        >
-                            <FaArrowLeftLong className="text-base  md:text-2xl" />
-                        </button>
-                        <div className="flex flex-col justify-center w-full md:w-[60%] gap-5 ">
-                            <p className="text-[1.37rem] font-normal text-[#41404d]">
-                                Gmail Address{" "}
-                            </p>
-                            <Textinput
-                                type="gamil"
-                                id="GamilAddress"
-                                name="GamilAddress"
-                                onChange={inputHandler}
-                                placeholder="Type here"
-                                label="gmail"
-                            />
-                        </div>
-                        <div className="flex flex-col justify-center w-full md:w-[60%] gap-5 ">
-                            <p className="text-[1.37rem] font-normal text-[#41404d]">
-                                Create passward
-                            </p>
-                            <Textinput
-                                type="password"
-                                id="passward"
-                                name="passward"
-                                onChange={inputHandler}
-                                placeholder="Type here"
-                                label="password"
-                            />
-                        </div>
-                        <div className="flex flex-col justify-center w-full md:w-[60%] gap-5 ">
-                            <p className="text-[1.37rem] font-normal text-[#41404d]">
-                                Re-Enter passward
-                            </p>
-                            <Textinput
-                                type="passward"
-                                id="ReEnterpassward"
-                                name="ReEnterpassward"
-                                onChange={inputHandler}
-                                placeholder="Type here"
-                            />
-                        </div>
-                        <div className="flex flex-col justify-center w-full md:w-[60%] gap-5 ">
-                            <p className="text-[1.37rem] font-normal text-[#41404d]">
-                                Number
-                            </p>
-                            <Textinput
-                                type="number"
-                                id="number"
-                                name="number"
-                                onChange={inputHandler}
-                                placeholder="Type here"
-                            />
-                        </div>
-                        <div className="flex justify-center">
                             <button
                                 onClick={onRegister}
                                 className="mt-5 font-semibold text-white py-2 px-5  bg-red-500  rounded-lg border-sky-500"

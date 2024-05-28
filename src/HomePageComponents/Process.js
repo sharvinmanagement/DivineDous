@@ -10,7 +10,7 @@ export default function Process() {
             <div className='px-3 lg:px-11 lg:px-24'>
 
                 <div className='py-12'>
-                    <p className='text-base text-center md:text-lg text-[#72727d] mb-4'>| Process |</p>
+                    {/* <p className='text-base text-center md:text-lg text-[#72727d] mb-4'>| Process |</p> */}
                     <h1 className=' font-medium text-center text-2xl md:text-4xl mb-4 text-[#fc4a2d]'>Discover your soulmate with DivineDuos</h1>
                     <p className='text-sm text-center md:text-base text-[#72727d]'>Unlock your soulmate's profile in three effortless steps with DivineDuos: Genuine connections made simple</p>
                 </div>
