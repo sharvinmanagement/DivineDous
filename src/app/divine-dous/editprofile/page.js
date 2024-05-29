@@ -157,7 +157,11 @@ export default function page() {
     Salary.push(`Above ${maxSalary} LPA`);
 
     if (isLoading) {
-        return <div>Loading</div>
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <h1 className="font-semibold text-3xl">Loading...</h1>
+            </div>
+        );
     }
 
     return (

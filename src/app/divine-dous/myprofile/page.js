@@ -78,16 +78,32 @@ import axios from "axios";
 export default function page() {
     useEffect(() => {
         const fetchProfileData = async () => {
-            const response = await axios.get("/api/users/myprofile/");
-            if (response.status === 200) {
-                console.log(response.data.user);
-                setUser(response.data.user);
+            try {
+                setLoading(true);
+                const response = await axios.get("/api/users/myprofile/");
+                if (response.status === 200) {
+                    console.log(response.data.user);
+                    setUser(response.data.user);
+                }
+            } catch (error) {
+                console.log("Error in myprofile", error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchProfileData();
     }, []);
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <h1 className="font-semibold text-3xl">Loading...</h1>
+            </div>
+        );
+    }
 
     return (
         <>

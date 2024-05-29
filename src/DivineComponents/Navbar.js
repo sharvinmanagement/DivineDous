@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import img from "../../public/Assets/logo.png";
 import fake from "../../public/NutralProfileImg.webp";
@@ -8,10 +8,12 @@ import Image from "next/image";
 import { FaChevronDown } from "react-icons/fa";
 import { GiQueenCrown } from "react-icons/gi";
 import axios from "axios";
+import notify from "@/helpers/notify";
 ("../../src/app/divine-dous/premium");
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [profile, setProfile] = useState({ name: "", email: "" });
     const router = useRouter();
 
     const toggleDropdown = () => {
@@ -21,15 +23,37 @@ export default function Navbar() {
     const logout = async () => {
         try {
             const respone = await axios.get("/api/users/logout");
-            console.log(respone.data);
+            // console.log(respone.data);
             if (respone.status === 200) {
-                router.refresh()
-
+                notify("Logged out!", "success");
+                router.refresh();
             }
         } catch (error) {
-            console.log("error:", error)
+            console.log("error:", error);
         }
     };
+
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+                const response = await axios.get("/api/users/myprofile/");
+                // console.log("getProfile: ", response.data);
+                if (response.status === 200) {
+                    const data = response.data.user;
+                    setProfile({
+                        email: data.email,
+                        name:
+                            data.profileData.FirstName +
+                            " " +
+                            data.profileData.LastName,
+                    });
+                }
+            } catch (error) {
+                console.log("error:", error);
+            }
+        };
+        getProfile();
+    }, []);
 
     return (
         <div>
@@ -50,7 +74,7 @@ export default function Navbar() {
                     <li>
                         <Link
                             href="/divine-dous/myprofile"
-                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400 md:py-1"
+                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400"
                         >
                             HOME
                         </Link>
@@ -58,7 +82,7 @@ export default function Navbar() {
                     <li>
                         <Link
                             href="/divine-dous/matches"
-                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400 md:py-1"
+                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400"
                         >
                             MATCHES
                         </Link>
@@ -66,7 +90,7 @@ export default function Navbar() {
                     <li>
                         <Link
                             href="/divine-dous/search"
-                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400 md:py-1"
+                            className="cursor-pointer px-2 md:px-6  py-2 md:py-3 border-b-2 border-red-400"
                         >
                             SEARCH
                         </Link>
@@ -119,19 +143,24 @@ export default function Navbar() {
                 >
                     <div className="px-3 md:px-4 flex flex-col gap-3 py-2  ">
                         <div className="font-medium text-base md:text-xl  ">
-                            Pro User
+                            {profile.name ? profile.name : "Profile Name"}
                         </div>
-                        <div className="">name@flowbite.com</div>
+                        <div className="">
+                            {profile.email ? profile.email : "Profile Email"}
+                        </div>
                         <Link
                             href=""
-                            className="lg:hidden flex flex-row items-center gap-3  font-medium text-red-400 block"
+                            className="lg:hidden flex flex-row items-center gap-3  font-medium text-red-400"
                         >
                             Premium{" "}
                             <GiQueenCrown className="text-base md:text-xl" />
                         </Link>
                     </div>
                     <div className="py-2">
-                        <span className="block px-3 md:px-4 cursor-pointer" onClick={logout}>
+                        <span
+                            className="block px-3 md:px-4 cursor-pointer"
+                            onClick={logout}
+                        >
                             Sign out
                         </span>
                     </div>

@@ -9,7 +9,7 @@ export async function PATCH(request) {
     try {
         const reqBody = request.json();
         const data = await reqBody;
-        console.log("data", data);
+        // console.log("data", data);
         const user = await Users.findOneAndUpdate(
             { email: data.email },
             { profileData: data },
