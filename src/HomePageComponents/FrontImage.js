@@ -619,12 +619,12 @@ export default function FrontImage() {
             </div>
           </div> */}
                     <div className="w-full  md:w-fit  md:mt-0 ">
-                        <div className="flex flex-col  ">
+                        <div className="flex flex-col">
                             <label htmlFor="" className="hidden md:flex">
                                 hi
                             </label>
                             <Link
-                                href="/registration-form"
+                                href="/sign-up"
                                 className="py-2 mt-1 rounded-lg font-semibold bg-[#FF9A8A] px-7 flex justify-center"
                             >
                                 <h1> Let's Begin </h1>

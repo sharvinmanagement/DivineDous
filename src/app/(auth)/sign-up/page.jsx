@@ -4,19 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import {
-    page1Fields,
-    page2Fields,
-    page3Fields,
-    page4Fields,
-    page5Fields,
-} from "@/validationMassage";
-import {
-    OptionsInput,
-    Radioinput,
-    Textinput,
-} from "@/InputComponents/RegistrationInput";
-
 import img from "../../../../public/Assets/logo.png";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -41,20 +28,20 @@ export default function page() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+
         try {
             const response = await axios.post("/api/users/register/", formData);
-            if (response.status === 200) {
-                router.push(
-                    `/complete-profile/?email=${encodeURIComponent(
-                        formData.email
-                    )}`
-                );
-            } else {
-                notify("User already exists!", "error");
+            if (response.status !== 200) {
+                throw new Error("User already exists");
             }
+
+            const { email } = formData;
+            router.push(
+                `/complete-profile/?email=${encodeURIComponent(email)}`
+            );
         } catch (error) {
-            console.log("signup error", error);
+            console.error("signup error", error);
+            notify("User already exists!", "error");
         }
     };
 
@@ -82,118 +69,8 @@ export default function page() {
     }
     Salary.push(`Above ${maxSalary} LPA`);
 
-    const validateFields = () => {
-        let isValid = true;
-        let missingFields = [];
-        switch (currentSlide) {
-            case 1:
-                Object.keys(page1Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                        missingFields.push(page1Fields[field]);
-                    }
-                });
-                break;
-            case 2:
-                Object.keys(page2Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                    }
-                });
-                break;
-            case 3:
-                Object.keys(page3Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                    }
-                });
-                break;
-            case 4:
-                Object.keys(page4Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                    }
-                });
-                break;
-            case 5:
-                Object.keys(page5Fields).forEach((field) => {
-                    if (!registerUser[field]) {
-                        isValid = false;
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-        return isValid;
-    };
-
-    const [currentSlide, setCurrentSlide] = useState(1);
-    const nextSlide = () => {
-        if (validateFields()) {
-            setCurrentSlide(currentSlide + 1);
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        } else {
-            alert(`Please fill in all required fields`);
-        }
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide(currentSlide - 1);
-    };
-
     return (
         <>
-            {/* <div className="bg-red-400 flex itms-center">
-            <div className="bg-white p-5 rounded shadow-2xl">
-                <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-                <h1 className="text-xl text-center font-bold">Sign Up</h1>
-                    <input
-                        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-red-400"
-                        type="text"
-                        name="username"
-                        placeholder="Name"
-                        value={formData.username}
-                        onChange={handleFormChange}
-                    />
-                    <input
-                        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-red-400"
-                        type="email"
-                        name="email"
-                        placeholder="user@email.com"
-                        value={formData.email}
-                        onChange={handleFormChange}
-                    />
-                    <input
-                        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-red-400"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleFormChange}
-                    />
-                    <button
-                        className="bg-red-400 hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Submit
-                    </button>
-                    <Link href="/login">
-                        <button className="bg-white hover:bg-red-400 text-red-400  hover:text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline border border-red-400 w-full">
-                            Login
-                        </button>
-                    </Link>
-                </form>
-            </div>
-        </div>
-
-            <div className='flex w-full mp-[4.5rem] justify-center bg-red-400 '>
-                <div className='w-full  px-5  md:px-10 lg:px-20 py-12 my-[3rem] w-[85%] md:w-[75%] lg:w-[55%] bg-white  rounded-lg'>
-
-                </div>
-            </div> */}
             <div className="fixed  bg-red-400 h-full w-full flex justify-center items-center z-50">
                 <div className="w-[90%] md:w-[50%] lg:w-[36%] xl:w-[28%] h-fit  relative  bg-white rounded-lg  mt-10 ">
                     <div className="px-5 md:px-9 py-7 z-10">
@@ -258,6 +135,7 @@ export default function page() {
                                     type="password"
                                     name="password"
                                     id="password"
+                                    minLength={8}
                                     value={formData.password}
                                     onChange={handleFormChange}
                                     className="block w-full py-2 pr-10 text-sm leading-normal px-3 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"

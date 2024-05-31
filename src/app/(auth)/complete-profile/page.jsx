@@ -13,9 +13,8 @@ import {
     Textinput,
 } from "@/InputComponents/RegistrationInput";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import formdata from "@/formdata";
-import { useRouter } from "next/navigation";
 import notify from "@/helpers/notify";
 
 const defaultForm = {
@@ -82,7 +81,6 @@ const defaultForm = {
 
 function CompleteProfilePage() {
     const [registerUser, setRegisterUser] = useState(defaultForm);
-    // const [mulyipleUsers, setmulyipleUsers] = useState([]);
     const searchParams = useSearchParams();
     const email = searchParams.get("email");
     const router = useRouter();
@@ -93,11 +91,16 @@ function CompleteProfilePage() {
         });
     };
 
+    useEffect(() => {
+        if (!email) {
+            router.push("/sign-up");
+        }
+    }, [email]);
+
     const onRegister = async (e) => {
         e.preventDefault();
         let data = registerUser;
         data["email"] = decodeURIComponent(email);
-        // setmulyipleUsers((prevUsers) => [...prevUsers, registerUser]);
         try {
             const response = await axios.patch(
                 "/api/users/complete-profile/",
@@ -137,54 +140,61 @@ function CompleteProfilePage() {
     Salary.push(`Above ${maxSalary} LPA`);
 
     const validateFields = () => {
-        let isValid = true;
-        let missingFields = [];
+        const fieldValidation = {
+            isValid: true,
+            missingFields: [],
+        };
+
         switch (currentSlide) {
             case 1:
                 Object.keys(page1Fields).forEach((field) => {
                     if (!registerUser[field]) {
-                        isValid = false;
-                        missingFields.push(page1Fields[field]);
+                        fieldValidation.isValid = false;
+                        fieldValidation.missingFields.push(page1Fields[field]);
                     }
                 });
-                break;
+                return fieldValidation;
             case 2:
                 Object.keys(page2Fields).forEach((field) => {
                     if (!registerUser[field]) {
-                        isValid = false;
+                        fieldValidation.isValid = false;
+                        fieldValidation.missingFields.push(page2Fields[field]);
                     }
                 });
-                break;
+                return fieldValidation;
             case 3:
                 Object.keys(page3Fields).forEach((field) => {
                     if (!registerUser[field]) {
-                        isValid = false;
+                        fieldValidation.isValid = false;
+                        fieldValidation.missingFields.push(page3Fields[field]);
                     }
                 });
-                break;
+                return fieldValidation;
             case 4:
                 Object.keys(page4Fields).forEach((field) => {
                     if (!registerUser[field]) {
-                        isValid = false;
+                        fieldValidation.isValid = false;
+                        fieldValidation.missingFields.push(page4Fields[field]);
                     }
                 });
-                break;
+                return fieldValidation;
             default:
                 break;
         }
-        return isValid;
+        return fieldValidation;
     };
 
     const [currentSlide, setCurrentSlide] = useState(1);
     const nextSlide = () => {
-        if (validateFields()) {
+        const { isValid, missingFields } = validateFields();
+        if (isValid) {
             setCurrentSlide(currentSlide + 1);
             window.scrollTo({
                 top: 0,
                 behavior: "smooth",
             });
         } else {
-            alert(`Please fill in all required fields`);
+            alert(`${missingFields.join("\n")}`);
         }
     };
 
