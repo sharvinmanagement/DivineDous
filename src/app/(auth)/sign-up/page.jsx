@@ -98,6 +98,7 @@ export default function page() {
                                     Username
                                 </label>
                                 <input
+                                    required
                                     type="username"
                                     id="username"
                                     name="username"
@@ -115,6 +116,7 @@ export default function page() {
                                     Email ID
                                 </label>
                                 <input
+                                    required
                                     type="email"
                                     id="email"
                                     name="email"
@@ -132,6 +134,7 @@ export default function page() {
                                     Password
                                 </label>
                                 <input
+                                    required
                                     type="password"
                                     name="password"
                                     id="password"

@@ -16,6 +16,7 @@ import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 import formdata from "@/formdata";
 import notify from "@/helpers/notify";
+import { GeoInputs } from "@/InputComponents/GeoDropdowns";
 
 const defaultForm = {
     CreatedFor: "",
@@ -68,7 +69,7 @@ const defaultForm = {
     lookingforReligion: "",
     lookingforDenomination: "",
     lookingforAnnualIncome: "",
-    lookingforProfileCreatedby: "",
+    // lookingforProfileCreatedby: "",
     lookingforDiet: "",
     lookingforCountryLiving: "",
     lookingforStateLiving: "",
@@ -84,6 +85,32 @@ function CompleteProfilePage() {
     const searchParams = useSearchParams();
     const email = searchParams.get("email");
     const router = useRouter();
+
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+
+    const [selectedPartnerCountry, setSelectedPartnerCountry] = useState(null);
+    const [selectedPartnerState, setSelectedPartnerState] = useState(null);
+    const [selectedPartnerCity, setSelectedPartnerCity] = useState(null);
+
+    useEffect(() => {
+        const newData = { ...registerUser };
+        if (selectedCountry) newData.LivingCountry = selectedCountry;
+        if (selectedState) newData.LivingState = selectedState;
+        if (selectedCity) newData.LivingCity = selectedCity;
+        setRegisterUser(newData);
+    }, [selectedCountry, selectedState, selectedCity]);
+
+    useEffect(() => {
+        const newData = { ...registerUser };
+        if (selectedPartnerCountry)
+            newData.lookingforCountryLiving = selectedPartnerCountry;
+        if (selectedPartnerState)
+            newData.lookingforStateLiving = selectedPartnerState;
+        if (selectedPartnerCity) newData.lookingforCity = selectedPartnerCity;
+        setRegisterUser(newData);
+    }, [selectedPartnerCountry, selectedPartnerState, selectedPartnerCity]);
 
     const inputHandler = (e) => {
         setRegisterUser((currentData) => {
@@ -116,17 +143,45 @@ function CompleteProfilePage() {
             console.log(error);
         }
     };
-
+    const [maxAgeOptions, setMaxAgeOptions] = useState([]);
     const ageOptions = [];
-    const heightOptions = [];
     for (let age = 18; age <= 55; age++) {
         ageOptions.push(age);
     }
+
+    const heightOptions = [];
     for (let feet = 4; feet <= 9; feet++) {
         for (let inches = 0; inches <= 12; inches++) {
             heightOptions.push(`${feet}ft ${inches}in`);
         }
     }
+    const [maxHeightOptions, setMaxHeightOptions] = useState([]);
+
+    useEffect(() => {
+        const heightOption = registerUser.lookingforMinHeight;
+
+        if (heightOption) {
+            const filteredOptions = heightOptions.filter((option) =>
+                option.startsWith(
+                    `${parseInt(heightOption.split(" ")[0]) + 1}ft`
+                )
+            );
+
+            setMaxHeightOptions(filteredOptions);
+        } else {
+            setMaxHeightOptions(heightOptions);
+        }
+    }, [registerUser.lookingforMinHeight]);
+
+    useEffect(() => {
+        const minAge = parseInt(registerUser.lookingforMinAge);
+
+        if (Number.isInteger(minAge)) {
+            setMaxAgeOptions(ageOptions.filter((age) => age > minAge));
+        } else {
+            setMaxAgeOptions(ageOptions);
+        }
+    }, [registerUser.lookingforMinAge]);
 
     const Salary = [];
     const rangeStep = 3;
@@ -683,6 +738,15 @@ function CompleteProfilePage() {
                                     )
                                 )}
                             </div>
+                            <div className="grid grid-cols-3 gap-3">
+                                <GeoInputs
+                                    name={"User"}
+                                    label={"User1"}
+                                    setCountryName={setSelectedCountry}
+                                    setStateName={setSelectedState}
+                                    setCityName={setSelectedCity}
+                                />
+                            </div>
                         </div>
 
                         {/* ResidencyStatus */}
@@ -830,7 +894,7 @@ function CompleteProfilePage() {
                                 To
                                 <OptionsInput
                                     name="lookingforMaxAge"
-                                    options={ageOptions}
+                                    options={maxAgeOptions}
                                     inputHandler={inputHandler}
                                     label="Max-Age"
                                     className="w-full"
@@ -849,7 +913,8 @@ function CompleteProfilePage() {
                                 To
                                 <OptionsInput
                                     name="lookingforMaxHeight"
-                                    options={heightOptions}
+                                    // options={heightOptions}
+                                    options={maxHeightOptions}
                                     inputHandler={inputHandler}
                                     label="Max-Height"
                                     className="w-full"
@@ -872,7 +937,7 @@ function CompleteProfilePage() {
                             />
 
                             {/* looking for Profile Created by */}
-                            <div className="flex flex-col  gap-3">
+                            {/* <div className="flex flex-col  gap-3">
                                 <p className="text-[1.37rem] font-normal  text-[#41404d]">
                                     Profile Created by{" "}
                                 </p>
@@ -894,7 +959,7 @@ function CompleteProfilePage() {
                                         )
                                     )}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* looking for Diet */}
                             <div className="flex flex-col  gap-3">
@@ -936,7 +1001,18 @@ function CompleteProfilePage() {
                                 <p className="text-[1.37rem] font-normal text-[#41404d]">
                                     Living Location
                                 </p>
-                                <div className="flex flex-row gap-3">
+                                <div className="grid grid-cols-3 gap-3">
+                                    <GeoInputs
+                                        name={"Partner"}
+                                        label={"Partner"}
+                                        setCountryName={
+                                            setSelectedPartnerCountry
+                                        }
+                                        setStateName={setSelectedPartnerState}
+                                        setCityName={setSelectedPartnerCity}
+                                    />
+                                </div>
+                                {/* <div className="flex flex-row gap-3">
                                     {formdata.lookingforLivingLoactionFields.map(
                                         (fields, index) => (
                                             <Textinput
@@ -952,7 +1028,7 @@ function CompleteProfilePage() {
                                             />
                                         )
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 

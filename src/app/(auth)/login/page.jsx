@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 
-import { IoMdClose } from "react-icons/io";
 import img from "../../../../public/Assets/logo.png";
 import Image from "next/image";
 import { IoMdArrowBack } from "react-icons/io";
@@ -28,8 +27,11 @@ export default function page() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
+            if (!formData || !formData.email || !formData.password) {
+                throw new Error("Email or password is missing");
+            }
+            formData.email = formData.email.toLowerCase();
             const response = await axios.post("/api/users/login/", formData);
             if (response.status === 200) {
                 notify("Login successful!", "success");
@@ -39,45 +41,16 @@ export default function page() {
             }
         } catch (error) {
             console.log(error);
-            notify(error, "error");
+            if (error.response && error.response.data) {
+                notify(error.response.data, "error");
+            } else {
+                notify(error.message, "error");
+            }
         }
     };
 
     return (
         <>
-            {/* <div className="h-screen w-full bg-red-400 flex items-center justify-center">
-            <div className="bg-white p-5 rounded shadow-2xl">
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                    <h1 className="text-xl text-center font-bold">Login</h1>
-                    <input
-                        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-red-400"
-                        type="email"
-                        name="email"
-                        placeholder="user@email.com"
-                        value={formData.email}
-                        onChange={handleFormChange}
-                    />
-                    <input
-                        className="appearance-none border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-red-400"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleFormChange}
-                    />
-                    <button
-                        className="bg-red-400 hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Login
-                    </button>
-                    <Link href="/sign-up">
-                        <button className="bg-white hover:bg-red-400 text-red-400  hover:text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline border border-red-400 w-full">
-                            Sign Up
-                        </button>
-                    </Link>
-                </form>
-            </div>
-        </div> */}
             <div className="fixed  bg-red-400 h-full w-full flex justify-center items-center z-50">
                 <div className="w-[90%] md:w-[50%] lg:w-[36%] xl:w-[28%] h-fit  relative  bg-white rounded-lg  mt-10 ">
                     <div className="absolute top-2 left-2 text-gray-600 cursor-pointer">
@@ -111,9 +84,10 @@ export default function page() {
                                     htmlFor=""
                                     className="text-sm text-gray-600"
                                 >
-                                    Mobile No. / Email ID
+                                    Email ID
                                 </label>
                                 <input
+                                    required
                                     type="email"
                                     name="email"
                                     placeholder="user@email.com"
@@ -130,6 +104,7 @@ export default function page() {
                                     Password
                                 </label>
                                 <input
+                                    required
                                     type="password"
                                     name="password"
                                     value={formData.password}
