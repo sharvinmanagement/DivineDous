@@ -723,7 +723,7 @@ function CompleteProfilePage() {
                             <p className="text-[1.37rem] font-normal text-[#41404d]">
                                 Living Location
                             </p>
-                            <div className="flex flex-row gap-3">
+                            {/* <div className="flex flex-row gap-3">
                                 {formdata.LivingLoactionFields.map(
                                     (field, index) => (
                                         <Textinput
@@ -737,7 +737,7 @@ function CompleteProfilePage() {
                                         />
                                     )
                                 )}
-                            </div>
+                            </div> */}
                             <div className="grid grid-cols-3 gap-3">
                                 <GeoInputs
                                     name={"User"}

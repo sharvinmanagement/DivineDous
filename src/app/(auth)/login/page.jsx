@@ -37,12 +37,13 @@ export default function page() {
                 notify("Login successful!", "success");
                 router.push("/divine-dous/myprofile");
             } else {
+                const message = response.data.error;
+                notify(message, "error");
                 console.log("Something went wrong!");
             }
         } catch (error) {
-            console.log(error);
             if (error.response && error.response.data) {
-                notify(error.response.data, "error");
+                notify(error.response.data.error, "error");
             } else {
                 notify(error.message, "error");
             }
@@ -113,7 +114,7 @@ export default function page() {
                                     placeholder="Enter Password"
                                 />
                             </div>
-                            <div className="flex justify-between">
+                            {/* <div className="flex justify-between">
                                 <div className="flex flex-row items-center gap-1">
                                     <input
                                         type="checkbox"
@@ -130,7 +131,7 @@ export default function page() {
                                         Forgot Password?
                                     </span>
                                 </Link>
-                            </div>
+                            </div> */}
                             <button className="bg-[#FF9A8A]  py-2 rounded-lg w-full">
                                 Login
                             </button>

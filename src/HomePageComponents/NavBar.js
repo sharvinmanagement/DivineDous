@@ -52,9 +52,9 @@ export default function NavBar() {
                             Login
                         </button>
                     </Link>
-                    <h1 className="hidden md:flex gap-1 cursor-pointer items-center ">
+                    {/* <h1 className="hidden md:flex gap-1 cursor-pointer items-center ">
                         Help <FaAngleDown />
-                    </h1>
+                    </h1> */}
                 </div>
             </nav>
             {/* {loginShow && (
