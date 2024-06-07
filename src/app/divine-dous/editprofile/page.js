@@ -1,19 +1,26 @@
 "use client";
 import Footer from "@/HomePageComponents/Footer";
 import { EditOptionsInput, EditTextinput } from "@/InputComponents/EditeInput";
+import { GeoInputs } from "@/InputComponents/GeoDropdowns";
 import formdata from "@/formdata";
+import notify from "@/helpers/notify";
+import axios from "axios";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { CiSaveUp2 } from "react-icons/ci";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import img from "../../../../public/NutralProfileImg.webp";
-import axios from "axios";
-import notify from "@/helpers/notify";
+import {
+    generateAgeOptions,
+    generateHeightOptions,
+    generateSalaryOptions,
+} from "@/helpers/generateInputOptions";
 
 export default function page() {
     useEffect(() => {
         const fetchProfileData = async () => {
-            setIsLoading(true)
+            setIsLoading(true);
             try {
                 const response = await axios.get("/api/users/myprofile/");
                 if (response.status === 200) {
@@ -22,14 +29,15 @@ export default function page() {
                     setedit(response.data.user.profileData);
                 }
             } catch (error) {
-                console.log(error)
+                console.log(error);
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
         };
 
         fetchProfileData();
     }, []);
+    const router = useRouter();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [edit, setedit] = useState({
@@ -73,8 +81,7 @@ export default function page() {
         passward: "",
         ReEnterpassward: "",
         number: "",
-        profileImages: "",
-
+    
         lookingforMaxAge: "",
         lookingforMinAge: "",
         lookingforMaxHeight: "",
@@ -84,7 +91,6 @@ export default function page() {
         lookingforReligion: "",
         lookingforDenomination: "",
         lookingforAnnualIncome: "",
-        lookingforProfileCreatedby: "",
         lookingforDiet: "",
         lookingforCountryLiving: "",
         lookingforStateLiving: "",
@@ -95,11 +101,17 @@ export default function page() {
         lookingforWorkingAsRole: "",
     });
 
+    const today = new Date();
+    const eighteenYearsAgo = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate()
+    );
+
     const onSubmit = async (e) => {
         e.preventDefault();
         let data = edit;
         data["email"] = user.email;
-        // setmulyipleUsers((prevUsers) => [...prevUsers, registerUser]);
         try {
             const response = await axios.patch(
                 "/api/users/complete-profile/",
@@ -108,6 +120,7 @@ export default function page() {
             if (response.status === 200) {
                 console.log(response.data);
                 notify("Profile Updated!", "success");
+                router.push("/divine-dous/myprofile");
             }
         } catch (error) {
             console.log(error);
@@ -135,26 +148,63 @@ export default function page() {
         }
     };
 
-    const ageOptions = [];
-    const heightOptions = [];
-    for (let age = 18; age <= 55; age++) {
-        ageOptions.push(age);
-    }
-    for (let feet = 4; feet <= 9; feet++) {
-        for (let inches = 0; inches <= 12; inches++) {
-            heightOptions.push(`${feet}ft ${inches}in`);
+    const ageOptions = generateAgeOptions();
+    const heightOptions = generateHeightOptions();
+    const Salary = generateSalaryOptions();
+
+    const [maxAgeOptions, setMaxAgeOptions] = useState([]);
+    useEffect(() => {
+        const minAge = parseInt(edit.lookingforMinAge);
+
+        if (Number.isInteger(minAge)) {
+            setMaxAgeOptions(ageOptions.filter((age) => age > minAge));
+        } else {
+            setMaxAgeOptions(ageOptions);
         }
-    }
-    const Salary = [];
-    const rangeStep = 3;
-    const maxSalary = 50; // Maximum salary in LPA
-    for (let i = rangeStep; i <= maxSalary; i += rangeStep) {
-        const lowerRange = i - rangeStep;
-        const upperRange = i;
-        const category = `${lowerRange} LPA to ${upperRange} LPA`;
-        Salary.push(category);
-    }
-    Salary.push(`Above ${maxSalary} LPA`);
+    }, [edit.lookingforMinAge]);
+
+    const [maxHeightOptions, setMaxHeightOptions] = useState([]);
+    useEffect(() => {
+        const heightOption = edit.lookingforMinHeight;
+
+        if (heightOption) {
+            const filteredOptions = heightOptions.filter((option) =>
+                option.startsWith(
+                    `${parseInt(heightOption.split(" ")[0]) + 1}ft`
+                )
+            );
+
+            setMaxHeightOptions(filteredOptions);
+        } else {
+            setMaxHeightOptions(heightOptions);
+        }
+    }, [edit.lookingforMinHeight]);
+
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+
+    useEffect(() => {
+        const newData = { ...edit };
+        if (selectedCountry) newData.LivingCountry = selectedCountry;
+        if (selectedState) newData.LivingState = selectedState;
+        if (selectedCity) newData.LivingCity = selectedCity;
+        setedit(newData);
+    }, [selectedCountry, selectedState, selectedCity]);
+
+    const [selectedPartnerCountry, setSelectedPartnerCountry] = useState(null);
+    const [selectedPartnerState, setSelectedPartnerState] = useState(null);
+    const [selectedPartnerCity, setSelectedPartnerCity] = useState(null);
+
+    useEffect(() => {
+        const newData = { ...edit };
+        if (selectedPartnerCountry)
+            newData.lookingforCountryLiving = selectedPartnerCountry;
+        if (selectedPartnerState)
+            newData.lookingforStateLiving = selectedPartnerState;
+        if (selectedPartnerCity) newData.lookingforCity = selectedPartnerCity;
+        setedit(newData);
+    }, [selectedPartnerCountry, selectedPartnerState, selectedPartnerCity]);
 
     if (isLoading) {
         return (
@@ -275,6 +325,11 @@ export default function page() {
                                         id="DateOfBirth"
                                         name="DateOfBirth"
                                         value={edit.DateOfBirth}
+                                        max={
+                                            eighteenYearsAgo
+                                                .toISOString()
+                                                .split("T")[0]
+                                        }
                                         onChange={edithandler}
                                         className="w-full peer   rounded border-2 bg-transparent px-3 py-1 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none"
                                     />
@@ -394,19 +449,16 @@ export default function page() {
                                 Location & Career Backround
                             </h1>
                             <div className="flex flex-col w-full text-sm md:text-base py-5 gap-y-2 md:gap-y-4">
-                                {formdata.LivingLoactionFields.map(
-                                    (fields, index) => (
-                                        <EditTextinput
-                                            key={index}
-                                            id="NativeCity"
-                                            name={fields.name}
-                                            value={edit[fields.name]}
-                                            onChange={edithandler}
-                                            placeholder="Type Here.."
-                                            label={fields.label}
-                                        />
-                                    )
-                                )}
+                                <div className="flex flex-col gap-4">
+                                    <GeoInputs
+                                        name={"User"}
+                                        label={"User1"}
+                                        setCountryName={setSelectedCountry}
+                                        setStateName={setSelectedState}
+                                        setCityName={setSelectedCity}
+                                        // selectedCountryValue={edit.LivingCountry}
+                                    />
+                                </div>
                                 <EditOptionsInput
                                     name="ResidencyStatus"
                                     options={formdata.ResidencyStatus}
@@ -580,6 +632,11 @@ export default function page() {
                                         id="BaptismDate"
                                         name="BaptismDate"
                                         value={edit.BaptismDate}
+                                        max={
+                                            new Date()
+                                                .toISOString()
+                                                .split("T")[0]
+                                        }
                                         onChange={edithandler}
                                         className="w-full peer   rounded border-2 bg-transparent px-3 py-1 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none"
                                     />
@@ -660,14 +717,14 @@ export default function page() {
                                 Parter Preferences
                             </h1>
                             <div className="flex flex-col w-full text-sm md:text-base py-5 gap-y-2 md:gap-y-4">
-                                <EditOptionsInput
+                                {/* <EditOptionsInput
                                     name="lookingforProfileCreatedby"
                                     options={formdata.CreatedFor}
                                     inputHandler={edithandler}
                                     label="Created For"
                                     className="w-full"
                                     value={edit.lookingforProfileCreatedby}
-                                />
+                                /> */}
 
                                 <div className="grid grid-cols-2   items-center ">
                                     <label className=" text-sm md:text-base peer-focus:text-black">
@@ -679,15 +736,20 @@ export default function page() {
                                             options={ageOptions}
                                             inputHandler={edithandler}
                                             className="w-full"
-                                            value={edit.lookingforMinAge}
+                                            value={parseInt(
+                                                edit.lookingforMinAge
+                                            ) || ""}
                                         />
                                         to
                                         <EditOptionsInput
                                             name="lookingforMaxAge"
-                                            options={ageOptions}
+                                            options={maxAgeOptions}
                                             inputHandler={edithandler}
+                                            // label="Max-Age"
                                             className="w-full"
-                                            value={edit.lookingforMaxAge}
+                                            value={parseInt(
+                                                edit.lookingforMaxAge
+                                            ) || ""}
                                         />
                                     </div>
                                 </div>
@@ -707,10 +769,10 @@ export default function page() {
                                         to
                                         <EditOptionsInput
                                             name="lookingforMaxHeight"
-                                            options={heightOptions}
+                                            options={maxHeightOptions}
                                             inputHandler={edithandler}
                                             className="w-full"
-                                            value={edit.lookingforMaxHeight}
+                                            value={edit.lookingforMaxHeight }
                                         />
                                     </div>
                                 </div>
@@ -755,19 +817,17 @@ export default function page() {
                                     className="w-full"
                                     value={edit.lookingforEthnicOrigin}
                                 />
-                                {formdata.lookingforLivingLoactionFields.map(
-                                    (fields, index) => (
-                                        <EditTextinput
-                                            key={index}
-                                            id="NativeCity"
-                                            name={fields.name}
-                                            value={edit[fields.name]}
-                                            onChange={edithandler}
-                                            placeholder="Type Here.."
-                                            label={fields.label}
-                                        />
-                                    )
-                                )}
+                                <div className="flex flex-col gap-4">
+                                    <GeoInputs
+                                        name={"Partner"}
+                                        label={"Partner"}
+                                        setCountryName={
+                                            setSelectedPartnerCountry
+                                        }
+                                        setStateName={setSelectedPartnerState}
+                                        setCityName={setSelectedPartnerCity}
+                                    />
+                                </div>
                                 <EditOptionsInput
                                     name="lookingforWorkingSector"
                                     options={formdata.WorkingSector}

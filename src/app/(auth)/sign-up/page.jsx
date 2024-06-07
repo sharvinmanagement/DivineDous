@@ -12,7 +12,7 @@ import notify from "@/helpers/notify";
 // TODO: fix the styling
 export default function page() {
     const [formData, setFormData] = useState({
-        username: "",
+        // username: "",
         email: "",
         password: "",
     });
@@ -45,30 +45,6 @@ export default function page() {
         }
     };
 
-    // changes start from here
-
-    const ageOptions = [];
-    const heightOptions = [];
-    for (let age = 18; age <= 55; age++) {
-        ageOptions.push(age);
-    }
-    for (let feet = 4; feet <= 9; feet++) {
-        for (let inches = 0; inches <= 12; inches++) {
-            heightOptions.push(`${feet} ft ${inches} in`);
-        }
-    }
-
-    const Salary = [];
-    const rangeStep = 3;
-    const maxSalary = 50; // Maximum salary in LPA
-    for (let i = rangeStep; i <= maxSalary; i += rangeStep) {
-        const lowerRange = i - rangeStep;
-        const upperRange = i;
-        const category = `${lowerRange} LPA to ${upperRange} LPA`;
-        Salary.push(category);
-    }
-    Salary.push(`Above ${maxSalary} LPA`);
-
     return (
         <>
             <div className="fixed  bg-red-400 h-full w-full flex justify-center items-center z-50">
@@ -90,7 +66,7 @@ export default function page() {
                             className="flex flex-col gap-y-4 my-6"
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-col gap-y-1">
+                            {/* <div className="flex flex-col gap-y-1">
                                 <label
                                     htmlFor="username"
                                     className="text-sm text-gray-600"
@@ -107,7 +83,7 @@ export default function page() {
                                     onChange={handleFormChange}
                                     className="block w-full py-2 pr-10 text-sm leading-normal px-3 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                                 />
-                            </div>
+                            </div> */}
                             <div className="flex flex-col gap-y-1">
                                 <label
                                     htmlFor="email"

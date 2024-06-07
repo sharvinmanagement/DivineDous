@@ -6,6 +6,7 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import Multiselect from "multiselect-react-dropdown";
 import Link from "next/link";
 import formdata from "@/formdata";
+import { generateAgeOptions } from "@/helpers/generateInputOptions";
 
 export default function FrontImage() {
     const [selectOption, setSelectOption] = useState({
@@ -131,6 +132,18 @@ export default function FrontImage() {
     for (let i = 20; i <= 60; i++) {
         ages.push(i);
     }
+    const ageOptions = generateAgeOptions();
+    const [maxAgeOptions, setMaxAgeOptions] = useState([]);
+
+    useEffect(() => {
+        const minAge = parseInt(selectOption.minimumAge);
+
+        if (Number.isInteger(minAge)) {
+            setMaxAgeOptions(ageOptions.filter((age) => age > minAge));
+        } else {
+            setMaxAgeOptions(ageOptions);
+        }
+    }, [selectOption.minimumAge]);
 
     const toggleGenderDropdown = () => {
         setOptionOpen((prevState) => ({
@@ -248,12 +261,6 @@ export default function FrontImage() {
         MinAge: "",
         gender: "",
     });
-
-    const ageOptions = [];
-
-    for (let age = 18; age <= 55; age++) {
-        ageOptions.push(age);
-    }
 
     const inputHandler = () => {};
     const submit = (event) => {
@@ -416,7 +423,7 @@ export default function FrontImage() {
                                                 }
                                                 placeholder="Select"
                                                 readOnly
-                                                name="motherTongue"
+                                                name="minimumAge"
                                                 onClick={toggleManimumAge}
                                                 className="block w-full py-1 pl-3 pr-10 leading-normal bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
                                             />
@@ -435,19 +442,21 @@ export default function FrontImage() {
                                             </div>
                                             {optionOpen.minimumAge && (
                                                 <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
-                                                    {ages.map((age, index) => (
-                                                        <div
-                                                            key={index}
-                                                            className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                                                            onClick={() =>
-                                                                selectedMinmumAge(
-                                                                    age
-                                                                )
-                                                            }
-                                                        >
-                                                            {age}
-                                                        </div>
-                                                    ))}
+                                                    {ageOptions.map(
+                                                        (age, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                                                                onClick={() =>
+                                                                    selectedMinmumAge(
+                                                                        age
+                                                                    )
+                                                                }
+                                                            >
+                                                                {age}
+                                                            </div>
+                                                        )
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
@@ -483,19 +492,21 @@ export default function FrontImage() {
                                             </div>
                                             {optionOpen.maximumAge && (
                                                 <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10 h-60 overflow-scroll scrollbar-hide">
-                                                    {ages.map((age, index) => (
-                                                        <div
-                                                            key={index}
-                                                            className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                                                            onClick={() =>
-                                                                selectedMiximumAge(
-                                                                    age
-                                                                )
-                                                            }
-                                                        >
-                                                            {age}
-                                                        </div>
-                                                    ))}
+                                                    {maxAgeOptions.map(
+                                                        (age, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                                                                onClick={() =>
+                                                                    selectedMiximumAge(
+                                                                        age
+                                                                    )
+                                                                }
+                                                            >
+                                                                {age}
+                                                            </div>
+                                                        )
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
@@ -560,64 +571,6 @@ export default function FrontImage() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className='flex-1 flex flex-col lg:flex-row gap-2 gap-y-3 '>
-            <div className=' flex-col '>
-              <p className="text-white text-base md:text-lg">
-                I'm looking for
-              </p>
-              <OptionsInput
-                name="denominations"
-                options={formdata.denominations}
-                inputHandler={inputHandler}
-                className='w-full'
-              />
-            </div>
-            <div className='grow flex flex-col'>
-              <p className="text-white text-base md:text-lg">
-                of Denomination
-              </p>
-              <OptionsInput
-                name="denominations"
-                options={formdata.denominations}
-                inputHandler={inputHandler}
-              />
-            </div>
-
-            <div className='grow flex flex-col'>
-            <p className="text-white text-base md:text-lg">
-                Age
-              </p>
-              <div className='flex-1 flex-row  gap-2 flex'>
-                <div className="relative grow">
-                  <OptionsInput
-                    name="forMinAge"
-                    options={ageOptions}
-                    inputHandler={inputHandler}
-                    className='w-full'
-                  />
-                </div>
-                To
-                <div className="relative grow">
-                  <OptionsInput
-                    name="forMaxAge"
-                    options={ageOptions}
-                    inputHandler={inputHandler}
-                    className='w-full'
-                  />
-                </div>
-              </div>
-            </div>
-            <div className='grow flex flex-col'>
-              <p className="text-white text-base md:text-lg">
-                of Denomination
-              </p>
-              <OptionsInput
-                name="motherTongue"
-                options={formdata.motherTongue}
-                inputHandler={inputHandler}
-              />
-            </div>
-          </div> */}
                     <div className="w-full  md:w-fit  md:mt-0 ">
                         <div className="flex flex-col">
                             <label htmlFor="" className="hidden md:flex">

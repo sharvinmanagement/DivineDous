@@ -440,7 +440,7 @@ const formdata = {
     ],
     CreatedFor: ["MySelf", "Parent Guardian", "Sibling", "Friend", "Other"],
     Gender: ["Male", "Female"],
-    Status: ["Never Married", "Divorced", "Awaiting Divorce"],
+    Status: ["Unmarried", "Divorced", "Awaiting Divorce"],
 
     healthOptions: [
         { value: "No Health Problems", label: "No Health Problems" },

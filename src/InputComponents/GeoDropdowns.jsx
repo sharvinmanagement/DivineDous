@@ -8,6 +8,7 @@ export function GeoInputs({
     setCountryName,
     setStateName,
     setCityName,
+    // selectedCountryValue = null,
 }) {
     const [countries, setCountries] = useState([]);
     const [countryStates, setCountryStates] = useState([]);
@@ -23,6 +24,7 @@ export function GeoInputs({
 
     useEffect(() => {
         if (selectedCountry) {
+            console.log(selectedCountry);
             setCountryStates(
                 State.getStatesOfCountry(countries[selectedCountry].isoCode)
             );
@@ -52,6 +54,19 @@ export function GeoInputs({
         }
     }, [selectedCountry, selectedState, selectedCity]);
 
+    // useEffect(() => {
+    //     if (
+    //         selectedCountryValue &&
+    //         selectedCountryValue !== null &&
+    //         countries.length > 0
+    //     ) {
+    //         const selectedCountry = countries.findIndex(
+    //             (country) => country.name === selectedCountryValue
+    //         );
+    //         setSelectedCountry(selectedCountry);
+    //     }
+    // }, [selectedCountryValue, countries]);
+
     return (
         <>
             <div className="relative w-full ">
@@ -63,6 +78,7 @@ export function GeoInputs({
                     placeholder="select"
                     className="w-full peer bg-white rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none"
                     required
+
                 >
                     <option value="">select</option>
                     {countries.map((item, index) => (

@@ -17,6 +17,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import formdata from "@/formdata";
 import notify from "@/helpers/notify";
 import { GeoInputs } from "@/InputComponents/GeoDropdowns";
+import {
+    generateAgeOptions,
+    generateHeightOptions,
+    generateSalaryOptions,
+} from "@/helpers/generateInputOptions";
 
 const defaultForm = {
     CreatedFor: "",
@@ -69,7 +74,6 @@ const defaultForm = {
     lookingforReligion: "",
     lookingforDenomination: "",
     lookingforAnnualIncome: "",
-    // lookingforProfileCreatedby: "",
     lookingforDiet: "",
     lookingforCountryLiving: "",
     lookingforStateLiving: "",
@@ -93,6 +97,13 @@ function CompleteProfilePage() {
     const [selectedPartnerCountry, setSelectedPartnerCountry] = useState(null);
     const [selectedPartnerState, setSelectedPartnerState] = useState(null);
     const [selectedPartnerCity, setSelectedPartnerCity] = useState(null);
+
+    const today = new Date();
+    const eighteenYearsAgo = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate()
+    );
 
     useEffect(() => {
         const newData = { ...registerUser };
@@ -144,17 +155,9 @@ function CompleteProfilePage() {
         }
     };
     const [maxAgeOptions, setMaxAgeOptions] = useState([]);
-    const ageOptions = [];
-    for (let age = 18; age <= 55; age++) {
-        ageOptions.push(age);
-    }
+    const ageOptions = generateAgeOptions();
+    const heightOptions = generateHeightOptions();
 
-    const heightOptions = [];
-    for (let feet = 4; feet <= 9; feet++) {
-        for (let inches = 0; inches <= 12; inches++) {
-            heightOptions.push(`${feet}ft ${inches}in`);
-        }
-    }
     const [maxHeightOptions, setMaxHeightOptions] = useState([]);
 
     useEffect(() => {
@@ -183,16 +186,7 @@ function CompleteProfilePage() {
         }
     }, [registerUser.lookingforMinAge]);
 
-    const Salary = [];
-    const rangeStep = 3;
-    const maxSalary = 50; // Maximum salary in LPA
-    for (let i = rangeStep; i <= maxSalary; i += rangeStep) {
-        const lowerRange = i - rangeStep;
-        const upperRange = i;
-        const category = `${lowerRange} LPA to ${upperRange} LPA`;
-        Salary.push(category);
-    }
-    Salary.push(`Above ${maxSalary} LPA`);
+    const Salary = generateSalaryOptions();
 
     const validateFields = () => {
         const fieldValidation = {
@@ -363,6 +357,11 @@ function CompleteProfilePage() {
                                     id="DateOfBirth"
                                     name="DateOfBirth"
                                     value={registerUser.DateOfBirth}
+                                    max={
+                                        eighteenYearsAgo
+                                            .toISOString()
+                                            .split("T")[0]
+                                    }
                                     onChange={inputHandler}
                                     className="w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none"
                                 />
@@ -687,6 +686,7 @@ function CompleteProfilePage() {
                                     id="BaptismDate"
                                     name="BaptismDate"
                                     value={registerUser.BaptismDate}
+                                    max={new Date().toISOString().split("T")[0]}
                                     onChange={inputHandler}
                                     className="w-full peer   rounded border-2 bg-transparent px-3 py-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder-opacity-100 placeholder-opacity-100 focus:border-cyan-400 appearance-none"
                                 />
