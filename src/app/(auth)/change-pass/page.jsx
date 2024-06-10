@@ -25,10 +25,11 @@ export function ChangePass() {
 
     const [token, setToken] = useState("");
     const searchParams = useSearchParams();
-
+    const urlToken = searchParams.get("token") || "";
+    
     useEffect(() => {
         console.log("urlToken", urlToken);
-        const urlToken = searchParams.get("token") || "";
+        
         setToken(urlToken);
     }, [urlToken]);
 
