@@ -31,7 +31,7 @@ export default function page() {
         try {
             const response = await axios.post("/api/users/register/", formData);
             if (response.status !== 200) {
-                throw new Error("User already exists");
+                throw new Error(response.data.error || "User already exists");
             }
 
             const { email } = formData;
@@ -39,8 +39,12 @@ export default function page() {
                 `/complete-profile/?email=${encodeURIComponent(email)}`
             );
         } catch (error) {
-            console.error("signup error", error);
-            notify("User already exists!", "error");
+            const errorMessage =
+                error.response && error.response.data
+                    ? error.response.data.error
+                    : error.message;
+            console.error("signup error", errorMessage);
+            notify(errorMessage, "error");
         }
     };
 
