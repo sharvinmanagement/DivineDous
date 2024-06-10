@@ -1,11 +1,11 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import notify from "@/helpers/notify";
 
 // This page is used to verify user email from token
-export default function VerifyPage() {
+export function VerifyPage() {
     const [token, setToken] = useState("");
     const [error, setError] = useState(false);
     const router = useRouter();
@@ -28,7 +28,7 @@ export default function VerifyPage() {
             if (response && response.status === 200) {
                 notify("Your email is verified", "success");
                 router.push("/login");
-            } 
+            }
         } catch (error) {
             setError(true);
             notify(error.response.data.error, "error");
@@ -54,5 +54,13 @@ export default function VerifyPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function page() {
+    return (
+        <Suspense fallback={<p>Loading...</p>}>
+            <VerifyPage />
+        </Suspense>
     );
 }
