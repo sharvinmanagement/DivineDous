@@ -149,7 +149,7 @@ const formdata = {
         "Passed Away",
     ],
     MotherStatus: [
-        "Housemaid",
+        "Housewife",
         "Employed",
         "Business",
         "Retired",

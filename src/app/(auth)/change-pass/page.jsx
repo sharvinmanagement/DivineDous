@@ -1,21 +1,19 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import img from "../../../../public/Assets/logo.png";
-import Image from "next/image";
-import { FaArrowRightLong } from "react-icons/fa6";
 import notify from "@/helpers/notify";
+import Image from "next/image";
+import { IoMdArrowBack } from "react-icons/io";
+import img from "../../../../public/Assets/logo.png";
 
-// TODO: fix the styling
-export default function page() {
+// This page is to change password
+export default function ChangePass() {
     const [formData, setFormData] = useState({
-        email: "",
         password: "",
+        confirmPassword: "",
     });
-
     const router = useRouter();
     const handleFormChange = (e) => {
         const { name, value } = e.target;
@@ -25,22 +23,37 @@ export default function page() {
         });
     };
 
+    const [token, setToken] = useState("");
+    const searchParams = useSearchParams();
+    const urlToken = searchParams.get("token");
+
+    useEffect(() => {
+        console.log("urlToken", urlToken);
+        setToken(urlToken);
+    }, [urlToken]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post("/api/users/register/", formData);
-            if (response.status !== 200) {
-                throw new Error("User already exists");
+            if (!token) {
+                throw new Error("Token is missing");
             }
-
-            const { email } = formData;
-            router.push(
-                `/complete-profile/?email=${encodeURIComponent(email)}`
+            formData["token"] = token;
+            const response = await axios.post(
+                "/api/users/change-pass/",
+                formData
             );
+            if (response.status !== 200) {
+                throw new Error("Failed to change password");
+            }
+            notify("Password changed!", "success");
+            router.push("/divine-dous/login");
         } catch (error) {
-            console.error("signup error", error);
-            notify("User already exists!", "error");
+            if (error.response && error.response.data) {
+                notify(error.response.data.error, "error");
+            } else {
+                notify(error.message, "error");
+            }
         }
     };
 
@@ -48,6 +61,14 @@ export default function page() {
         <>
             <div className="fixed  bg-red-400 h-full w-full flex justify-center items-center z-50">
                 <div className="w-[90%] md:w-[50%] lg:w-[36%] xl:w-[28%] h-fit  relative  bg-white rounded-lg  mt-10 ">
+                    <div className="absolute top-2 left-2 text-gray-600 cursor-pointer">
+                        <IoMdArrowBack
+                            size={20}
+                            onClick={() => {
+                                router.push("/");
+                            }}
+                        />
+                    </div>
                     <div className="px-5 md:px-9 py-7 z-10">
                         <div className="flex justify-center mb-2">
                             <Image
@@ -56,10 +77,11 @@ export default function page() {
                                 height={100}
                                 alt="DivinsDuos logo"
                                 style={{ width: "8rem", height: "4rem" }}
+                                priority
                             />
                         </div>
                         <h1 className="text-base md:text-lg text-center py-3 text-gray-700">
-                            Hello, Please sign up
+                            Reset Your Password
                         </h1>
                         <form
                             className="flex flex-col gap-y-4 my-6"
@@ -67,53 +89,42 @@ export default function page() {
                         >
                             <div className="flex flex-col gap-y-1">
                                 <label
-                                    htmlFor="email"
+                                    htmlFor=""
                                     className="text-sm text-gray-600"
                                 >
-                                    Email ID
-                                </label>
-                                <input
-                                    required
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="user@email.com"
-                                    value={formData.email}
-                                    onChange={handleFormChange}
-                                    className="block w-full py-2 pr-10 text-sm leading-normal px-3 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-y-1">
-                                <label
-                                    htmlFor="password"
-                                    className="text-sm text-gray-600"
-                                >
-                                    Password
+                                    Enter New Password
                                 </label>
                                 <input
                                     required
                                     type="password"
                                     name="password"
-                                    id="password"
-                                    minLength={8}
                                     value={formData.password}
                                     onChange={handleFormChange}
                                     className="block w-full py-2 pr-10 text-sm leading-normal px-3 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
-                                    placeholder="Enter Password"
+                                    placeholder="Enter New Password"
                                 />
                             </div>
-                            <button className="bg-[#FF9A8A] text-white font-semibold py-2 rounded-lg w-full">
-                                Sign Up
+                            <div className="flex flex-col gap-y-1">
+                                <label
+                                    htmlFor=""
+                                    className="text-sm text-gray-600"
+                                >
+                                    Confirm Password
+                                </label>
+                                <input
+                                    required
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleFormChange}
+                                    className="block w-full py-2 pr-10 text-sm leading-normal px-3 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-blue-500"
+                                    placeholder="Confirm Your Password"
+                                />
+                            </div>
+                            <button className="bg-[#FF9A8A]  py-2 rounded-lg w-full">
+                                Reset Password
                             </button>
                         </form>
-                        <div className="text-sm text-center text-gray-500 flex flex-row justify-center gap-2">
-                            <span>Already have an account? </span>
-                            <Link href="/login">
-                                <span className="font-semibold flex items-center hover:underline gap-2">
-                                    Login <FaArrowRightLong size={12} />
-                                </span>{" "}
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>

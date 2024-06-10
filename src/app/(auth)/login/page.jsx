@@ -114,7 +114,7 @@ export default function page() {
                                     placeholder="Enter Password"
                                 />
                             </div>
-                            {/* <div className="flex justify-between">
+                            <div className="flex justify-between">
                                 <div className="flex flex-row items-center gap-1">
                                     <input
                                         type="checkbox"
@@ -125,13 +125,13 @@ export default function page() {
                                         Remember me
                                     </label>
                                 </div>
-                                <Link href="">
+                                <Link href="/reset-password">
                                     {" "}
                                     <span className="text-xs font-semibold text-blue-600 hover:underline ">
                                         Forgot Password?
                                     </span>
                                 </Link>
-                            </div> */}
+                            </div>
                             <button className="bg-[#FF9A8A]  py-2 rounded-lg w-full">
                                 Login
                             </button>
